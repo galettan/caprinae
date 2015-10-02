@@ -1,0 +1,7 @@
+<td><%= image_tag user.avatar.url(:thumb) %></td>
+<td>    		<%= link_to user.login, user %></td>
+<td>      		<%= user.profile %></td>
+<td>  		<% if (current_user.admin? || (user.admin? == false && current_user?(user)))%>
+  			<%= link_to 'parametres', edit_user_path(user), class: "btn btn-default" %>
+  	  <% end %>
+</td>

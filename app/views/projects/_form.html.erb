@@ -1,0 +1,47 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });
+</script>
+<%= form_for(@project) do |f| %>
+
+  <div class="field">
+    <%= f.label :nom %><br>
+    <%= f.text_field :name, class: 'form-control'%>
+  </div>
+  <div class="field">
+    <%= f.label :numero %><br>
+    <%= f.number_field :number, class: 'form-control'%>
+  </div>
+  <div class="form-group">
+  	<%= f.label :worker_id %><br>
+	<%= collection_select(:project, :worker_id, User.all, :id, :login, {prompt: 'Sélectionner un utilisateur'}, {class: 'form-control'} )%>
+  </div>
+  <div class="form-group">
+  	<%= f.label :project_type %><br>
+  	<%= f.select(:project_type, options_for_select([['Crea', 'crea'], ['Print', 'print'], ['Crea-Print', 'printcrea']], @project.project_type), {prompt: 'Selectionner un type de projet'},{class: 'form-control'})%>
+  </div>
+  <div class="form-group">
+  	<%= f.label :description %><br>
+  	<%= f.text_area :description, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+  	<%= f.label :premier_retour%>
+  	<%= f.date_field :first_feedback, class: 'form-control '%>
+  </div>
+  <div class="form-group">
+  	<%= f.label :date_de_validation%>
+  	<%= f.date_field :validation_date, class: 'form-control '%>
+  </div>
+  <div class="form-group">
+  	<%= f.label :bon_a_tirer%>
+  	<%= f.date_field :good_to_print, class: 'form-control '%>
+  </div>
+  <div class="field">
+    <%= f.label :nombre_de_retour %><br>
+    <%= f.number_field :feedback_number, class: 'form-control'%>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Valider', class: 'btn btn-primary'%>
+  </div>
+<% end %>

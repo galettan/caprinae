@@ -1,0 +1,13 @@
+<h3><%= @user.login %></h3>
+
+<p>
+  <strong>Avatar</strong>
+  <%= image_tag @user.avatar.url(:medium) %>
+</p>
+
+<p>
+	<strong>Profil</strong>
+	<%= @user.profile%>
+</p>
+  <%= link_to 'Nouvel Utilisateur', new_user_path %>
+  <%= link_to 'Tous les utilisateurs', users_path %>
