@@ -3,13 +3,12 @@
     $('.datepicker').datepicker();
   });
 </script>
-<%= form_for(@project) do |f| %>
-
-  <div class="field">
+<%= form_for(@project, :html => {class: ".form-inline"}) do |f|%>
+  <div class="form-group">
     <%= f.label :nom %><br>
     <%= f.text_field :name, class: 'form-control'%>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :numero %><br>
     <%= f.number_field :number, class: 'form-control'%>
   </div>
