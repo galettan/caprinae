@@ -24,6 +24,10 @@ gem 'faker', '1.4.2'
 
 gem 'bcrypt', '~> 3.1.10'
 
+gem 'cocoon'
+
+gem 'formtastic', '~> 3.0'
+
 #role and permission
 gem 'cancancan'
 

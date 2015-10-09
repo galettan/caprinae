@@ -1,0 +1,39 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });
+</script>
+<h2>Informations générales :</h2>
+<%= form_for(@client, :html => {class: ".form-inline"}) do |f|%>
+  <div class="form-group">
+    <%= f.label :nom %><br>
+    <%= f.text_field :name, class: 'form-control'%>
+  </div>
+  <div class="form-group">
+    <%= f.label :adresse %><br>
+    <%= f.text_field :street, class: 'form-control'%>
+  </div>
+  <div class="form-group">
+  	<%= f.label :code_postal %><br>
+  	<%= f.text_field :postal_code, class: 'form-control'%>
+  </div>
+  <div class="form-group">
+  	<%= f.label :ville%>
+  	<%= f.text_field :town, class: 'form-control' %>
+  </div>
+  <h2>Contacts :</h2>
+	<% @client.client_contacts.each do |contact| %>
+		<%= fields_for :client_contacts do |form_contact|%>
+			<%= form_contact.text_field :name %>
+		<%end%>
+	<% end %>
+  <div class="form-group">
+  	<%= semantic_fields_for :client_contacts do |contact| %>
+  		<% render 'client_contact_fields', :f => contact %>
+		<%= link_to_add_association "Ajouter un contact", f, :client_contacts %>
+	<% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Valider', class: 'btn btn-primary'%>
+  </div>
+<% end %>

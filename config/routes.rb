@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :projects
+  resources :clients
   get 'sessions/new'
 
   # The priority is based upon order of creation: first created -> highest priority.

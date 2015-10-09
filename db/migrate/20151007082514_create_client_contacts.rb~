@@ -1,0 +1,11 @@
+class CreateClientContacts < ActiveRecord::Migration
+  def change
+    create_table :client_contacts do |t|
+      t.string :last_name
+      t.string :first_name
+      t.string :phone_nbr
+      t.string :email
+      t.references :client
+    end
+  end
+end

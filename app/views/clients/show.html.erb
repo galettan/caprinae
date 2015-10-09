@@ -1,0 +1,28 @@
+<h3><%= @client.name %></h3>
+<%= @client.street %>
+<%= @client.postal_code %>
+<%= @client.town %>
+
+
+<h3>Contacts :</h3>
+</p>
+<table class="table table-striped text-center">
+	<% @client.client_contacts.each do |contact| %>
+	<tr>
+		<td>
+			<%= contact.first_name %>
+		</td>
+		<td>
+			<%= contact.last_name %>
+		</td>
+		<td>
+			<%= contact.email %>
+		</td>
+		<td>
+			<%= contact.phone_nbr %>
+		</td>
+	</tr>
+	<% end %>
+</table>
+<%= link_to 'Edit', edit_client_path(@client) %> |
+<%= link_to 'Back', clients_path %>

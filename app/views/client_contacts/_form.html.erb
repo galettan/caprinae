@@ -1,0 +1,21 @@
+<%= form_for(@client_contact, :html => {class: ".form-inline"}) do |f|%>
+  <div class="form-group">
+    <%= f.label :prenom %><br>
+    <%= f.text_field :first_name, class: 'form-control'%>
+  </div>
+  <div class="form-group">
+    <%= f.label :nom %><br>
+    <%= f.text_field :last_name, class: 'form-control'%>
+  </div>
+  <div class="form-group">
+  	<%= f.label :telephone %><br>
+  	<%= f.text_field :phone_nbr, class: 'form-control'%>
+  </div>
+  <div class="form-group">
+  	<%= f.label :email %>
+  	<%= f.text_field :email, class: 'form-control' %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Valider', class: 'btn btn-primary'%>
+  </div>
+<% end %>
