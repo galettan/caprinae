@@ -37,8 +37,8 @@ class ClientsController < ApplicationController
   
   def update
     @client = Client.find(params[:id])
-    @client.client_contact.build
-      if @client.update(client_params)
+    
+    if @client.update(client_params)
         flash[:success] = 'Client mis à jour avec succès'
         redirect_to @client
       else

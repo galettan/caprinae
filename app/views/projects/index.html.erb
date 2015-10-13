@@ -1,15 +1,28 @@
-<h3>Liste des utilisateurs</h3>
+<h3>Liste des Projets</h3>
 <div class="panel">
 <div class="panel-header">
 <%= link_to 'Nouveau Projet', new_project_path, class: 'btn btn-default'%>
 </div>
 	<table class="table table-striped text-center">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Nom du projet:</th>
+				<th>Type de projet:</th>
+				<th>Asssigné à:</th>
+				<th>Temps estimé:</th>
+				<th>Date premier retour:</th>
+				<th>Date de validation:</th>
+				<th>nombre de retour:</th>
+			</tr>
+		</thead>
+		<tbody>
   		<% @projects.each do |project| %>
   		<tr>
 			<%= render project%>
 		</tr>
   		<% end %>
-
+</tbody>
 	</table>
 		<div class="panel-footer">
 		<%= will_paginate %>
