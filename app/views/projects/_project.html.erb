@@ -2,10 +2,10 @@
 	<td><%= project.number%></td>
 	<td><%= link_to project.name, edit_project_path(project) %></td>
 	<td><%= project.project_type %></td>
+	<td><%= project.owner.login %></td>
 	<td><%= project.worker.login %></td>
 	<td>A IMPLEMENTER</td>
 	<td class="<%= project.first_feedback < Date.today ? 'danger' : 'success' %>"><%= l project.first_feedback%></td>
-	<td><%= project.validation_date%></td>
+	<td class="<%= project.validation_date < Date.today ? 'danger' : 'success' %>"><%= l project.validation_date%></td>
 	<td><%= project.feedback_number%></td>
-	<td><%= %></td>
-</th>
+</tr>

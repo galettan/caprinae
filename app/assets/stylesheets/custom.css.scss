@@ -70,3 +70,16 @@ textarea {
     color: red;
   }
 }
+
+.navbar-inverse {
+  background-color: #7eae00;
+  border-color: #7eae00;
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: #fff;
+}
+
+
+.table th {
+  text-align: center;
+}

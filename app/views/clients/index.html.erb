@@ -1,17 +1,15 @@
 <h3>Liste des Clients</h3>
-<div class="panel">
-<div class="panel-header">
 <%= link_to 'Nouveau Client', new_client_path, class: 'btn btn-default'%>
-</div>
-	<table class="table table-striped text-center">
-  		<% @clients.each do |client| %>
-  		<tr>
-			<%= render client%>
-		</tr>
-  		<% end %>
-
+	<table class="table table-striped text-center table-bordered">
+		<thead>
+			<th>Nom du client:</th>
+			<th>Adresse client:</th>
+			<th>Nombre de contact: </th>
+		</thead>
+		<tbody>
+	  		<% @clients.each do |client| %>
+				<%= render client%>
+	  		<% end %>
+		</tbody>
 	</table>
-		<div class="panel-footer">
-		<%= will_paginate %>
-		</div>
-</div>
+<%= will_paginate %>
