@@ -1,11 +1,16 @@
 <tr>
 	<td><%= project.number%></td>
-	<td><%= link_to project.name, edit_project_path(project) %></td>
+	<td><%= link_to project.name, project_path(project) %></td>
 	<td><%= project.project_type %></td>
 	<td><%= project.owner.login %></td>
 	<td><%= project.worker.login %></td>
 	<td>A IMPLEMENTER</td>
-	<td class="<%= project.first_feedback < Date.today ? 'danger' : 'success' %>"><%= l project.first_feedback%></td>
-	<td class="<%= project.validation_date < Date.today ? 'danger' : 'success' %>"><%= l project.validation_date%></td>
+	<td><span class="label label-<%= project.first_feedback < Date.today ? 'danger' : 'success' %>"><%= l project.first_feedback%></span></td>
+	<td><span class="label label-<%= project.validation_date < Date.today ? 'danger' : 'success' %>"><%= l project.validation_date%></span></td>
+	<% if (project.project_type != 'crea')%>
+	<td><span class="label label-<%= project.good_to_print < Date.today ? 'danger' : 'success' %>"><%= l project.good_to_print %></span></td>
+	<% else %>
+	<td>Sans objet</td>
+	<% end %>
 	<td><%= project.feedback_number%></td>
 </tr>

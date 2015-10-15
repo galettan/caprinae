@@ -1,32 +1,90 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
-
-<p>
-  <strong>Number:</strong>
-  <%= @project.number %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @project.owner.login %>
-</p>
-
-<p>
-  <strong>User assigned:</strong>
-  <%= @project.worker.login %>
-</p>
-<p>
-  <strong>Type de projet :</strong>
-  <%= @project.project_type %>
-</p>
-<p>
-  <strong>Description:</strong>
-  <%= @project.description %>
-</p>
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<h3><%= @project.name %></h3>
+<div class="row clearfix">
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class='panel-heading'>
+				<strong>Informations générales:</strong>
+			</div>
+			<div class='panel-body'>
+				<table class="table table-striped table-bordered">
+					<tr>
+						<td>Numéro:</td>
+						<td><%= @project.number %></td>
+					</tr>
+					<tr>
+						<td>Créé par:</td>
+						<td><%= @project.owner.login %></td>
+					</tr>
+					<tr>
+						<td>Assigné à:</td>
+						<td><%= @project.worker.login %></td>
+					</tr>
+					<tr>
+						<td>Type de projet:</td>
+						<td><%= @project.project_type %></td>
+					</tr>
+					<tr>
+						<td>Description:</td>
+						<td><%= @project.description %></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="panel panel-warning">
+			<div class="panel-heading">
+				<strong>Dates clés:</strong>
+			</div>
+			<div class="panel-body">
+				<table class="table table-striped table-bordered">
+					<tr>
+						<td>Date de premier retour:</td>
+						<td><span class="label label-<%= @project.first_feedback < Date.today ? 'danger' : 'success' %>"><%= l @project.first_feedback%></span></td>
+					</tr>
+					<tr>
+						<td>Date de validation:</td>
+						<td><span class="label label-<%= @project.validation_date < Date.today ? 'danger' : 'success' %>"><%= l @project.validation_date%></span></td>	
+					</tr>
+					<% if (@project.project_type != 'crea') %>
+					<tr>
+						<td>Bon à tirer:</td>
+						<td><span class="label label-<%= @project.good_to_print < Date.today ? 'danger' : 'success' %>"><%= l @project.good_to_print%></span></td>	
+					</tr>
+					<% end%>
+				</table>		
+			</div>
+		</div>
+	</div>
+</div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<strong>Client:</strong>
+	</div>
+	<div class="panel-body">
+		<table class="table table-striped table-bordered">
+			<tr>
+				<td>Entreprise:</td>
+				<td><%= @project.contact.client.name %></td>
+			</tr>
+			<tr>
+				<td>Prénom du contact:</td>
+				<td><%= @project.contact.first_name %></td>
+			</tr>
+			<tr>
+				<td>Nomm du contact:</td>
+				<td><%= @project.contact.last_name %></td>
+			</tr>
+			<tr>
+				<td>Email du contact:</td>
+				<td><%= mail_to @project.contact.email %></td>
+			</tr>
+			<tr>
+				<td>Téléphone du contact:</td>
+				<td><%= @project.contact.phone_nbr %></td>
+			</tr>
+		</table>
+	</div>
+</div>
+<%= link_to 'Back', projects_path,  {class: 'btn btn-default'}%>
+<%= link_to 'Edit', edit_project_path(@project), {class: 'btn btn-danger'}%>

@@ -4,43 +4,122 @@
   });
 </script>
 <%= form_for(@project, :html => {class: ".form-inline"}) do |f|%>
-  <div class="form-group">
-    <%= f.label :nom %><br>
-    <%= f.text_field :name, class: 'form-control'%>
-  </div>
-  <div class="form-group">
-    <%= f.label :numero %><br>
-    <%= f.number_field :number, class: 'form-control'%>
-  </div>
-  <div class="form-group">
-  	<%= f.label :worker_id %><br>
-	<%= collection_select(:project, :worker_id, User.all, :id, :login, {prompt: 'Sélectionner un utilisateur'}, {class: 'form-control'} )%>
-  </div>
-  <div class="form-group">
-  	<%= f.label :project_type %><br>
-  	<%= f.select(:project_type, options_for_select([['Crea', 'crea'], ['Print', 'print'], ['Crea-Print', 'printcrea']], @project.project_type), {prompt: 'Selectionner un type de projet'},{class: 'form-control'})%>
-  </div>
-  <div class="form-group">
-  	<%= f.label :description %><br>
-  	<%= f.text_area :description, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-  	<%= f.label :premier_retour%>
-  	<%= f.date_field :first_feedback, class: 'form-control '%>
-  </div>
-  <div class="form-group">
-  	<%= f.label :date_de_validation%>
-  	<%= f.date_field :validation_date, class: 'form-control '%>
-  </div>
-  <div class="form-group">
-  	<%= f.label :bon_a_tirer%>
-  	<%= f.date_field :good_to_print, class: 'form-control '%>
-  </div>
-  <div class="field">
-    <%= f.label :nombre_de_retour %><br>
-    <%= f.number_field :feedback_number, class: 'form-control'%>
-  </div>
-  <div class="actions">
-    <%= f.submit 'Valider', class: 'btn btn-primary'%>
-  </div>
+<div class="row clearfix">
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class='panel-heading'>
+				<strong>Informations générales:</strong>
+			</div>
+			<div class='panel-body'>
+				<table class="table table-striped table-bordered">
+					<tr>
+						<td>
+						    <%= f.label :nom %>
+					    </td>
+					    <td>
+						    <%= f.text_field :name, class: 'form-control'%>
+					    </td>
+				    </tr>
+				    <tr>
+				    	<td>
+						    <%= f.label :numero %>
+					    </td>
+					    <td>
+						    <%= f.number_field :number, class: 'form-control'%>
+					    </td>
+    				</tr>
+    				<tr>
+    					<td>
+						  	<%= f.label :assigné %>
+    					</td>
+    					<td>
+							<%= collection_select(:project, :worker_id, User.all, :id, :login, {prompt: 'Sélectionner un utilisateur'}, {class: 'form-control'} )%>    						
+    					</td>
+    				</tr>
+    				<tr>
+    					<td>
+						  	<%= f.label :type_de_projet %>
+    					</td>
+    					<td>
+						  	<%= f.select(:project_type, options_for_select([['Crea', 'crea'], ['Print', 'print'], ['Crea-Print', 'printcrea']], @project.project_type), {prompt: 'Selectionner un type de projet'},{class: 'form-control'})%>
+    					</td>
+    				</tr>
+    				<tr>
+    					<td>
+						  	<%= f.label :description %>
+    					</td>
+    					<td>
+						  	<%= f.text_area :description, class: 'form-control' %>
+    					</td>
+    				</tr>
+    				<tr>
+    					<td>
+						    <%= f.label :nombre_de_retour %><br>
+    					</td>
+    					<td>
+						    <%= f.number_field :feedback_number, class: 'form-control'%>
+    					</td>
+    				</tr>
+    		</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="panel panel-warning">
+			<div class='panel-heading'>
+				<strong>Dates clés</strong>
+			</div>
+			<div class='panel-body'>
+				<table class="table table-striped table-bordered">
+					<tr>
+						<td>
+						  	<%= f.label :date_de_premier_retour%>
+					  	</td>
+					  	<td>
+						  	<%= f.date_field :first_feedback, class: 'form-control '%>
+					  	</td>
+				  	</tr>
+				  	<tr>
+				  		<td>
+						  	<%= f.label :date_de_validation%>
+				  		</td>
+				  		<td>
+						  	<%= f.date_field :validation_date, class: 'form-control '%>
+				  		</td>
+				  	</tr>
+				  	<tr>
+				  		<td>
+						  	<%= f.label :bon_a_tirer%>
+				  		</td>
+				  		<td>
+						  	<%= f.date_field :good_to_print, class: 'form-control '%>
+				  		</td>
+				  	</tr>
+			  	</table>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<strong>Client:</strong>
+	</div>
+	<div class="panel-body">
+		<table class="table table-striped table-bordered">
+			  	<tr>
+			  		<td>
+					  	<%= f.label :client %>	  			
+			  		</td>
+			  		<td>
+						<%= grouped_collection_select(:project, :contact_id, @client, :contacts, :name, :id, :first_name,{}, {class: 'form-control'})%>	  			
+			  		</td>
+			  	</tr>
+		</table>
+	</div>
+</div>
+<p class="text-center">
+	<%= link_to 'Back', projects_path, class: 'btn btn-default'%>
+    <%= f.submit 'Valider', class: 'btn btn-danger'%>
+</p>
+
 <% end %>
