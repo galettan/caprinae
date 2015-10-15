@@ -1,5 +1,9 @@
-<h3>Liste des Clients</h3>
-<%= link_to 'Nouveau Client', new_client_path, class: 'btn btn-default'%>
+<p><%= link_to 'Nouveau Client', new_client_path, class: 'btn btn-default'%></p>
+</p><div class="panel panel-default">
+	<div class="panel-heading">
+		<strong>Liste des Clients</strong>
+	</div>
+	<div class="panel-body">
 	<table class="table table-striped text-center table-bordered">
 		<thead>
 			<th>Nom du client:</th>
@@ -12,4 +16,6 @@
 	  		<% end %>
 		</tbody>
 	</table>
-<%= will_paginate %>
+	<%= will_paginate %>
+	</div>
+</div>	

@@ -1,11 +1,37 @@
- <div class='form-inline'>
-	<%= f.label :prenom%>
-	<%= f.text_field :first_name, class: "form-control"%>
-	<%= f.label :nom%>
-	<%= f.text_field :last_name, class: "form-control"%>
-	<%= f.label :email%>
-	<%= f.email_field :email, class: "form-control"%>
-	<%= f.label :telephone%>
-	<%= f.text_field :phone_nbr, class: "form-control"%>
-	<%= link_to_remove_association "Retirer le contact", f %>
+<div class='panel-body'>
+	<table class="table table-striped table-bordered">
+		<tr>
+			<td>
+				<%= f.label :prenom%>
+			</td>
+			<td>
+				<%= f.text_field :first_name, class: "form-control"%>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<%= f.label :nom%>
+			</td>
+			<td>
+				<%= f.text_field :last_name, class: "form-control"%>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<%= f.label :email%>
+			</td>
+			<td>
+				<%= f.email_field :email, class: "form-control"%>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<%= f.label :telephone%>
+			</td>
+			<td>
+				<%= f.text_field :phone_nbr, class: "form-control"%>
+			</td>
+		</tr>
+	</table>
+		<%= link_to_remove_association "Retirer le contact", f %>
 </div>
