@@ -1,20 +1,25 @@
-<h3>Liste des utilisateurs</h3>
-<%= link_to 'Nouvel Utilisateur', new_user_path, class: 'btn btn-default'%>
-<br />
-<table class="table table-striped text-center table-bordered text-center table-hover">
-	<thead>
-		<tr>
-			<th>Avatar : </th>
-			<th>Login :</th>
-			<th>Statut :</th>
-			<th>Edition :</th>
+<p><%= link_to 'Nouvel Utilisateur', new_user_path, class: 'btn btn-default'%>
+</p>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<strong>Liste des Utilisateurs</strong>
+	</div>
+	<div class="panel-body">
+	<table class="table table-bordered text-center table-hover table-striped">
+		<thead>
+			<tr>
+				<th>Avatar : </th>
+				<th>Login :</th>
+				<th>Statut :</th>
+				<th>Edition :</th>
+			</tr>
+		<tbody>
+		<% @users.each do |user| %>
+			<%= render user%>
 		</tr>
-	</thead>
-	<tbody>
-	<% @users.each do |user| %>
-	<tr>
-		<%= render user%>
-	</tr>
-	<% end %>
-</table>
-<%= will_paginate %>
+		<% end %>
+		</tbody>
+	</table>
+	<%= will_paginate %>
+	</div>
+</div>	
