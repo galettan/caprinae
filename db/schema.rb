@@ -11,19 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151007082514) do
-
-  create_table "client_contacts", force: :cascade do |t|
-    t.string   "last_name",  limit: 255
-    t.string   "first_name", limit: 255
-    t.string   "phone_nbr",  limit: 255
-    t.string   "email",      limit: 255
-    t.integer  "client_id",  limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "client_contacts", ["client_id"], name: "fk_rails_766917a6b6", using: :btree
+ActiveRecord::Schema.define(version: 20151014121047) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -33,6 +21,18 @@ ActiveRecord::Schema.define(version: 20151007082514) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string   "last_name",  limit: 255
+    t.string   "first_name", limit: 255
+    t.string   "phone_nbr",  limit: 255
+    t.string   "email",      limit: 255
+    t.integer  "client_id",  limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "contacts", ["client_id"], name: "fk_rails_766917a6b6", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -47,8 +47,10 @@ ActiveRecord::Schema.define(version: 20151007082514) do
     t.date     "validation_date"
     t.date     "good_to_print"
     t.integer  "feedback_number", limit: 4
+    t.integer  "contact_id",      limit: 4
   end
 
+  add_index "projects", ["contact_id"], name: "fk_rails_d2ed3a7e49", using: :btree
   add_index "projects", ["owner_id"], name: "fk_rails_219ef9bf7d", using: :btree
   add_index "projects", ["worker_id"], name: "fk_rails_e1871a26bc", using: :btree
 
@@ -76,7 +78,8 @@ ActiveRecord::Schema.define(version: 20151007082514) do
 
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
 
-  add_foreign_key "client_contacts", "clients", on_delete: :nullify
+  add_foreign_key "contacts", "clients", on_delete: :nullify
+  add_foreign_key "projects", "contacts", on_delete: :nullify
   add_foreign_key "projects", "users", column: "owner_id", on_delete: :nullify
   add_foreign_key "projects", "users", column: "worker_id", on_delete: :nullify
   add_foreign_key "users", "roles"
