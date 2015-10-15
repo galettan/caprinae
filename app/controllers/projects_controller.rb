@@ -17,16 +17,19 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+    @client = Client.all
   end
 
   # GET /projects/1/edit
   def edit
+    @client = Client.all
   end
 
   # POST /projects
   # POST /projects.json
   def create
     @project = Project.new(project_params)
+    @client = Client.all
 
     @project.owner_id = current_user.id
     respond_to do |format|
@@ -35,6 +38,7 @@ class ProjectsController < ApplicationController
         format.html { redirect_to @project }
         format.json { render :show, status: :created, location: @project }
       else
+        p @project.errors
         flash[:danger] = 'Projet non créé'
         format.html { render :new }
         format.json { render json: @project.errors, status: :unprocessable_entity }
@@ -82,7 +86,18 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :number, :worker_id, :project_type, :owner_id, :description, :first_feedback, :validation_date, :good_to_print, :feedback_number)
+      params.require(:project).permit(
+        :name,
+        :number,
+        :worker_id,
+        :project_type,
+        :owner_id,
+        :description,
+        :first_feedback,
+        :validation_date,
+        :good_to_print,
+        :feedback_number,
+        :contact_id)
     end
     
     

@@ -3,11 +3,11 @@ class ClientsController < ApplicationController
 
   def index
     @clients = Client.paginate(page: params[:page])
+    p @clients.inspect
   end
 
   def show
     @client = Client.find_detailed(params[:id])
-    p @client.inspect
   end
 
   def new
@@ -68,7 +68,7 @@ class ClientsController < ApplicationController
     def client_params
       params.require(:client).permit(
         :name, :street, :postal_code, :town,
-        client_contacts_attributes: [:id, :_destroy, :first_name, :last_name, :email, :phone_nbr, :client_id]
+        contacts_attributes: [:id, :_destroy, :first_name, :last_name, :email, :phone_nbr, :client_id]
       )
     end
 
