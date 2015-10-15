@@ -16,19 +16,11 @@
   	<%= f.text_field :town, class: 'form-control' %>
   </div>
   <h2>Contacts :</h2>
-  <!-- <% @client.client_contacts.each do |contact| %>
-  <div class="form-group">
-	  <%= contact.first_name %>
-	  <%= contact.last_name %>
-	  <%= contact.email%>
-	  <%= contact.phone_nbr%>
-  </div>
-  <% end %> -->
     <div class="form-group">
-  	<%= f.fields_for :client_contacts do |contact| %>
-		<% render 'client_contact_fields', :f => contact %>
+  	<%= f.fields_for :contacts do |contact| %>
+		<% render 'contact_fields', :f => contact %>
 	<% end %>
-	<%= link_to_add_association 'Ajouter un contact', f, :client_contacts %>
+	<%= link_to_add_association 'Ajouter un contact', f, :contacts %>
   </div>
   <div class="actions">
     <%= f.submit 'Valider', class: 'btn btn-primary'%>

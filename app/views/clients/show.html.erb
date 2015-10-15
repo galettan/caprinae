@@ -5,24 +5,31 @@
 
 
 <h3>Contacts :</h3>
-</p>
-<table class="table table-striped text-center">
-	<% @client.client_contacts.each do |contact| %>
-	<tr>
-		<td>
-			<%= contact.first_name %>
-		</td>
-		<td>
-			<%= contact.last_name %>
-		</td>
-		<td>
-			<%= contact.email %>
-		</td>
-		<td>
-			<%= contact.phone_nbr %>
-		</td>
-	</tr>
-	<% end %>
+<table class="table table-striped text-center table-bordered table-hover">
+	<thead>
+		<th>Nom:</th>
+		<th>Prénom:</th>
+		<th>Adresse Email:</th>
+		<th>Numéro de téléphone:</th>
+	</thead>
+	<tbody>
+		<% @client.contacts.each do |contact| %>
+		<tr>
+			<td>
+				<%= contact.first_name %>
+			</td>
+			<td>
+				<%= contact.last_name %>
+			</td>
+			<td>
+				<%= contact.email %>
+			</td>
+			<td>
+				<%= contact.phone_nbr %>
+			</td>
+		</tr>
+		<% end %>
+	</tbody>
 </table>
 <%= link_to 'Edit', edit_client_path(@client) %> |
 <%= link_to 'Back', clients_path %>
