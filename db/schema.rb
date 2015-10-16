@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151014121047) do
+ActiveRecord::Schema.define(version: 20151016162009) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(version: 20151014121047) do
     t.integer  "number",          limit: 4
     t.integer  "owner_id",        limit: 4
     t.integer  "worker_id",       limit: 4
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
     t.integer  "project_type",    limit: 4
     t.text     "description",     limit: 65535
     t.date     "first_feedback"
@@ -48,6 +48,9 @@ ActiveRecord::Schema.define(version: 20151014121047) do
     t.date     "good_to_print"
     t.integer  "feedback_number", limit: 4
     t.integer  "contact_id",      limit: 4
+    t.integer  "priority",        limit: 4,     default: 0
+    t.boolean  "archived",                      default: false
+    t.integer  "state",           limit: 4,     default: 0
   end
 
   add_index "projects", ["contact_id"], name: "fk_rails_d2ed3a7e49", using: :btree
