@@ -9,17 +9,15 @@ class Project < ActiveRecord::Base
   validates :first_feedback, presence: true
   
   enum project_type: [:print, :crea, :printcrea]
+  enum priority: [:basse, :normale, :urgence]
+  enum state: [:running, :waitingclient, :validatedclient, :finished]
 
   def self.by_owner(id)
-      @projects = Project.where(owner_id:  id)
-  end
-  
-  def self.by_worker(id)
-    @projects = Project.where(worker_id: id)
+      @projects = Project.where(["owner_id = ? AND archived = false", id])
   end
   
   def self.by_profile(id, profile)
-    @projects = Project.where(["worker_id = ? AND project_type IN (?,?)", id, profile, 2])
+    @projects = Project.where(["worker_id = ? AND project_type IN (?,?) AND archived = false", id, profile, 2])
   end
 
   def self.find_detailed(id)

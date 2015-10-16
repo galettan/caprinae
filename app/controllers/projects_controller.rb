@@ -6,10 +6,10 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     if current_user.admin?
-      @projects = Project.by_owner(current_user.id).paginate(page: params[:page])
+      @projects = Project.by_owner(current_user.id).order(priority: :desc, number: :asc).paginate(page: params[:page])
     else 
       profile = current_user.profile == 'crea' ? 1 : 0
-      @projects = Project.by_profile(current_user.id, profile).paginate(page: params[:page])
+      @projects = Project.by_profile(current_user.id, profile).order(priority: :desc, number: :asc).paginate(page: params[:page])
     end
   end
 
@@ -102,7 +102,8 @@ class ProjectsController < ApplicationController
         :validation_date,
         :good_to_print,
         :feedback_number,
-        :contact_id)
+        :contact_id,
+        :priority)
     end
     
     
