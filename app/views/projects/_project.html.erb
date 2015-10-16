@@ -5,12 +5,37 @@
 	<td><%= project.owner.login %></td>
 	<td><%= project.worker.login %></td>
 	<td>A IMPLEMENTER</td>
-	<td><span class="label label-<%= project.first_feedback < Date.today ? 'danger' : 'success' %>"><%= l project.first_feedback%></span></td>
-	<td><span class="label label-<%= project.validation_date < Date.today ? 'danger' : 'success' %>"><%= l project.validation_date%></span></td>
-	<% if (project.project_type != 'crea')%>
-	<td><span class="label label-<%= project.good_to_print < Date.today ? 'danger' : 'success' %>"><%= l project.good_to_print %></span></td>
-	<% else %>
-	<td>Sans objet</td>
+	<td>
+	<% if ((project.first_feedback > Date.today) && ((project.first_feedback) <= (Date.today + 7.days))) %>
+		<span class="label label-warning">
+	<% elsif (project.first_feedback < Date.today)%>
+		<span class="label label-danger">
+	<% elsif (project.first_feedback > Date.today + 7.days) %>
+		<span class="label label-success">
 	<% end %>
+	<%= l project.first_feedback%></span></td>
+	<td>
+	<% if ((project.validation_date > Date.today) && ((project.validation_date) <= (Date.today + 7.days))) %>
+		<span class="label label-warning">
+	<% elsif (project.validation_date < Date.today)%>
+		<span class="label label-danger">
+	<% elsif (project.validation_date > Date.today + 7.days) %>
+		<span class="label label-success">
+	<% end %>
+	<%= l project.validation_date%></span></td>
+	<td>
+	<% if (project.project_type != 'crea')%>
+		<% if ((project.good_to_print > Date.today) && ((project.good_to_print) <= (Date.today + 7.days))) %>
+			<span class="label label-warning">
+		<% elsif (project.good_to_print < Date.today)%>
+			<span class="label label-danger">
+		<% elsif (project.good_to_print > Date.today + 7.days) %>
+			<span class="label label-success">
+		<% end %>
+			<%= l project.good_to_print %></span>
+	<% else %>
+		<span class="label label-default">Sans objet</span>
+	<% end %>
+	</td>
 	<td><%= project.feedback_number%></td>
 </tr>

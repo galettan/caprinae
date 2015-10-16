@@ -4,18 +4,20 @@
 		<strong>Liste des Clients</strong>
 	</div>
 	<div class="panel-body">
-	<table class="table table-striped text-center table-bordered">
-		<thead>
-			<th>Nom du client:</th>
-			<th>Adresse client:</th>
-			<th>Nombre de contact: </th>
-		</thead>
-		<tbody>
-	  		<% @clients.each do |client| %>
-				<%= render client%>
-	  		<% end %>
-		</tbody>
-	</table>
-	<%= will_paginate %>
+		<table class="table table-striped text-center table-bordered">
+			<thead>
+				<th>Nom du client</th>
+				<th>Adresse client</th>
+				<th>Nombre de contact</th>
+			</thead>
+			<tbody>
+		  		<% @clients.each do |client| %>
+					<%= render client%>
+		  		<% end %>
+			</tbody>
+		</table>
+		<div class="text-center">
+			<%= will_paginate %>
+		</div>
 	</div>
-</div>	
+</div>
