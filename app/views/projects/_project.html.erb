@@ -2,7 +2,16 @@
 	<td><%= project.number%></td>
 	<td><%= link_to project.name, project_path(project) %></td>
 	<td><%= project.project_type %></td>
-	<td><%= project.owner.login %></td>
+	<td>
+		<% if (project.priority == 'basse')%>
+			<span class="label label-success">
+		<% elsif (project.priority == 'normale')%>
+			<span class="label label-warning">
+		<% else %>
+			<span class="label label-danger">
+		<% end %>
+		<%= project.priority %></span>
+	</td>
 	<td><%= project.worker.login %></td>
 	<td>A IMPLEMENTER</td>
 	<td>

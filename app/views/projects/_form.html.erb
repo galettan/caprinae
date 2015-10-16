@@ -60,6 +60,14 @@
 						    <%= f.number_field :feedback_number, class: 'form-control'%>
     					</td>
     				</tr>
+    				<tr>
+    					<td>
+						    <%= f.label :priorite %><br>
+    					</td>
+    					<td>
+						  	<%= f.select(:priority, options_for_select([['Bas', 'basse'], ['Normal', 'normale'], ['Urgent', 'urgence']], @project.priority), {prompt: 'Selectionner une priorité'},{class: 'form-control'})%>
+    					</td>
+    				</tr>
     		</table>
 			</div>
 		</div>
