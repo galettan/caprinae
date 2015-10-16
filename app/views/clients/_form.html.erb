@@ -48,14 +48,15 @@
 	<div class='panel-heading'>
 		<strong>Contact:</strong>
 	</div>
-	<div class='panel-body'>
+	<div class="panel-body">
 		<%= f.fields_for :contacts do |contact| %>
 			<% render 'contact_fields', :f => contact %>
 		<% end %>
-		<%= link_to_add_association 'Ajouter un contact', f, :contacts, class: "btn btn-default"%>
+		<p class="text-center">
+		<%= link_to_add_association 'Ajouter un contact', f, :contacts, class: "btn btn-success"%>
+		</p>
+	</div> 	
 </div>
-  </div>
-  </div>
   <p class="text-center">
 	<%= link_to 'Back', clients_path, class: 'btn btn-default' %>
     <%= f.submit 'Valider', class: 'btn btn-danger'%>
