@@ -5,7 +5,12 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-        @projects = Project.paginate(page: params[:page])
+    if current_user.admin?
+      @projects = Project.by_owner(current_user.id).paginate(page: params[:page])
+    else 
+      profile = current_user.profile == 'crea' ? 1 : 0
+      @projects = Project.by_profile(current_user.id, profile).paginate(page: params[:page])
+    end
   end
 
   # GET /projects/1
