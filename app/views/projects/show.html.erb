@@ -27,6 +27,14 @@
 						<td>Description:</td>
 						<td><%= @project.description %></td>
 					</tr>
+					<tr>
+						<td>Archivé:</td>
+						<td><%= @project.archived? ? 'oui' : 'non'%></td>
+					</tr>
+					<tr>
+						<td>État:</td>
+						<td><%= t @project.state%></td>
+					</tr>
 				</table>
 			</div>
 		</div>

@@ -24,3 +24,7 @@ en:
   date:
     formats:
       default: "%d/%m/%Y"
+  running: "En cours"
+  waitingclient: "En attente client"
+  validatedclient: "Validé client"
+  finished: "Terminé"
