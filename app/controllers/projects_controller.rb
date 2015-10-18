@@ -56,9 +56,11 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+        flash[:success] = 'Projet mis à jour avec succès'
+        format.html { redirect_to @project}
         format.json { render :show, status: :ok, location: @project }
       else
+        flash[:danger] = 'Mise à jour non sauvegardée'
         format.html { render :edit }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
