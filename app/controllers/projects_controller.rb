@@ -9,7 +9,7 @@ class ProjectsController < ApplicationController
       @projects = Project.by_owner(current_user.id).order(priority: :desc, number: :asc).paginate(page: params[:page])
     else 
       profile = current_user.profile == 'crea' ? 1 : 0
-      @projects = Project.by_profile(current_user.id, profile).order(priority: :desc, number: :asc).paginate(page: params[:page])
+      @projects = Project.by_profile(current_user.id).order(priority: :desc, number: :asc).paginate(page: params[:page])
     end
   end
 

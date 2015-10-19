@@ -2,7 +2,7 @@
 	<td><%= project.number%></td>
 	<td><%= project.contact.client.name %></td>
 	<td><%= link_to project.name, project_path(project) %></td>
-	<td><%= project.project_type %></td>
+	<td><%= t project.project_type %></td>
 	<td>
 		<% if (project.priority == 'normal')%>
 			<span class="label label-success">
@@ -32,7 +32,7 @@
 	<% end %>
 	<%= l project.validation_date%></span></td>
 	<td>
-	<% if (project.project_type != 'crea')%>
+	<% if (!project.good_to_print.nil?)%>
 		<% if ((project.good_to_print > Date.today) && ((project.good_to_print) <= (Date.today + 7.days))) %>
 			<span class="label label-warning">
 		<% elsif (project.good_to_print < Date.today)%>

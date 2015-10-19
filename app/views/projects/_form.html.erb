@@ -17,7 +17,7 @@
 						    <%= f.label :nom %>
 					    </td>
 					    <td>
-						    <%= f.text_field :name, class: 'form-control', readonly: !current_user.manager?%>
+						    <%= f.text_field :name, class: 'form-control'%>
 					    </td>
 				    </tr>
 				    <tr>
@@ -25,7 +25,7 @@
 						    <%= f.label :numero %>
 					    </td>
 					    <td>
-						    <%= f.number_field :number, class: 'form-control', readonly: !current_user.manager?%>
+						    <%= f.number_field :number, class: 'form-control'%>
 					    </td>
     				</tr>
     				<tr>
@@ -33,7 +33,7 @@
 						  	<%= f.label :assigné %>
     					</td>
     					<td>
-							<%= collection_select(:project, :worker_id, User.all, :id, :login, {prompt: 'Sélectionner un utilisateur'}, {class: 'form-control', disabled: !current_user.manager?})%>    						
+							<%= collection_select(:project, :worker_id, User.all, :id, :login, {prompt: 'Sélectionner un utilisateur'}, {class: 'form-control'})%>    						
     					</td>
     				</tr>
     				<tr>
@@ -41,7 +41,7 @@
 						  	<%= f.label :type_de_projet %>
     					</td>
     					<td>
-						  	<%= f.select(:project_type, options_for_select([['Crea', 'crea'], ['Print', 'print'], ['Crea-Print', 'printcrea']], @project.project_type), {prompt: 'Selectionner un type de projet'},{class: 'form-control', disabled: !current_user.manager?})%>
+    						<%= f.select(:project_type, options_for_select(t("project_types").invert, @project.project_type), {prompt: 'Selectionner un type de projet'}, {class: 'form-control'})%>
     					</td>
     				</tr>
     				<tr>
@@ -49,7 +49,7 @@
 						  	<%= f.label :description %>
     					</td>
     					<td>
-						  	<%= f.text_area :description, class: 'form-control', readonly: !current_user.manager? %>
+						  	<%= f.text_area :description, class: 'form-control' %>
     					</td>
     				</tr>
     				<tr>
@@ -57,7 +57,7 @@
 						    <%= f.label :nombre_de_retour %><br>
     					</td>
     					<td>
-						    <%= f.number_field :feedback_number, class: 'form-control', readonly: !current_user.manager?%>
+						    <%= f.number_field :feedback_number, class: 'form-control'%>
     					</td>
     				</tr>
     				<tr>
@@ -65,23 +65,25 @@
 						    <%= f.label :priorite %><br>
     					</td>
     					<td>
-						  	<%= f.select(:priority, options_for_select([['Bas', 'basse'], ['Normal', 'normale'], ['Urgent', 'urgence']], @project.priority), {prompt: 'Selectionner une priorité'},{class: 'form-control', disabled: !current_user.manager?})%>
+    						<%= f.select(:priority, options_for_select(t("project_priorities").invert, @project.priority), {prompt: 'Selectionner une priorité'}, {class: 'form-control'})%>
     					</td>
     				</tr>
+    				<% if current_user.manager?%>
 				  	<tr>
 				  		<td>
 						  	<%= f.label :archiver%>
 				  		</td>
 				  		<td>
-						  	<%= f.check_box :archived, disabled: !current_user.manager?%>
+						  	<%= f.check_box :archived%>
 				  		</td>
 				  	</tr>
+				  	<% end %>
     				<tr>
     					<td>
 						    <%= f.label :statut %><br>
     					</td>
     					<td>
-						  	<%= f.select(:state, options_for_select([['En cours', 'running'], ['En attente client', 'waitingclient'], ['Validé client', 'validatedclient'], ['Terminé', 'finished']], @project.priority), {prompt: 'Selectionner une priorité'},{class: 'form-control', disabled: !current_user.manager?})%>
+						  	<%= f.select(:state, options_for_select([['En cours', 'running'], ['En attente client', 'waitingclient'], ['Validé client', 'validatedclient'], ['Terminé', 'finished']], @project.priority), {prompt: 'Selectionner une priorité'},{class: 'form-control'})%>
     					</td>
     				</tr>
     		</table>
@@ -100,7 +102,7 @@
 						  	<%= f.label :date_de_premier_retour%>
 					  	</td>
 					  	<td>
-						  	<%= f.date_field :first_feedback, class: 'form-control', readonly: !current_user.manager?%>
+						  	<%= f.date_field :first_feedback, class: 'form-control'%>
 					  	</td>
 				  	</tr>
 				  	<tr>
@@ -108,7 +110,7 @@
 						  	<%= f.label :date_de_validation%>
 				  		</td>
 				  		<td>
-						  	<%= f.date_field :validation_date, class: 'form-control', readonly: !current_user.manager?%>
+						  	<%= f.date_field :validation_date, class: 'form-control'%>
 				  		</td>
 				  	</tr>
 				  	<tr>
@@ -116,7 +118,7 @@
 						  	<%= f.label :bon_a_tirer%>
 				  		</td>
 				  		<td>
-						  	<%= f.date_field :good_to_print, class: 'form-control', readonly: !current_user.manager?%>
+						  	<%= f.date_field :good_to_print, class: 'form-control'%>
 				  		</td>
 				  	</tr>
 			  	</table>
@@ -135,7 +137,7 @@
 					  	<%= f.label :client %>	  			
 			  		</td>
 			  		<td>
-						<%= grouped_collection_select(:project, :contact_id, @client, :contacts, :name, :id, :first_name,{}, {class: 'form-control', disabled: !current_user.manager?})%>	  			
+						<%= grouped_collection_select(:project, :contact_id, @client, :contacts, :name, :id, :first_name,{}, {class: 'form-control'})%>	  			
 			  		</td>
 			  	</tr>
 		</table>

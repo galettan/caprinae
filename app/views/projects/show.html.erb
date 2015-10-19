@@ -21,7 +21,7 @@
 					</tr>
 					<tr>
 						<td>Type de projet:</td>
-						<td><%= @project.project_type %></td>
+						<td><%= t @project.project_type %></td>
 					</tr>
 					<tr>
 						<td>Description:</td>
@@ -70,7 +70,7 @@
 							<% end %>
 							<%= l @project.validation_date%></span></td>	
 					</tr>
-					<% if (@project.project_type != 'crea') %>
+					<% if (!@project.good_to_print.nil?) %>
 					<tr>
 						<td>Bon à tirer:</td>
 						<td>
