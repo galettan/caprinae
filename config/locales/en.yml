@@ -28,3 +28,19 @@ en:
   waitingclient: "En attente client"
   validatedclient: "Validé client"
   finished: "Terminé"
+  print: 'Print'
+  crea: 'Crea'
+  creaprint: 'Crea-print'
+  other: 'Autre'
+  creaother: 'Crea-autre'
+  printother: 'Print-autre' 
+  project_types:
+    print: 'Print'
+    crea: 'Crea'
+    creaprint: 'Crea-print'
+    other: 'Autre'
+    creaother: 'Crea-autre'
+    printother: 'Print-autre' 
+  project_priorities:
+      normal: 'Normal'
+      urgent: 'Urgent'

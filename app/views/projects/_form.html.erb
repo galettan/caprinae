@@ -86,6 +86,22 @@
 						  	<%= f.select(:state, options_for_select([['En cours', 'running'], ['En attente client', 'waitingclient'], ['Validé client', 'validatedclient'], ['Terminé', 'finished']], @project.priority), {prompt: 'Selectionner une priorité'},{class: 'form-control'})%>
     					</td>
     				</tr>
+    				<tr>
+    					<td>
+						    <%= f.label :important %><br>
+    					</td>
+    					<td>
+    						<%= f.text_area :important, class: 'form-control'%>
+    					</td>
+    				</tr>
+    				<tr>
+    					<td>
+						    <%= f.label :details %><br>
+    					</td>
+    					<td>
+    						<%= f.text_area :details, class: 'form-control'%>
+    					</td>
+    				</tr>
     		</table>
 			</div>
 		</div>

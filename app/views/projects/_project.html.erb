@@ -1,7 +1,7 @@
 <tr>
 	<td><%= project.number%></td>
 	<td><%= project.contact.client.name %></td>
-	<td><%= link_to project.name, project_path(project) %></td>
+	<td><%= link_to project.name, project_path(project) %><% if (!project.important.nil?)%><%= image_tag('important_16', {title: project.important})%> <% end%></td>
 	<td><%= t project.project_type %></td>
 	<td>
 		<% if (project.priority == 'normal')%>
@@ -11,7 +11,7 @@
 		<% end %>
 		<%= project.priority %></span>
 	</td>
-	<td><%= project.worker.login %></td>
+	<td><%= image_tag project.worker.avatar(:thumb), {title:  project.worker.login}%></td>
 	<td>A IMPLEMENTER</td>
 	<td>
 	<% if ((project.first_feedback > Date.today) && ((project.first_feedback) <= (Date.today + 7.days))) %>

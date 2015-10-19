@@ -105,7 +105,9 @@ class ProjectsController < ApplicationController
         :good_to_print,
         :feedback_number,
         :contact_id,
-        :priority)
+        :priority,
+        :important,
+        :details)
     end
     
     
