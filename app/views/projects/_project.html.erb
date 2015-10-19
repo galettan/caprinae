@@ -1,7 +1,7 @@
 <tr>
 	<td><%= project.number%></td>
 	<td><%= project.contact.client.name %></td>
-	<td><%= link_to project.name, project_path(project) %><% if (!project.important.nil?)%><%= image_tag('important_16', {title: project.important})%> <% end%></td>
+	<td><%= link_to project.name, project_path(project) %><% if (!project.important.blank?)%><%= image_tag('important_16', {title: project.important})%> <% end%></td>
 	<td><%= t project.project_type %></td>
 	<td>
 		<% if (project.priority == 'normal')%>
