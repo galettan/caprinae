@@ -9,7 +9,7 @@ class Project < ActiveRecord::Base
   validates :first_feedback, presence: true
   
   enum project_type: [:print, :crea, :printcrea]
-  enum priority: [:basse, :normale, :urgence]
+  enum priority: [:normal, :urgent]
   enum state: [:running, :waitingclient, :validatedclient, :finished]
 
   def self.by_owner(id)
