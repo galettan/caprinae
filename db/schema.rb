@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151016162009) do
+ActiveRecord::Schema.define(version: 20151019091532) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -65,25 +65,19 @@ ActiveRecord::Schema.define(version: 20151016162009) do
 
   create_table "users", force: :cascade do |t|
     t.string   "login",               limit: 255
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
-    t.integer  "role_id",             limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "password_digest",     limit: 255
     t.string   "remember_digest",     limit: 255
-    t.boolean  "admin"
     t.integer  "profile",             limit: 4
     t.string   "avatar_file_name",    limit: 255
     t.string   "avatar_content_type", limit: 255
     t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
-    t.boolean  "enable",                          default: true
   end
-
-  add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
 
   add_foreign_key "contacts", "clients", on_delete: :nullify
   add_foreign_key "projects", "contacts", on_delete: :nullify
   add_foreign_key "projects", "users", column: "owner_id", on_delete: :nullify
   add_foreign_key "projects", "users", column: "worker_id", on_delete: :nullify
-  add_foreign_key "users", "roles"
 end

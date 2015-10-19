@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    if current_user.admin?
+    if current_user.manager?
       @projects = Project.by_owner(current_user.id).order(priority: :desc, number: :asc).paginate(page: params[:page])
     else 
       profile = current_user.profile == 'crea' ? 1 : 0
