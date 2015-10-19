@@ -60,7 +60,7 @@ class ProjectsController < ApplicationController
         format.html { redirect_to @project}
         format.json { render :show, status: :ok, location: @project }
       else
-        flash[:danger] = 'Mise à jour non sauvegardée'
+        flash[:danger] = 'Mise à jour du projet impossible'
         format.html { render :edit }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end

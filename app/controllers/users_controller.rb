@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   
-  before_action :logged_in_user, only: [:edit, :update, :index, :destroy]
+  before_action :logged_in_user, only: [:index]
   before_action :correct_user,   only: [:edit, :update]
-  before_action :admin_user,     only: [:destroy, :edit, :update]
+  before_action :manager_user,     only: [:destroy, :edit, :update]
 
       def index
         @users = User.paginate(page: params[:page])
@@ -63,17 +63,17 @@ class UsersController < ApplicationController
           redirect_to login_url
         end
       end
-      
+
       def correct_user
         @user = User.find(params[:id])
-        unless (current_user?(@user) || current_user.admin?)
+        unless (current_user?(@user) || current_user.manager?)
           flash[:danger] = 'Vous n\'avez pas les permissions nécessaires pour accéder à cette page'       
           redirect_to(user_url) 
         end
       end
-            
-      def admin_user
-        current_user.admin?
+
+      def manager_user
+        current_user.manager?
       end
       
 end
