@@ -36,6 +36,10 @@
 						<td><%= t @project.state%></td>
 					</tr>
 					<tr>
+						<td>Avancement:</td>
+						<td><%= t @project.progression%></td>
+					</tr>
+					<tr>
 						<td>Important:</td>
 						<td><%= @project.important%></td>
 					</tr>
@@ -66,18 +70,6 @@
 							<% end %>							
 							<%= l @project.first_feedback%></span></td>
 					</tr>
-					<tr>
-						<td>Date de validation:</td>
-						<td>
-							<% if ((@project.validation_date > Date.today) && ((@project.validation_date) <= (Date.today + 7.days))) %>
-								<span class="label label-warning">
-							<% elsif (@project.validation_date < Date.today)%>
-								<span class="label label-danger">
-							<% elsif (@project.validation_date > Date.today + 7.days) %>
-								<span class="label label-success">
-							<% end %>
-							<%= l @project.validation_date%></span></td>	
-					</tr>
 					<% if (!@project.good_to_print.nil?) %>
 					<tr>
 						<td>Bon à tirer:</td>
@@ -93,7 +85,46 @@
 						</td>
 					</tr>
 					<% end%>
+					<tr>
+						<td>Date de Livraison:</td>
+						<td>
+							<% if ((@project.delivery_date > Date.today) && ((@project.delivery_date) <= (Date.today + 7.days))) %>
+								<span class="label label-warning">
+							<% elsif (@project.delivery_date < Date.today)%>
+								<span class="label label-danger">
+							<% elsif (@project.delivery_date > Date.today + 7.days) %>
+								<span class="label label-success">
+							<% end %>
+							<%= l @project.delivery_date%></span></td>	
+					</tr>
 				</table>		
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="panel panel-success">
+			<div class="panel-heading">Données chiffrées:</div>
+			<div class="panel-body">
+				<table class="table table-bordered table-striped">
+					<tr>
+						<td>Temps :</td>
+						<td>
+							<div class="progress">
+								<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+    								60% effectué</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>Retours: </td>
+						<td>
+							<div class="progress">
+								<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
+							    80% effectué</div>
+							</div>
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>

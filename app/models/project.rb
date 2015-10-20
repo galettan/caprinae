@@ -8,22 +8,11 @@ class Project < ActiveRecord::Base
   validates :worker, presence: true
   validates :first_feedback, presence: true
   
-  PROJECT_TYPES = {
-    :print => 0,
-    :crea => 1,
-    :other => 2,
-    :creaprint => 3,
-    :creaother => 4,
-    :printother => 5
-  }
-  PPROJECT_PRIORITY = {
-    :normal => 'Normal',
-    :urgent => 'Urgent'
-  }
   
   enum project_type: [:print, :crea, :other, :creaprint, :creaother, :printother]
   enum priority: [:normal, :urgent]
   enum state: [:running, :waitingclient, :validatedclient, :finished]
+  enum progression: [:todocrea, :runningcrea, :finishedcrea, :todoprint, :runningprint, :finishedprint]
 
   def self.by_owner(id)
       @projects = Project.where(["owner_id = ? AND archived = false", id])

@@ -107,7 +107,8 @@ class ProjectsController < ApplicationController
         :contact_id,
         :priority,
         :important,
-        :details)
+        :details,
+        :progression)
     end
     
     

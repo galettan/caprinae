@@ -83,6 +83,14 @@
     				</tr>
     				<tr>
     					<td>
+    						<%= f.label :progression%>
+    					</td>
+    					<td>
+    						<%= f.select(:progression, options_for_select(t("project_progression").invert, @project.progression), {prompt: 'Sélectionner un avancement du projet'}, {class: 'form-control'})%>
+    					</td>
+    				</tr>
+    				<tr>
+    					<td>
 						    <%= f.label :important %><br>
     					</td>
     					<td>
@@ -118,18 +126,18 @@
 				  	</tr>
 				  	<tr>
 				  		<td>
-						  	<%= f.label :date_de_validation%>
-				  		</td>
-				  		<td>
-						  	<%= f.date_field :validation_date, class: 'form-control'%>
-				  		</td>
-				  	</tr>
-				  	<tr>
-				  		<td>
 						  	<%= f.label :bon_a_tirer%>
 				  		</td>
 				  		<td>
 						  	<%= f.date_field :good_to_print, class: 'form-control'%>
+				  		</td>
+				  	</tr>
+				  	<tr>
+				  		<td>
+						  	<%= f.label :date_de_livraison%>
+				  		</td>
+				  		<td>
+						  	<%= f.date_field :delivery_date, class: 'form-control'%>
 				  		</td>
 				  	</tr>
 			  	</table>
