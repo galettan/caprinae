@@ -14,7 +14,7 @@ class Project < ActiveRecord::Base
     :other => 2,
     :creaprint => 3,
     :creaother => 4,
-    :printother => 5 
+    :printother => 5
   }
   PPROJECT_PRIORITY = {
     :normal => 'Normal',
