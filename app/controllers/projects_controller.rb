@@ -113,6 +113,8 @@ class ProjectsController < ApplicationController
         :progression,
         :archived,
         :state,
+        :hours,
+        :minutes,
         tasks_attributes: [:id, :description, :hours, :minutes, :_destroy, :worker_id, :project_id],
         feedbacks_attributes: [:id, :description, :_destroy, :worker_id, :project_id]
       )

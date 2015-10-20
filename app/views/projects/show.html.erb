@@ -100,18 +100,24 @@
 				</table>		
 			</div>
 		</div>
-	</div>
+		</div>
 	<div class="col-md-6">
 		<div class="panel panel-success">
 			<div class="panel-heading">Données chiffrées:</div>
 			<div class="panel-body">
 				<table class="table table-bordered table-striped">
 					<tr>
-						<td>Temps estimé: XXheures</td>
+						<td>Temps estimé:<%= @project.hours %> heure<%= @project.hours > 1? 's' : ''%> <%= @project.minutes%> minute<%= @project.minutes > 1? 's' : ''%></td>
 						<td>
 							<div class="progress">
-								<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-    								60% écoulé .. <%= @spent_time%></div>
+								<% pct_time = (@spent_time * 100) / @project.estimated_time %>
+								<div class="progress-bar progress-bar-<%= (pct_time > 80 ? (pct_time > 100 ? 'danger' : 'warning'): 'success')%>"
+									role="progressbar"
+									aria-valuenow="<%= pct_time %>"
+									aria-valuemin="0"
+									aria-valuemax="100"
+									style="width: <%= pct_time %>%;">
+    								<%= pct_time %>% du temps consommé%</div>
 							</div>
 						</td>
 					</tr>
@@ -119,14 +125,15 @@
 						<td>Retours prévus: <%= @project.feedback_number%> retours</td>
 						<td>
 							<div class="progress">
-								<% pourcent = (@project.feedbacks.count * 100) / @project.feedback_number %>
-								<div class="progress-bar progress-bar-<%= (pourcent > 80 ) ? 'warning' : 'success'%>"
+								<% pct_feedback = (@project.feedbacks.count * 100) / @project.feedback_number %>
+								<div class="progress-bar progress-bar-<%= (pct_feedback > 80 ) ? 'warning' : 'success'%>"
 									role="progressbar"
-									aria-valuenow="<%= pourcent %>"
+									aria-valuenow="<%= pct_feedback %>"
 									aria-valuemin="0"
 									aria-valuemax="100"
-									style="width: <%= pourcent %>%;">
-							    <%= @project.feedbacks.count %> effectué</div>
+									style="width: <%= pct_feedback %>%;">
+							    <%= @project.feedbacks.count %> effectué
+							    </div>
 							</div>
 						</td>
 					</tr>
@@ -134,7 +141,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+	</div>
 <% if !current_user.print? %>
 <div class="clearfix">
 	<div class="panel panel-info">

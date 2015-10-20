@@ -15,7 +15,7 @@ class AddTasksAndFeedbackToProjects < ActiveRecord::Migration
       fe.timestamps null: false
     end
     
-  add_column :projects, :estimated_time, :integer, :default => 0
+  add_column :projects, :estimated_time, :integer, :default => 1
   add_foreign_key :tasks, :projects, column: :project_id, on_delete: :nullify
   add_foreign_key :tasks, :users, column: :worker_id, on_delete: :nullify
   add_foreign_key :feedbacks, :projects, column: :project_id, on_delete: :nullify

@@ -49,14 +49,6 @@
     				</tr>
     				<tr>
     					<td>
-						    <%= f.label :nombre_de_retour %><br>
-    					</td>
-    					<td>
-						    <%= f.number_field :feedback_number, class: 'form-control'%>
-    					</td>
-    				</tr>
-    				<tr>
-    					<td>
 						    <%= f.label :priorite %><br>
     					</td>
     					<td>
@@ -144,7 +136,32 @@
 			</div>
 		</div>
 	</div>
-</div>
+	<div class="col-md-6">
+		<div class="panel panel-success">
+			<div class="panel-heading">Données chiffrées:</div>
+			<div class="panel-body">
+				<table class="table table-bordered table-striped">
+    				<tr>
+    					<td>
+						    <%= f.label :temps_estimé %><br>
+    					</td>
+    					<td>
+							<%= f.text_field :hours, class: 'form-control' %>Heures <%= f.text_field :minutes, class: 'form-control'%>Minutes
+    					</td>
+    				</tr>
+    				<tr>
+    					<td>
+						    <%= f.label :nombre_de_retour_prévus %><br>
+    					</td>
+    					<td>
+						    <%= f.number_field :feedback_number, class: 'form-control'%>
+    					</td>
+    				</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	</div>
 <% if (!current_user.print?) %>
 <div class="row clearfix">
 	<div class="panel panel-info">

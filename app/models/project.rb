@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
   belongs_to :contact, class_name: Contact, foreign_key: "contact_id"
   has_many :tasks
   has_many :feedbacks
+  before_save :set_estimated_time
 
 
   accepts_nested_attributes_for :tasks, :allow_destroy => true
@@ -29,6 +30,26 @@ class Project < ActiveRecord::Base
 
   def self.find_detailed(id)
       @project = Project.includes(:owner, :worker, :contact, :tasks, :feedbacks).find(id)
+  end
+
+  def set_estimated_time
+    self.estimated_time = @hours * 60 + @minutes
+  end
+  
+  def hours
+    self.estimated_time / 60 if self.estimated_time?;
+  end
+  
+  def minutes
+    self.estimated_time % 60 if self.estimated_time?;
+  end
+  
+  def hours=(h)
+    @hours = h.to_i
+  end
+  
+  def minutes=(m)
+   @minutes = m.to_i
   end
 
 end

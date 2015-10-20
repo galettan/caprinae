@@ -18,7 +18,18 @@
 	
 	<td><%= image_tag project.worker.avatar(:thumb), {title:  project.worker.login}%></td>
 	
-	<td>A IMPLEMENTER</td>
+						<td>
+							<div class="progress">
+								<% pct_time = (project.tasks.sum(:duration) * 100) / project.estimated_time %>
+								<div class="progress-bar progress-bar-<%= (pct_time > 80 ? (pct_time > 100 ? 'danger' : 'warning'): 'success')%>"
+									role="progressbar"
+									aria-valuenow="<%= pct_time %>"
+									aria-valuemin="0"
+									aria-valuemax="100"
+									style="width: <%= pct_time %>%;">
+    								<%= pct_time %>%</div>
+							</div>
+						</td>
 	
 	<td>
 	<% if ((project.first_feedback > Date.today) && ((project.first_feedback) <= (Date.today + 7.days))) %>
