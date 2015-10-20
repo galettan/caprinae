@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151020100227) do
+ActiveRecord::Schema.define(version: 20151020114821) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(version: 20151020100227) do
 
   add_index "contacts", ["client_id"], name: "fk_rails_766917a6b6", using: :btree
 
+  create_table "feedbacks", force: :cascade do |t|
+    t.text     "description", limit: 65535
+    t.integer  "project_id",  limit: 4
+    t.integer  "worker_id",   limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "feedbacks", ["project_id"], name: "fk_rails_8f27045d07", using: :btree
+  add_index "feedbacks", ["worker_id"], name: "fk_rails_2cb4658f09", using: :btree
+
   create_table "projects", force: :cascade do |t|
     t.string   "name",            limit: 255
     t.string   "number",          limit: 255
@@ -54,6 +65,7 @@ ActiveRecord::Schema.define(version: 20151020100227) do
     t.text     "important",       limit: 65535
     t.text     "details",         limit: 65535
     t.integer  "progression",     limit: 4
+    t.integer  "estimated_time",  limit: 4,     default: 0
   end
 
   add_index "projects", ["contact_id"], name: "fk_rails_d2ed3a7e49", using: :btree
@@ -65,6 +77,18 @@ ActiveRecord::Schema.define(version: 20151020100227) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "tasks", force: :cascade do |t|
+    t.integer  "duration",    limit: 4
+    t.integer  "project_id",  limit: 4
+    t.integer  "worker_id",   limit: 4
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "tasks", ["project_id"], name: "fk_rails_02e851e3b7", using: :btree
+  add_index "tasks", ["worker_id"], name: "fk_rails_5b266ced74", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "login",               limit: 255
@@ -80,7 +104,11 @@ ActiveRecord::Schema.define(version: 20151020100227) do
   end
 
   add_foreign_key "contacts", "clients", on_delete: :nullify
+  add_foreign_key "feedbacks", "projects", on_delete: :nullify
+  add_foreign_key "feedbacks", "users", column: "worker_id", on_delete: :nullify
   add_foreign_key "projects", "contacts", on_delete: :nullify
   add_foreign_key "projects", "users", column: "owner_id", on_delete: :nullify
   add_foreign_key "projects", "users", column: "worker_id", on_delete: :nullify
+  add_foreign_key "tasks", "projects", on_delete: :nullify
+  add_foreign_key "tasks", "users", column: "worker_id", on_delete: :nullify
 end

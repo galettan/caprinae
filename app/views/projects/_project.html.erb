@@ -52,6 +52,12 @@
 		<span class="label label-success">
 	<% end %>
 	<%= l project.delivery_date%></span></td>
-	<td><%= project.feedback_number%></td>
-	<td><%= t project.state %></td>
+	<td>
+		<% if (project.feedbacks.count  / project.feedback_number > 0.8) %>
+			<span class="label label-warning">
+		<% else %>
+			<span class="label label-success">
+		<% end %>
+		<%= project.feedback_number%> / <%= project.feedbacks.count%></span></td>
+	<td><%= t project.state %> / <%= t project.progression %></td>
 </tr>

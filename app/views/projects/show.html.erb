@@ -107,20 +107,26 @@
 			<div class="panel-body">
 				<table class="table table-bordered table-striped">
 					<tr>
-						<td>Temps :</td>
+						<td>Temps estimé: XXheures</td>
 						<td>
 							<div class="progress">
 								<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-    								60% effectué</div>
+    								60% écoulé .. <%= @spent_time%></div>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td>Retours: </td>
+						<td>Retours prévus: <%= @project.feedback_number%> retours</td>
 						<td>
 							<div class="progress">
-								<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-							    80% effectué</div>
+								<% pourcent = (@project.feedbacks.count * 100) / @project.feedback_number %>
+								<div class="progress-bar progress-bar-<%= (pourcent > 80 ) ? 'warning' : 'success'%>"
+									role="progressbar"
+									aria-valuenow="<%= pourcent %>"
+									aria-valuemin="0"
+									aria-valuemax="100"
+									style="width: <%= pourcent %>%;">
+							    <%= @project.feedbacks.count %> effectué</div>
 							</div>
 						</td>
 					</tr>
@@ -129,6 +135,56 @@
 		</div>
 	</div>
 </div>
+<% if !current_user.print? %>
+<div class="clearfix">
+	<div class="panel panel-info">
+		<div class='panel-heading'>
+			<strong>Travaux effectués:</strong>
+		</div>
+		<div class="panel-body">
+			<table class="table table-bordered table-hover table-striped">
+				<thead>
+					<th>Date</th>
+					<th>Intervenant</th>
+					<th>Description</th>
+					<th>Durée</th>
+				</thead>
+				<tbody>
+				<% @project.tasks.each do |task|%>
+						<tr>
+							<td><%= task.created_at.strftime('%d-%b-%Y') %></td>
+							<td><%= image_tag(task.worker.avatar(:thumb))%></td>
+							<td><%= task.description %></td>
+							<td><%= task.hours %> heure<%= task.hours > 1? 's' : ''%> <%= task.minutes%> minute<%= task.minutes > 1? 's' : ''%></td>
+						</tr>
+				<% end %>
+				</tbody>
+			</table>
+		</div>
+		<div class="panel-heading">
+			<strong>Retours clients:</strong>
+		</div>
+		<div class="panel-body">
+			<table class="table table-bordered table-hover table-striped">
+				<thead>
+					<th>Date</th>
+					<th>Intervenant</th>
+					<th>Description</th>
+				</thead>
+				<tbody>
+				<% @project.feedbacks.each do |feedback|%>
+						<tr>
+							<td><%= feedback.created_at.strftime('%d-%b-%Y à %H:%M:%S') %></td>
+							<td><%= image_tag(feedback.worker.avatar(:thumb))%></td>
+							<td><%= feedback.description %></td>
+						</tr>
+				<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<% end%>
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<strong>Client:</strong>

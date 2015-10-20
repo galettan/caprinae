@@ -145,6 +145,28 @@
 		</div>
 	</div>
 </div>
+<% if (!current_user.print?) %>
+<div class="row clearfix">
+	<div class="panel panel-info">
+		<div class='panel-heading'>
+			<strong>Travaux effectués:</strong>
+		</div>
+		<div class="panel-body">
+			<%= f.fields_for :tasks do |t| %>
+				<% render 'task_fields', :f => t %>
+			<% end %>
+			<%= f.fields_for :feedbacks do |feed| %>
+				<% render 'feedback_fields', :f => feed %>
+			<% end %>
+			<p class="text-center">
+			<%= link_to_add_association 'Ajouter un travail effectué', f, :tasks, class: "btn btn-success"%>
+			<%= link_to_add_association 'Ajouter un retour client', f, :feedbacks, class: "btn btn-warning"%>
+			</p>
+			<p class="text-center">
+			</p>
+		</div>
+</div>
+<% end%>
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<strong>Client:</strong>

@@ -17,6 +17,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find_detailed(params[:id])
+    @spent_time = @project.tasks.sum(:duration)
   end
 
   # GET /projects/new
@@ -54,6 +55,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
+    @client = Client.all
     respond_to do |format|
       if @project.update(project_params)
         flash[:success] = 'Projet mis à jour avec succès'
@@ -101,16 +103,18 @@ class ProjectsController < ApplicationController
         :owner_id,
         :description,
         :first_feedback,
-        :validation_date,
+        :delivery_date,
         :good_to_print,
         :feedback_number,
         :contact_id,
         :priority,
         :important,
         :details,
-        :progression)
+        :progression,
+        :archived,
+        :state,
+        tasks_attributes: [:id, :description, :hours, :minutes, :_destroy, :worker_id, :project_id],
+        feedbacks_attributes: [:id, :description, :_destroy, :worker_id, :project_id]
+      )
     end
-    
-    
-    
 end
