@@ -20,6 +20,10 @@
   text-decoration: none;
 }
 
+#logo img, #logo span {
+    vertical-align: bottom;
+}
+
 .checkbox {
   margin-bottom: 10px;
   span {

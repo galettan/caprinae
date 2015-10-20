@@ -1,8 +1,6 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-  	<p>
-   <%= image_tag("logo-rubtik-c-2015-transparent.png", size: "71x30")%></p>
-    <%= link_to "DJOBI-DJOBA", '#', id: "logo" %>
+  	<a href="<%= root_path%>" class="logo"><%=image_tag("logo-rubtik-c-2015-transparent.png", size: "71x30")%><span>dJOBi-dJOBa</span></a> 
     <nav>
     	<ul class="nav navbar-nav navbar-right">
         	<li><%= link_to "Home",   root_path %></li>
@@ -12,7 +10,7 @@
         		<li><%= link_to "Utilisateurs", users_url %></li>
 				<li class="dropdown">
             		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              		<%= current_user.login %> <b class="caret"></b>
+              		<%= image_tag(current_user.avatar(:thumb), width: "25px") %> <b class="caret"></b>
             	</a>	
             	<ul class="dropdown-menu">
                 	<li><%= link_to "Profil", current_user %></li>
