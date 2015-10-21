@@ -106,7 +106,6 @@ class ProjectsController < ApplicationController
         :delivery_date,
         :good_to_print,
         :feedback_number,
-        :contact_id,
         :priority,
         :important,
         :details,
@@ -116,7 +115,8 @@ class ProjectsController < ApplicationController
         :hours,
         :minutes,
         tasks_attributes: [:id, :description, :hours, :minutes, :_destroy, :worker_id, :project_id],
-        feedbacks_attributes: [:id, :description, :_destroy, :worker_id, :project_id]
+        feedbacks_attributes: [:id, :description, :_destroy, :worker_id, :project_id],
+        participants_attributes: [:id, :project_id, :contact_id, :_destroy]
       )
     end
 end

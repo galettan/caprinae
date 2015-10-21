@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151020114821) do
+ActiveRecord::Schema.define(version: 20151021121436) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -45,6 +45,16 @@ ActiveRecord::Schema.define(version: 20151020114821) do
   add_index "feedbacks", ["project_id"], name: "fk_rails_8f27045d07", using: :btree
   add_index "feedbacks", ["worker_id"], name: "fk_rails_2cb4658f09", using: :btree
 
+  create_table "participants", force: :cascade do |t|
+    t.integer  "project_id", limit: 4
+    t.integer  "contact_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "participants", ["contact_id"], name: "index_participants_on_contact_id", using: :btree
+  add_index "participants", ["project_id"], name: "index_participants_on_project_id", using: :btree
+
   create_table "projects", force: :cascade do |t|
     t.string   "name",            limit: 255
     t.string   "number",          limit: 255
@@ -58,7 +68,6 @@ ActiveRecord::Schema.define(version: 20151020114821) do
     t.date     "delivery_date"
     t.date     "good_to_print"
     t.integer  "feedback_number", limit: 4
-    t.integer  "contact_id",      limit: 4
     t.integer  "priority",        limit: 4,     default: 0
     t.boolean  "archived",                      default: false
     t.integer  "state",           limit: 4,     default: 0
@@ -68,7 +77,6 @@ ActiveRecord::Schema.define(version: 20151020114821) do
     t.integer  "estimated_time",  limit: 4,     default: 0
   end
 
-  add_index "projects", ["contact_id"], name: "fk_rails_d2ed3a7e49", using: :btree
   add_index "projects", ["owner_id"], name: "fk_rails_219ef9bf7d", using: :btree
   add_index "projects", ["worker_id"], name: "fk_rails_e1871a26bc", using: :btree
 
@@ -106,7 +114,6 @@ ActiveRecord::Schema.define(version: 20151020114821) do
   add_foreign_key "contacts", "clients", on_delete: :nullify
   add_foreign_key "feedbacks", "projects", on_delete: :nullify
   add_foreign_key "feedbacks", "users", column: "worker_id", on_delete: :nullify
-  add_foreign_key "projects", "contacts", on_delete: :nullify
   add_foreign_key "projects", "users", column: "owner_id", on_delete: :nullify
   add_foreign_key "projects", "users", column: "worker_id", on_delete: :nullify
   add_foreign_key "tasks", "projects", on_delete: :nullify

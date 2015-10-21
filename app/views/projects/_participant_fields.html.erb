@@ -1,0 +1,16 @@
+<script>$(document).ready(function() {
+$(".js-example-placeholder-single").select2({
+  placeholder: "Select a state",
+  allowClear: true
+});
+ });
+</script>
+<tr>
+	<td>
+	  	<%= f.label :client %>	  			
+	</td>
+	<td>
+		<%= f.grouped_collection_select(:contact_id, @client, :contacts, :name, :id, :first_name_and_last_name, {:include_blank => true}, {class: 'js-example-placeholder-single form-control'} )%>
+				<%= f.hidden_field :project_id, :value => @project.id%>
+	</td>
+</tr>

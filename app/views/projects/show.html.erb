@@ -198,26 +198,24 @@
 	</div>
 	<div class="panel-body">
 		<table class="table table-striped table-bordered">
+			<thead>
+				<th>Entreprise:</th>
+				<th>Prénom:</th>
+				<th>Nom:</th>
+				<th>Email:</th>
+				<th>Téléphone:</th>
+			</thead>
+			<tbody>
+			<% @project.participants.each do |participant| %>
 			<tr>
-				<td>Entreprise:</td>
-				<td><%= @project.contact.client.name %></td>
+				<td><%= participant.contact.client.name %></td>
+				<td><%= participant.contact.first_name %></td>
+				<td><%= participant.contact.last_name %></td>
+				<td><%= mail_to participant.contact.email %></td>
+				<td><%= participant.contact.phone_nbr %></td>
 			</tr>
-			<tr>
-				<td>Prénom du contact:</td>
-				<td><%= @project.contact.first_name %></td>
-			</tr>
-			<tr>
-				<td>Nom du contact:</td>
-				<td><%= @project.contact.last_name %></td>
-			</tr>
-			<tr>
-				<td>Email du contact:</td>
-				<td><%= mail_to @project.contact.email %></td>
-			</tr>
-			<tr>
-				<td>Téléphone du contact:</td>
-				<td><%= @project.contact.phone_nbr %></td>
-			</tr>
+			<% end %>
+			</tbody>
 		</table>
 	</div>
 </div>

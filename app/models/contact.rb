@@ -1,6 +1,8 @@
 class Contact < ActiveRecord::Base
 
 belongs_to :client, class_name: Client, foreign_key: "client_id"
+has_many :participant, :class_name => 'Participant'
+has_many :projects, :through => :participant
 
 validates :last_name, presence: true
 validates :first_name, presence: true
