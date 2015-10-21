@@ -5,12 +5,19 @@ $(".js-example-placeholder-single").select2({
 });
  });
 </script>
+	<div class="nested-fields">
+	<table class="table table-striped table-bordered">
 <tr>
 	<td>
 	  	<%= f.label :client %>	  			
 	</td>
 	<td>
 		<%= f.grouped_collection_select(:contact_id, @client, :contacts, :name, :id, :first_name_and_last_name, {:include_blank => true}, {class: 'js-example-placeholder-single form-control'} )%>
-				<%= f.hidden_field :project_id, :value => @project.id%>
+		<%= f.hidden_field :project_id, :value => @project.id%>
 	</td>
 </tr>
+		</table>
+		<p class="text-left">
+		<%= link_to_remove_association "Retirer un contact client", f, class: "btn btn-danger" %>
+		</p>
+		</div>
