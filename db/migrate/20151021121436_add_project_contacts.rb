@@ -5,6 +5,6 @@ class AddProjectContacts < ActiveRecord::Migration
       pc.belongs_to :contact, index: true
       pc.timestamps null: false
     end
-    remove_foreign_key :projects, column: :project_id
+    remove_foreign_key :projects, column: :contact_id
   end
 end
