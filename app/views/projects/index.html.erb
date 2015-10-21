@@ -1,5 +1,6 @@
 <p><%= link_to 'Nouveau Projet', new_project_path, class: 'btn btn-default'%>
-</p><div class="panel panel-default">
+</p>
+<div class="panel panel-default">
 	<div class="panel-heading">
 		<strong>Liste des Projets</strong>
 	</div>
@@ -17,7 +18,7 @@
 					<th>Date premier retour</th>
 					<th>Bon à tirer</th>
 					<th>Date de Livraison</th>
-					<th>nombre de retour estimé / réel</th>
+					<th>nombre de retour(s) réel / estimé</th>
 					<th>Statut</th>
 				</tr>
 			</thead>
@@ -31,4 +32,4 @@
 			<%= will_paginate %>
 		</div>
 	</div>
-</div>	
+</div>

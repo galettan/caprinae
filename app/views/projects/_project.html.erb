@@ -21,7 +21,7 @@
 						<td>
 							<div class="progress">
 								<% pct_time = (project.tasks.sum(:duration) * 100) / project.estimated_time %>
-								<div class="progress-bar progress-bar-<%= (pct_time > 80 ? (pct_time > 100 ? 'danger' : 'warning'): 'success')%>"
+								<div class="progress-bar progress-bar-<%= (pct_time >= 80 ? (pct_time > 100 ? 'danger' : 'warning'): 'success')%> progress-bar-striped active"
 									role="progressbar"
 									aria-valuenow="<%= pct_time %>"
 									aria-valuemin="0"
@@ -69,6 +69,6 @@
 		<% else %>
 			<span class="label label-success">
 		<% end %>
-		<%= project.feedback_number%> / <%= project.feedbacks.count%></span></td>
+		<%= project.feedbacks.count%> / <%= project.feedback_number%></span></td>
 	<td><%= t project.state %> / <%= t project.progression %></td>
 </tr>

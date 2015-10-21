@@ -111,13 +111,13 @@
 						<td>
 							<div class="progress">
 								<% pct_time = (@spent_time * 100) / @project.estimated_time %>
-								<div class="progress-bar progress-bar-<%= (pct_time > 80 ? (pct_time > 100 ? 'danger' : 'warning'): 'success')%>"
+								<div class="progress-bar progress-bar-<%= (pct_time >= 80 ? (pct_time > 100 ? 'danger' : 'warning'): 'success')%> progress-bar-striped active"
 									role="progressbar"
 									aria-valuenow="<%= pct_time %>"
 									aria-valuemin="0"
 									aria-valuemax="100"
 									style="width: <%= pct_time %>%;">
-    								<%= pct_time %>% du temps consommé%</div>
+    								<%= pct_time %>% du temps consommé</div>
 							</div>
 						</td>
 					</tr>
@@ -126,7 +126,7 @@
 						<td>
 							<div class="progress">
 								<% pct_feedback = (@project.feedbacks.count * 100) / @project.feedback_number %>
-								<div class="progress-bar progress-bar-<%= (pct_feedback > 80 ) ? 'warning' : 'success'%>"
+								<div class="progress-bar progress-bar-<%= (pct_feedback >= 80 ) ? 'warning' : 'success'%> progress-bar-striped active"
 									role="progressbar"
 									aria-valuenow="<%= pct_feedback %>"
 									aria-valuemin="0"
@@ -160,7 +160,7 @@
 				<% @project.tasks.each do |task|%>
 						<tr>
 							<td><%= task.created_at.strftime('%d-%b-%Y') %></td>
-							<td><%= image_tag(task.worker.avatar(:thumb))%></td>
+							<td><%= image_tag(task.worker.avatar(:thumb), {title:  task.worker.login})%></td>
 							<td><%= task.description %></td>
 							<td><%= task.hours %> heure<%= task.hours > 1? 's' : ''%> <%= task.minutes%> minute<%= task.minutes > 1? 's' : ''%></td>
 						</tr>
@@ -182,7 +182,7 @@
 				<% @project.feedbacks.each do |feedback|%>
 						<tr>
 							<td><%= feedback.created_at.strftime('%d-%b-%Y à %H:%M:%S') %></td>
-							<td><%= image_tag(feedback.worker.avatar(:thumb))%></td>
+							<td><%= image_tag(feedback.worker.avatar(:thumb), {title:  feedback.worker.login})%></td>
 							<td><%= feedback.description %></td>
 						</tr>
 				<% end %>
