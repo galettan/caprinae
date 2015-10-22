@@ -7,10 +7,10 @@ $(".js-example-placeholder-single").select2({
  });
 </script>
 <script>
-	function markForCreaRunning() {
+	function markForRunningCrea() {
 		projectType = document.getElementById('projectProgression');
 		if (projectType.value == 'todocrea') {
-			document.getElementById('projectType').value='runningcrea';
+			document.getElementById('projectProgression').value='runningcrea';
 		}
 	}
 </script>
@@ -114,9 +114,8 @@ $(".js-example-placeholder-single").select2({
 			<%= f.fields_for :participants do |p| %>
 				<% render 'participant_fields', :f => p %>
 		  	<% end %>
-			<p class="text-center">
-			<%= link_to_add_association 'Ajouter un contact client', f, :participants, class: "btn btn-warning"%>
-			</p>
+		  	<p class="text-left">
+			<%= link_to_add_association '<span class="glyphicon glyphicon-plus"></span>'.html_safe, f, :participants, class: "btn btn-success"%></p>
 			</div>
 		</div>
 	</div>
@@ -199,8 +198,8 @@ $(".js-example-placeholder-single").select2({
 			<%= f.fields_for :tasks do |t| %>
 				<% render 'task_fields', :f => t %>
 			<% end %>
-			<p class="text-center">
-			<%= link_to_add_association 'Ajouter un travail effectué', f, :tasks, class: "btn btn-success", onclick: "markForRunningCrea();"%>
+			<p class="text-left">
+			<%= link_to_add_association '<span class="glyphicon glyphicon-plus"></span>'.html_safe, f, :tasks, class: "btn btn-success", onclick: "markForRunningCrea();"%>
 			</p>
 		</div>
 		<div class='panel-heading'>
@@ -210,8 +209,8 @@ $(".js-example-placeholder-single").select2({
 			<%= f.fields_for :feedbacks do |feed| %>
 				<% render 'feedback_fields', :f => feed %>
 			<% end %>
-			<p class="text-center">
-			<%= link_to_add_association 'Ajouter un retour client', f, :feedbacks, class: "btn btn-warning", onlick: "markForRunningCrea();"%>
+			<p class="text-left">
+			<%= link_to_add_association '<span class="glyphicon glyphicon-plus"></span>'.html_safe, f, :feedbacks, class: "btn btn-success", onclick: "markForRunningCrea();"%>
 			</p>
 		</div>
 </div>
