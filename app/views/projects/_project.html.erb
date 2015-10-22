@@ -67,11 +67,14 @@
 	<% end %>
 	</p>
 	<td>
+	<% if (project.feedback_number != 0)%>
 		<% if (project.feedbacks.count  / project.feedback_number > 0.8) %>
 			<span class="label label-warning">
 		<% else %>
 			<span class="label label-success">
 		<% end %>
-		<%= project.feedbacks.count%> / <%= project.feedback_number%></span></td>
+		<%= project.feedbacks.count%> / <%= project.feedback_number%></span>
+	<% end %>
+	</td>
 	<td><%= t project.state %> / <%= t project.progression %></td>
 </tr>
