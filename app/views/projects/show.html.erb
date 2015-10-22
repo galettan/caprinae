@@ -178,7 +178,7 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="<%= current_user.print? ? '' : 'active'%>"><a href="#studio" aria-controls="studio" role="tab" data-toggle="tab">Studio</a></li>
-    <% if @project.project_type == 'print' || @project.project_type == 'printcrea' || @project.project_type == 'printother'%>
+    <% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother'%>
     <li role="presentation" class="<%= current_user.print? ? 'active' : ''%>"><a href="#print" aria-controls="print" role="tab" data-toggle="tab">Print</a></li>
     <% end %>
   </ul>
@@ -236,7 +236,7 @@
 </div>
 
     </div>
-    <% if @project.project_type == 'print' || @project.project_type == 'printcrea' || @project.project_type == 'printother'%>
+    <% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother'%>
     <div role="tabpanel" class="tab-pane <%= current_user.print? ? 'active' : ''%>" id="print">
     		<div class="clearfix">
 				<div class="panel panel-default">
@@ -311,18 +311,18 @@
 						<div class="panel-body">
 							<table class="table table-striped table-hover table-bordered">
 								<thead>
-									<th>Numéro</th>
+									<th>Type</th>
 									<th>Grammage</th>
 									<th>Format</th>
 								</thead>						
 								<tbody>
 									<tr>
-										<td>1</td>
+										<td>bristol</td>
 										<td>350g</td>
 										<td>SRA3</td>
 									</tr>
 									<tr>
-										<td>2</td>
+										<td>couché mat</td>
 										<td>250g</td>
 										<td>110x220mm</td>
 									</tr>

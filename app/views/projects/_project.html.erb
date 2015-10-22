@@ -15,7 +15,7 @@
 		<%= project.priority %></span>
 	</td>
 	
-	<td><%= image_tag project.worker.avatar(:thumb), {title:  project.worker.login}%></td>
+	<td><%= image_tag project.worker.avatar(:thumb), title: project.worker.login%></td>
 	
 						<td>
 							<div class="progress">
@@ -30,7 +30,7 @@
 							</div>
 						</td>
 	
-	<td>
+	<td>1er retour:
 	<% if ((project.first_feedback > Date.today) && ((project.first_feedback) <= (Date.today + 7.days))) %>
 		<span class="label label-warning">
 	<% elsif (project.first_feedback <= Date.today)%>
@@ -38,8 +38,8 @@
 	<% elsif (project.first_feedback > Date.today + 7.days) %>
 		<span class="label label-success">
 	<% end %>
-	<%= l project.first_feedback%></span></td>
-	<td>
+	<%= l project.first_feedback%></span>
+	Bon à tirer:
 	<% if (!project.good_to_print.nil?)%>
 		<% if ((project.good_to_print > Date.today) && ((project.good_to_print) <= (Date.today + 7.days))) %>
 			<span class="label label-warning">
@@ -51,17 +51,21 @@
 			<%= l project.good_to_print %></span>
 	<% else %>
 		<span class="label label-default">Sans objet</span>
+	<% end %><p class="text-center">
+	Livraison:
+	<% if (!project.delivery_date.nil?)%>
+		<% if ((project.delivery_date > Date.today) && ((project.delivery_date) <= (Date.today + 7.days))) %>
+			<span class="label label-warning">
+		<% elsif (project.delivery_date <= Date.today)%>
+			<span class="label label-danger">
+		<% elsif (project.delivery_date > Date.today + 7.days) %>
+			<span class="label label-success">
+		<% end %>
+		<%= l project.delivery_date%></span></td>
+	<% else %>
+		<span class="label label-default">Sans objet</span>
 	<% end %>
-	</td>
-	<td>
-	<% if ((project.delivery_date > Date.today) && ((project.delivery_date) <= (Date.today + 7.days))) %>
-		<span class="label label-warning">
-	<% elsif (project.delivery_date <= Date.today)%>
-		<span class="label label-danger">
-	<% elsif (project.delivery_date > Date.today + 7.days) %>
-		<span class="label label-success">
-	<% end %>
-	<%= l project.delivery_date%></span></td>
+	</p>
 	<td>
 		<% if (project.feedbacks.count  / project.feedback_number > 0.8) %>
 			<span class="label label-warning">

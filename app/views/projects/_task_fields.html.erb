@@ -7,6 +7,9 @@
 			<td>
 				<%= f.text_field :hours, class: 'form-control' %>Heures <%= f.text_field :minutes, class: 'form-control'%>Minutes
 			</td>
+			<td rowspan="2" class="vmiddle">
+				<%= link_to_remove_association '<span class="glyphicon glyphicon-trash"></span>'.html_safe, f, class: "btn btn-danger"%>
+			</td>
 		</tr>
 		<tr>
 			<td>
@@ -16,10 +19,6 @@
 				<%= f.text_area :description, class: "form-control"%>
 				<%= f.hidden_field :worker_id, :value => current_user.id%>
 				<%= f.hidden_field :project_id, :value => @project.id%>
-			</td>
-			<td rowspan="2">
-		<%= link_to_remove_association '<span class="glyphicon glyphicon-trash"></span>'.html_safe, f, class: "btn btn-danger"%>
-				
 			</td>
 		</tr>
 		</table>
