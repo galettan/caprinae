@@ -116,6 +116,7 @@
 							<%= l @project.departure_date%></span></td>	
 					</tr>
 					<% end %>
+					<% if (!@project.delivery_date.nil?) %>
 					<tr>
 						<td>Date de Livraison:</td>
 						<td>
@@ -128,6 +129,7 @@
 							<% end %>
 							<%= l @project.delivery_date%></span></td>	
 					</tr>
+					<% end %>
 				</table>		
 			</div>
 		</div>
