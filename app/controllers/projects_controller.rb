@@ -108,12 +108,12 @@ class ProjectsController < ApplicationController
         :feedback_number,
         :priority,
         :important,
-        :details,
         :progression,
         :archived,
         :state,
         :hours,
         :minutes,
+        :departure_date,
         tasks_attributes: [:id, :description, :hours, :minutes, :_destroy, :worker_id, :project_id],
         feedbacks_attributes: [:id, :description, :_destroy, :worker_id, :project_id],
         participants_attributes: [:id, :project_id, :contact_id, :_destroy]

@@ -43,14 +43,31 @@
 						<td>Important:</td>
 						<td><%= @project.important%></td>
 					</tr>
-					<tr>
-						<td>Détails:</td>
-						<td><%= @project.details%></td>
-					</tr>
 				</table>
 			</div>
+			<div class="panel-heading">
+				<strong>Client:</strong>
+			</div>
+			<div class="panel-body">
+				<table class="table table-striped table-bordered">
+				<% @project.participants.each do |participant| %>
+				<tr>
+					<td>Société:</td>
+					<td><%= participant.contact.client.name %></td>
+				</tr>
+				<tr>
+					<td>Contact:</td>
+					<td>
+						<p><span class="glyphicon glyphicon-user"> <%= participant.contact.first_name %> <%= participant.contact.last_name %></span></p>
+						<p><span class="glyphicon glyphicon-send"> <%= mail_to participant.contact.email %></span></p>
+						<p><span class="glyphicon glyphicon-phone-alt"> <%= participant.contact.phone_nbr %></span></p>
+					</td>
+				</tr>
+				<% end %>
+				</table>
+			</div>
+			</div>
 		</div>
-	</div>
 	<div class="col-md-6">
 		<div class="panel panel-warning">
 			<div class="panel-heading">
@@ -76,7 +93,7 @@
 						<td>
 						<% if ((@project.good_to_print > Date.today) && ((@project.good_to_print) <= (Date.today + 7.days))) %>
 							<span class="label label-warning">
-						<% elsif (@project.good_to_print < Date.today)%>
+						<% elsif (@project.good_to_print <= Date.today)%>
 							<span class="label label-danger">
 						<% elsif (@project.good_to_print > Date.today + 7.days) %>
 							<span class="label label-success">
@@ -85,12 +102,26 @@
 						</td>
 					</tr>
 					<% end%>
+					<% if (!@project.departure_date.nil?) %>
+					<tr>
+						<td>Date de Départ</td>
+						<td>
+							<% if ((@project.departure_date > Date.today) && ((@project.departure_date) <= (Date.today + 7.days))) %>
+								<span class="label label-warning">
+							<% elsif (@project.departure_date < Date.today)%>
+								<span class="label label-danger">
+							<% elsif (@project.departure_date > Date.today + 7.days) %>
+								<span class="label label-success">
+							<% end %>
+							<%= l @project.departure_date%></span></td>	
+					</tr>
+					<% end %>
 					<tr>
 						<td>Date de Livraison:</td>
 						<td>
 							<% if ((@project.delivery_date > Date.today) && ((@project.delivery_date) <= (Date.today + 7.days))) %>
 								<span class="label label-warning">
-							<% elsif (@project.delivery_date < Date.today)%>
+							<% elsif (@project.delivery_date <= Date.today)%>
 								<span class="label label-danger">
 							<% elsif (@project.delivery_date > Date.today + 7.days) %>
 								<span class="label label-success">
@@ -142,8 +173,20 @@
 		</div>
 	</div>
 	</div>
-<% if !current_user.print? %>
-<div class="clearfix">
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="<%= current_user.print? ? '' : 'active'%>"><a href="#studio" aria-controls="studio" role="tab" data-toggle="tab">Studio</a></li>
+    <% if @project.project_type == 'print' || @project.project_type == 'printcrea' || @project.project_type == 'printother'%>
+    <li role="presentation" class="<%= current_user.print? ? 'active' : ''%>"><a href="#print" aria-controls="print" role="tab" data-toggle="tab">Print</a></li>
+    <% end %>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane <%= current_user.print? ? '' : 'active'%>" id="studio">
+	<div class="clearfix">
 	<div class="panel panel-info">
 		<div class='panel-heading'>
 			<strong>Travaux effectués:</strong>
@@ -191,33 +234,112 @@
 		</div>
 	</div>
 </div>
-<% end%>
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<strong>Client:</strong>
-	</div>
-	<div class="panel-body">
-		<table class="table table-striped table-bordered">
-			<thead>
-				<th>Entreprise:</th>
-				<th>Prénom:</th>
-				<th>Nom:</th>
-				<th>Email:</th>
-				<th>Téléphone:</th>
-			</thead>
-			<tbody>
-			<% @project.participants.each do |participant| %>
-			<tr>
-				<td><%= participant.contact.client.name %></td>
-				<td><%= participant.contact.first_name %></td>
-				<td><%= participant.contact.last_name %></td>
-				<td><%= mail_to participant.contact.email %></td>
-				<td><%= participant.contact.phone_nbr %></td>
-			</tr>
-			<% end %>
-			</tbody>
-		</table>
-	</div>
+
+    </div>
+    <% if @project.project_type == 'print' || @project.project_type == 'printcrea' || @project.project_type == 'printother'%>
+    <div role="tabpanel" class="tab-pane <%= current_user.print? ? 'active' : ''%>" id="print">
+    		<div class="clearfix">
+				<div class="panel panel-default">
+					<div class='panel-heading'>
+						<strong>Informations Print:</strong>
+					</div>
+					<div class="panel-body">
+						<table class="table table-bordered table-hover table-striped">
+							<tr>
+								<td>Bon à tirer</td>
+								<td>Oui</td>
+							</tr>
+							<tr>
+								<td>Couleur</td>
+								<td>Quadri R:V</td>
+							</tr>
+							<tr>
+								<td>Données variables</td>
+								<td>Non</td>
+							</tr>
+							<tr>
+								<td>Quantité bonnes feuilles</td>
+								<td>290</td>
+							</tr>
+							<tr>
+								<td>Quantité documents finis</td>
+								<td>150</td>
+							</tr>
+							<tr>
+								<td>Laisser brut de tirage</td>
+								<td>Oui</td>
+							</tr>
+							<tr>
+								<td>Format ouvert (mm)</td>
+								<td>paysage</td>
+							</tr>
+							<tr>
+								<td>Format Fini</td>
+								<td>US Letter</td>
+							</tr>
+							<tr>
+								<td>Pelliculage ou plastification</td>
+								<td>Pelli brillant 'V'</td>
+							</tr>
+							<tr>
+								<td>Façonnage</td>
+								<td>coupe</td>
+							</tr>
+							<tr>
+								<td>Paqutage</td>
+								<td>boite</td>
+							</tr>
+							<tr>
+								<td>Livraison</td>
+								<td>A dispo</td>
+							</tr>
+							<tr>
+								<td>Remarques</td>
+								<td>Wire'o et cristal devant derrière</td>
+							</tr>
+							<tr>
+								<td>Sous traitance</td>
+								<td>DEFICOM 6 papers</td>
+							</tr>
+						</table>
+					</div>
+					</div>
+				<div class="panel panel-info">
+						<div class="panel-heading">
+							<strong>Papier(s)</strong>
+						</div>
+						<div class="panel-body">
+							<table class="table table-striped table-hover table-bordered">
+								<thead>
+									<th>Numéro</th>
+									<th>Grammage</th>
+									<th>Format</th>
+								</thead>						
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td>350g</td>
+										<td>SRA3</td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>250g</td>
+										<td>110x220mm</td>
+									</tr>
+									<tr>
+										<td>XX</td>
+										<td>80</td>
+										<td>A3</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+		</div>
+    </div>
+</div>
+<% end %>
+  </div>
+
 </div>
 <p class="text-center">
 	<%= link_to 'Back', projects_path,  {class: 'btn btn-default'}%>

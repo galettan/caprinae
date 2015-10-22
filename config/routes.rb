@@ -9,13 +9,12 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   resources :users
-  
-  root :to => 'sessions#new'
+
+  root to: "sessions#new"
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
   
-  resources :roles
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
