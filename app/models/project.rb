@@ -23,6 +23,33 @@ class Project < ActiveRecord::Base
   enum state: [:running, :waitingclient, :validatedclient, :finished]
   enum progression: [:todocrea, :runningcrea, :finishedcrea, :todoprint, :runningprint, :finishedprint]
 
+  enum colors: [:quadrir, :quadrirv, :quadrirnbv, :nbr, :nbrv]
+  enum open_shapes: [:a3oshape, :a4oshape, :a5oshape, :hundredseventybyfiftyfour, :hundredseventybyheightyfive, :twohundredbytwoten,
+    :twofortybyhundred, :twoninetysevenbyhundred, :twoninetysevenbyoneofive, :threehundredbyoneandhalf, :fourtwentybytwoten, :fourtwentybyhundred,
+    :fourtwentybyhundredandhalf, :fourfortybytwoten, :portrait, :landscape]
+  enum finished_shapes: [:indicatedshape, :various, :fortybythirtyheight, :heightyfivebyfifty, :heightyfivebyfiftyfour,
+    :ninetybyfifty, :ninetybyfiftyfour, :ninetyfivebyfiftyfour, :heightyfivesq, :heightbyhundred, :heightytwobyhundredtwentyheight,
+    :heightyfivebyhundred, :ninetyninebytwoten, :hundredbytwoten, :hundredfivebytwoten, :hundredtenbytwoten, :twotenbyhundredfifty,
+    :twofivebyhundredten, :hundredbytwoninetyseven, :hundredfortybytwoninetyseven, :hundredfiftysq, :hundredheightytwobytwofiftyseven,
+    :twotensq, :a3, :a4, :a5, :a6, :usletter, :seenotice, :sra3]
+  enum filmings: [:shinyrv, :dullrv, :shinyr, :dullr, :shinylaminating, :dulllaminating, :thirtysevenhalfmc, :heightymc, :hundredtwentyfivemc, :hundredseventyfivemc]
+  enum shapings: [:cut, :rainage, :pierced, :piercedandbent, :cutting, :straddlesting, :rainageandstraddlesting, :cutrainagebent, :leftcornersting, :manualbending,
+    :mechanicbending, :binding, :wireowhite, :wireosilver, :wireoblack, :frontcristal, :bothcristal, :flatback, :topofmindgluing, :leftgluing, :roundedcorner, 
+    :badgepin, :hanginghole, :ringbinderhole, :variousshaping, :assemblygluing, :no]
+  enum packages: [:film, :kraft, :elasticedby, :packagedby, :box, :pallet, :carton]
+  enum deliveries: [:available, :wedeliver, :steed, :tnt, :ups, :clientups, :standardmail]
+  
+  
+  #model paper
+  enum paper_type: [:layhalfmat,:laymat, :layshine, :layrefurb, :offsettype, :offsetrefurb, :offsetlaser,
+    :reprocolor, :opale, :bristol, :retightadhesiv, :adhesivnoretight, :piercedadhesiv, :labelboard,
+    :windowenvelope, :envelope, :cbcf,:cbcfbcf, :colorfile, :creapaper, :provideddoc]
+  enum paper_density: [:sixty, :heighty, :ninety, :hundred, :hundredten, :hundredfifteen, :hundredtwenty,
+    :hundredthirtyfive, :hundredfifty, :hundredseventy, :hundredninety, :twohundred, :twohundredfifty,
+    :threehundred, :threehundredtwenty, :threehundredfifty, :fourhundred, :otherdensity]
+  enum paper_shape: [:sra3shape, :a3shape, :sra4shape, :a4shape, :hundredtenbytwotwenty, :fourheightybythreethirty,
+    :onesixtytwobytwotwentynine, :twotwentyninebythreetwentyfour]
+
   def self.by_owner(id)
       @projects = Project.where(["owner_id = ? AND archived = false", id])
   end

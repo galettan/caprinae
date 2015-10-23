@@ -1,16 +1,8 @@
 <script>
-$(document).ready(function() {
-$(".js-example-placeholder-single").select2({
-  placeholder: "Select a state",
-  allowClear: true
-});
- });
-</script>
-<script>
 	function markForRunningCrea() {
 		projectType = document.getElementById('projectProgression');
 		if (projectType.value == 'todocrea') {
-			document.getElementById('projectProgression').value='runningcrea';
+			document.getElementById('projectProgression').value = 'runningcrea';
 		}
 	}
 </script>
@@ -24,98 +16,65 @@ $(".js-example-placeholder-single").select2({
 			<div class='panel-body'>
 				<table class="table table-striped table-bordered">
 					<tr>
-						<td>
-						    <%= f.label :nom %>
-					    </td>
-					    <td>
-						    <%= f.text_field :name, class: 'form-control'%>
-					    </td>
-				    </tr>
-				    <tr>
-				    	<td>
-						    <%= f.label :numero %>
-					    </td>
-					    <td>
-						    <%= f.number_field :number, class: 'form-control'%>
-					    </td>
-    				</tr>
-    				<tr>
-    					<td>
-						  	<%= f.label :assigné %>
-    					</td>
-    					<td>
-							<%= collection_select(:project, :worker_id, User.all, :id, :login, {prompt: 'Sélectionner un utilisateur'}, {class: 'form-control'})%>    						
-    					</td>
-    				</tr>
-    				<tr>
-    					<td>
-						  	<%= f.label :type_de_projet %>
-    					</td>
-    					<td>
-    						<%= f.select(:project_type, options_for_select(t("project_types").invert, @project.project_type), {prompt: 'Selectionner un type de projet'}, class: 'form-control')%>
-    					</td>
-    				</tr>
-    				<tr>
-    					<td>
-						  	<%= f.label :description %>
-    					</td>
-    					<td>
-						  	<%= f.text_area :description, class: 'form-control' %>
-    					</td>
-    				</tr>
-    				<tr>
-    					<td>
-						    <%= f.label :priorite %><br>
-    					</td>
-    					<td>
-    						<%= f.select(:priority, options_for_select(t("project_priorities").invert, @project.priority), {prompt: 'Selectionner une priorité'}, {class: 'form-control'})%>
-    					</td>
-    				</tr>
-    				<% if current_user.manager?%>
-				  	<tr>
-				  		<td>
-						  	<%= f.label :archiver%>
-				  		</td>
-				  		<td>
-						  	<%= f.check_box :archived%>
-				  		</td>
-				  	</tr>
-				  	<% end %>
-    				<tr>
-    					<td>
-						    <%= f.label :statut %><br>
-    					</td>
-    					<td>
-						  	<%= f.select(:state, options_for_select([['En cours', 'running'], ['En attente client', 'waitingclient'], ['Validé client', 'validatedclient'], ['Terminé', 'finished']], @project.priority), {prompt: 'Selectionner une priorité'},{class: 'form-control'})%>
-    					</td>
-    				</tr>
-    				<tr>
-    					<td>
-    						<%= f.label :progression%>
-    					</td>
-    					<td>
-    						<%= f.select(:progression, options_for_select(t("project_progression").invert, @project.progression), {prompt: 'Sélectionner un avancement du projet'}, {class: 'form-control', id: 'projectProgression'})%>
-    					</td>
-    				</tr>
-    				<tr>
-    					<td>
-						    <%= f.label :important %><br>
-    					</td>
-    					<td>
-    						<%= f.text_area :important, class: 'form-control'%>
-    					</td>
-    				</tr>
-    		</table>
-    		</div>
+						<td> <%= f.label :nom %> </td>
+						<td> <%= f.text_field :name, class: 'form-control'%> </td>
+					</tr>
+					<tr>
+						<td> <%= f.label :numero %> </td>
+						<td> <%= f.number_field :number, class: 'form-control'%> </td>
+					</tr>
+					<tr>
+						<td> <%= f.label :assigné %> </td>
+						<td> <%= collection_select(:project, :worker_id, User.all, :id, :login, {prompt: 'Sélectionner un utilisateur'}, {class: 'form-control'})%> </td>
+					</tr>
+					<tr>
+						<td> <%= f.label :type_de_projet %> </td>
+						<td> <%= f.select(:project_type, options_for_select(t("project_types").invert, @project.project_type), {prompt: 'Selectionner un type de projet'}, class: 'form-control')%> </td>
+					</tr>
+					<tr>
+						<td> <%= f.label :description %> </td>
+						<td> <%= f.text_area :description, class: 'form-control' %> </td>
+					</tr>
+					<tr>
+						<td> <%= f.label :priorite %>
+						<br>
+						</td>
+						<td> <%= f.select(:priority, options_for_select(t("project_priorities").invert, @project.priority), {prompt: 'Selectionner une priorité'}, {class: 'form-control'})%> </td>
+					</tr>
+					<% if current_user.manager?%>
+					<tr>
+						<td> <%= f.label :archiver%> </td>
+						<td> <%= f.check_box :archived%> </td>
+					</tr>
+					<% end %>
+					<tr>
+						<td> <%= f.label :statut %>
+						<br>
+						</td>
+						<td> <%= f.select(:state, options_for_select([['En cours', 'running'], ['En attente client', 'waitingclient'], ['Validé client', 'validatedclient'], ['Terminé', 'finished']], @project.priority), {prompt: 'Selectionner une priorité'},{class: 'form-control'})%> </td>
+					</tr>
+					<tr>
+						<td> <%= f.label :progression%> </td>
+						<td> <%= f.select(:progression, options_for_select(t("project_progression").invert, @project.progression), {prompt: 'Sélectionner un avancement du projet'}, {class: 'form-control', id: 'projectProgression'})%> </td>
+					</tr>
+					<tr>
+						<td> <%= f.label :important %>
+						<br>
+						</td>
+						<td> <%= f.text_area :important, class: 'form-control'%> </td>
+					</tr>
+				</table>
+			</div>
 			<div class="panel-heading">
 				<strong>Client:</strong>
 			</div>
 			<div class="panel-body">
-			<%= f.fields_for :participants do |p| %>
-				<% render 'participant_fields', :f => p %>
-		  	<% end %>
-		  	<p class="text-left">
-			<%= link_to_add_association '<span class="glyphicon glyphicon-plus"></span>'.html_safe, f, :participants, class: "btn btn-success"%></p>
+				<%= f.fields_for :participants do |p| %>
+				<% render 'projects/forms/participant_fields', :f => p %>
+				<% end %>
+				<p class="text-left">
+					<%= link_to_add_association '<span class="glyphicon glyphicon-plus"></span>'.html_safe, f, :participants, class: "btn btn-success", :partial => '/projects/forms/participant_fields' %>
+				</p>
 			</div>
 		</div>
 	</div>
@@ -127,97 +86,70 @@ $(".js-example-placeholder-single").select2({
 			<div class='panel-body'>
 				<table class="table table-striped table-bordered">
 					<tr>
-						<td>
-						  	<%= f.label :date_de_premier_retour%>
-					  	</td>
-					  	<td>
-						  	<%= f.date_field :first_feedback, class: 'form-control'%>
-					  	</td>
-				  	</tr>
-				  	<tr>
-				  		<td>
-						  	<%= f.label :bon_a_tirer%>
-				  		</td>
-				  		<td>
-						  	<%= f.date_field :good_to_print, class: 'form-control'%>
-				  		</td>
-				  	</tr>
-				  	<tr>
-				  		<td>
-						  	<%= f.label :date_de_depart%>
-				  		</td>
-				  		<td>
-						  	<%= f.date_field :departure_date, class: 'form-control'%>
-				  		</td>
-				  	</tr>
-				  	<tr>
-				  		<td>
-						  	<%= f.label :date_de_livraison%>
-				  		</td>
-				  		<td>
-						  	<%= f.date_field :delivery_date, class: 'form-control'%>
-				  		</td>
-				  	</tr>
-			  	</table>
+						<td> <%= f.label :date_de_premier_retour%> </td>
+						<td> <%= f.date_field :first_feedback, class: 'form-control'%> </td>
+					</tr>
+					<tr>
+						<td> <%= f.label :bon_a_tirer%> </td>
+						<td> <%= f.date_field :good_to_print, class: 'form-control'%> </td>
+					</tr>
+					<tr>
+						<td> <%= f.label :date_de_depart%> </td>
+						<td> <%= f.date_field :departure_date, class: 'form-control'%> </td>
+					</tr>
+					<tr>
+						<td> <%= f.label :date_de_livraison%> </td>
+						<td> <%= f.date_field :delivery_date, class: 'form-control'%> </td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>
 	<div class="col-md-6">
 		<div class="panel panel-success">
-			<div class="panel-heading">Données chiffrées:</div>
+			<div class="panel-heading">
+				Données chiffrées:
+			</div>
 			<div class="panel-body">
 				<table class="table table-bordered table-striped">
-    				<tr>
-    					<td>
-						    <%= f.label :temps_estimé %><br>
-    					</td>
-    					<td>
-							<%= f.text_field :hours, class: 'form-control' %>Heures <%= f.text_field :minutes, class: 'form-control'%>Minutes
-    					</td>
-    				</tr>
-    				<tr>
-    					<td>
-						    <%= f.label :nombre_de_retour_prévus %><br>
-    					</td>
-    					<td>
-						    <%= f.number_field :feedback_number, class: 'form-control'%>
-    					</td>
-    				</tr>
+					<tr>
+						<td> <%= f.label :temps_estimé %>
+						<br>
+						</td>
+						<td> <%= f.text_field :hours, class: 'form-control' %>Heures <%= f.text_field :minutes, class: 'form-control'%>Minutes </td>
+					</tr>
+					<tr>
+						<td> <%= f.label :nombre_de_retour_prévus %>
+						<br>
+						</td>
+						<td> <%= f.number_field :feedback_number, class: 'form-control'%> </td>
+					</tr>
 				</table>
 			</div>
 		</div>
 	</div>
-	</div>
-<% if (!current_user.print?) %>
-<div class=" clearfix">
-	<div class="panel panel-info">
-		<div class='panel-heading'>
-			<strong>Travaux effectués:</strong>
-		</div>
-		<div class="panel-body">
-			<%= f.fields_for :tasks do |t| %>
-				<% render 'task_fields', :f => t %>
-			<% end %>
-			<p class="text-left">
-			<%= link_to_add_association '<span class="glyphicon glyphicon-plus"></span>'.html_safe, f, :tasks, class: "btn btn-success", onclick: "markForRunningCrea();"%>
-			</p>
-		</div>
-		<div class='panel-heading'>
-			<strong>Retours clients:</strong>
-		</div>
-		<div class="panel-body">
-			<%= f.fields_for :feedbacks do |feed| %>
-				<% render 'feedback_fields', :f => feed %>
-			<% end %>
-			<p class="text-left">
-			<%= link_to_add_association '<span class="glyphicon glyphicon-plus"></span>'.html_safe, f, :feedbacks, class: "btn btn-success", onclick: "markForRunningCrea();"%>
-			</p>
-		</div>
 </div>
-<% end%>
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Studio</a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Print</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+    	<%= render 'projects/forms/studio_fields', :f => f %>
+	</div>
+    <div role="tabpanel" class="tab-pane" id="profile">
+		<%= render 'projects/forms/print_fields', :f => f %>
+	</div>
+  </div>
+
+</div>
 <p class="text-center">
 	<%= link_to 'Back', projects_path, class: 'btn btn-default'%>
-    <%= f.submit 'Valider', class: 'btn btn-danger'%>
+	<%= f.submit 'Valider', class: 'btn btn-danger'%>
 </p>
-
 <% end %>

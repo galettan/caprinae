@@ -50,24 +50,29 @@
 			</div>
 			<div class="panel-body">
 				<table class="table table-striped table-bordered">
-				<% @project.participants.each do |participant| %>
-				<tr>
-					<td>Société:</td>
-					<td><%= participant.contact.client.name %></td>
-				</tr>
-				<tr>
-					<td>Contact:</td>
-					<td>
-						<p><span class="glyphicon glyphicon-user"> <%= participant.contact.first_name %> <%= participant.contact.last_name %></span></p>
-						<p><span class="glyphicon glyphicon-send"> <%= mail_to participant.contact.email %></span></p>
-						<p><span class="glyphicon glyphicon-phone-alt"> <%= participant.contact.phone_nbr %></span></p>
-					</td>
-				</tr>
-				<% end %>
+					<% @project.participants.each do |participant| %>
+					<tr>
+						<td>Société:</td>
+						<td><%= participant.contact.client.name %></td>
+					</tr>
+					<tr>
+						<td>Contact:</td>
+						<td>
+						<p>
+							<span class="glyphicon glyphicon-user"> <%= participant.contact.first_name %> <%= participant.contact.last_name %></span>
+						</p>
+						<p>
+							<span class="glyphicon glyphicon-send"> <%= mail_to participant.contact.email %></span>
+						</p>
+						<p>
+							<span class="glyphicon glyphicon-phone-alt"> <%= participant.contact.phone_nbr %></span>
+						</p></td>
+					</tr>
+					<% end %>
 				</table>
 			</div>
-			</div>
 		</div>
+	</div>
 	<div class="col-md-6">
 		<div class="panel panel-warning">
 			<div class="panel-heading">
@@ -77,270 +82,97 @@
 				<table class="table table-striped table-bordered">
 					<tr>
 						<td>Date de premier retour:</td>
-						<td>
-							<% if ((@project.first_feedback > Date.today) && ((@project.first_feedback) <= (Date.today + 7.days))) %>
-								<span class="label label-warning">
-							<% elsif (@project.first_feedback < Date.today)%>
-								<span class="label label-danger">
-							<% elsif (@project.first_feedback > Date.today + 7.days) %>
-								<span class="label label-success">
-							<% end %>							
-							<%= l @project.first_feedback%></span></td>
+						<td> <% if ((@project.first_feedback > Date.today) && ((@project.first_feedback) <= (Date.today + 7.days))) %> <span class="label label-warning"> <% elsif (@project.first_feedback < Date.today)%> <span class="label label-danger"> <% elsif (@project.first_feedback > Date.today + 7.days) %> <span class="label label-success"> <% end %>
+									<%= l @project.first_feedback%></span></td>
 					</tr>
 					<% if (!@project.good_to_print.nil?) %>
 					<tr>
 						<td>Bon à tirer:</td>
-						<td>
-						<% if ((@project.good_to_print > Date.today) && ((@project.good_to_print) <= (Date.today + 7.days))) %>
-							<span class="label label-warning">
-						<% elsif (@project.good_to_print <= Date.today)%>
-							<span class="label label-danger">
-						<% elsif (@project.good_to_print > Date.today + 7.days) %>
-							<span class="label label-success">
-						<% end %>
-							<%= l @project.good_to_print %></span>
-						</td>
+						<td> <% if ((@project.good_to_print > Date.today) && ((@project.good_to_print) <= (Date.today + 7.days))) %> <span class="label label-warning"> <% elsif (@project.good_to_print <= Date.today)%> <span class="label label-danger"> <% elsif (@project.good_to_print > Date.today + 7.days) %> <span class="label label-success"> <% end %>
+									<%= l @project.good_to_print %></span> </td>
 					</tr>
 					<% end%>
 					<% if (!@project.departure_date.nil?) %>
 					<tr>
 						<td>Date de Départ</td>
-						<td>
-							<% if ((@project.departure_date > Date.today) && ((@project.departure_date) <= (Date.today + 7.days))) %>
-								<span class="label label-warning">
-							<% elsif (@project.departure_date < Date.today)%>
-								<span class="label label-danger">
-							<% elsif (@project.departure_date > Date.today + 7.days) %>
-								<span class="label label-success">
-							<% end %>
-							<%= l @project.departure_date%></span></td>	
+						<td> <% if ((@project.departure_date > Date.today) && ((@project.departure_date) <= (Date.today + 7.days))) %> <span class="label label-warning"> <% elsif (@project.departure_date < Date.today)%> <span class="label label-danger"> <% elsif (@project.departure_date > Date.today + 7.days) %> <span class="label label-success"> <% end %>
+									<%= l @project.departure_date%></span></td>
 					</tr>
 					<% end %>
 					<% if (!@project.delivery_date.nil?) %>
 					<tr>
 						<td>Date de Livraison:</td>
-						<td>
-							<% if ((@project.delivery_date > Date.today) && ((@project.delivery_date) <= (Date.today + 7.days))) %>
-								<span class="label label-warning">
-							<% elsif (@project.delivery_date <= Date.today)%>
-								<span class="label label-danger">
-							<% elsif (@project.delivery_date > Date.today + 7.days) %>
-								<span class="label label-success">
-							<% end %>
-							<%= l @project.delivery_date%></span></td>	
+						<td> <% if ((@project.delivery_date > Date.today) && ((@project.delivery_date) <= (Date.today + 7.days))) %> <span class="label label-warning"> <% elsif (@project.delivery_date <= Date.today)%> <span class="label label-danger"> <% elsif (@project.delivery_date > Date.today + 7.days) %> <span class="label label-success"> <% end %>
+									<%= l @project.delivery_date%></span></td>
 					</tr>
 					<% end %>
-				</table>		
+				</table>
 			</div>
 		</div>
-		</div>
+	</div>
 	<div class="col-md-6">
 		<div class="panel panel-success">
-			<div class="panel-heading">Données chiffrées:</div>
+			<div class="panel-heading">
+				Données chiffrées:
+			</div>
 			<div class="panel-body">
 				<table class="table table-bordered table-striped">
 					<tr>
 						<td>Temps estimé:<%= @project.hours %> heure<%= @project.hours > 1? 's' : ''%> <%= @project.minutes%> minute<%= @project.minutes > 1? 's' : ''%></td>
 						<td>
-							<div class="progress">
-								<% pct_time = (@spent_time * 100) / @project.estimated_time %>
-								<div class="progress-bar progress-bar-<%= (pct_time >= 80 ? (pct_time > 100 ? 'danger' : 'warning'): 'success')%> progress-bar-striped active"
-									role="progressbar"
-									aria-valuenow="<%= pct_time %>"
-									aria-valuemin="0"
-									aria-valuemax="100"
-									style="width: <%= pct_time %>%;">
-    								<%= pct_time %>% du temps consommé</div>
+						<div class="progress">
+							<% pct_time = (@spent_time * 100) / @project.estimated_time %>
+							<div class="progress-bar progress-bar-<%= (pct_time >= 80 ? (pct_time > 100 ? 'danger' : 'warning'): 'success')%> progress-bar-striped active"
+							role="progressbar"
+							aria-valuenow="<%= pct_time %>"
+							aria-valuemin="0"
+							aria-valuemax="100"
+							style="width: <%= pct_time %>%;">
+								<%= pct_time %>% du temps consommé
 							</div>
-						</td>
+						</div></td>
 					</tr>
 					<tr>
 						<td>Retours prévus: <%= @project.feedback_number%> retours</td>
 						<td>
-							<div class="progress">
-								<% pct_feedback = (@project.feedbacks.count * 100) / @project.feedback_number %>
-								<div class="progress-bar progress-bar-<%= (pct_feedback >= 80 ) ? 'warning' : 'success'%> progress-bar-striped active"
-									role="progressbar"
-									aria-valuenow="<%= pct_feedback %>"
-									aria-valuemin="0"
-									aria-valuemax="100"
-									style="width: <%= pct_feedback %>%;">
-							    <%= @project.feedbacks.count %> effectué
-							    </div>
+						<div class="progress">
+							<% pct_feedback = (@project.feedbacks.count * 100) / @project.feedback_number %>
+							<div class="progress-bar progress-bar-<%= (pct_feedback >= 80 ) ? 'warning' : 'success'%> progress-bar-striped active"
+							role="progressbar"
+							aria-valuenow="<%= pct_feedback %>"
+							aria-valuemin="0"
+							aria-valuemax="100"
+							style="width: <%= pct_feedback %>%;">
+								<%= @project.feedbacks.count %> effectué
 							</div>
-						</td>
+						</div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
 	</div>
-	</div>
+</div>
 <div>
 
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="<%= current_user.print? ? '' : 'active'%>"><a href="#studio" aria-controls="studio" role="tab" data-toggle="tab">Studio</a></li>
-    <% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother'%>
-    <li role="presentation" class="<%= current_user.print? ? 'active' : ''%>"><a href="#print" aria-controls="print" role="tab" data-toggle="tab">Print</a></li>
-    <% end %>
-  </ul>
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="<%= current_user.print? ? '' : 'active'%>">
+			<a href="#studio" aria-controls="studio" role="tab" data-toggle="tab">Studio</a>
+		</li>
+		<% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother'%>
+		<li role="presentation" class="<%= current_user.print? ? 'active' : ''%>">
+			<a href="#print" aria-controls="print" role="tab" data-toggle="tab">Print</a>
+		</li>
+		<% end %>
+	</ul>
 
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane <%= current_user.print? ? '' : 'active'%>" id="studio">
-	<div class="clearfix">
-	<div class="panel panel-info">
-		<div class='panel-heading'>
-			<strong>Travaux effectués:</strong>
-		</div>
-		<div class="panel-body">
-			<table class="table table-bordered table-hover table-striped">
-				<thead>
-					<th>Date</th>
-					<th>Intervenant</th>
-					<th>Description</th>
-					<th>Durée</th>
-				</thead>
-				<tbody>
-				<% @project.tasks.each do |task|%>
-						<tr>
-							<td><%= task.created_at.strftime('%d-%b-%Y') %></td>
-							<td><%= image_tag(task.worker.avatar(:thumb), {title:  task.worker.login})%></td>
-							<td><%= task.description %></td>
-							<td><%= task.hours %> heure<%= task.hours > 1? 's' : ''%> <%= task.minutes%> minute<%= task.minutes > 1? 's' : ''%></td>
-						</tr>
-				<% end %>
-				</tbody>
-			</table>
-		</div>
-		<div class="panel-heading">
-			<strong>Retours clients:</strong>
-		</div>
-		<div class="panel-body">
-			<table class="table table-bordered table-hover table-striped">
-				<thead>
-					<th>Date</th>
-					<th>Intervenant</th>
-					<th>Description</th>
-				</thead>
-				<tbody>
-				<% @project.feedbacks.each do |feedback|%>
-						<tr>
-							<td><%= feedback.created_at.strftime('%d-%b-%Y à %H:%M:%S') %></td>
-							<td><%= image_tag(feedback.worker.avatar(:thumb), {title:  feedback.worker.login})%></td>
-							<td><%= feedback.description %></td>
-						</tr>
-				<% end %>
-				</tbody>
-			</table>
-		</div>
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<%= render 'projects/detailed/studio' %>
+		<% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother'%>
+		<%= render 'projects/detailed/print' %>
+		<% end %>
 	</div>
-</div>
-
-    </div>
-    <% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother'%>
-    <div role="tabpanel" class="tab-pane <%= current_user.print? ? 'active' : ''%>" id="print">
-    		<div class="clearfix">
-				<div class="panel panel-default">
-					<div class='panel-heading'>
-						<strong>Informations Print:</strong>
-					</div>
-					<div class="panel-body">
-						<table class="table table-bordered table-hover table-striped">
-							<tr>
-								<td>Bon à tirer</td>
-								<td>Oui</td>
-							</tr>
-							<tr>
-								<td>Couleur</td>
-								<td>Quadri R:V</td>
-							</tr>
-							<tr>
-								<td>Données variables</td>
-								<td>Non</td>
-							</tr>
-							<tr>
-								<td>Quantité bonnes feuilles</td>
-								<td>290</td>
-							</tr>
-							<tr>
-								<td>Quantité documents finis</td>
-								<td>150</td>
-							</tr>
-							<tr>
-								<td>Laisser brut de tirage</td>
-								<td>Oui</td>
-							</tr>
-							<tr>
-								<td>Format ouvert (mm)</td>
-								<td>paysage</td>
-							</tr>
-							<tr>
-								<td>Format Fini</td>
-								<td>US Letter</td>
-							</tr>
-							<tr>
-								<td>Pelliculage ou plastification</td>
-								<td>Pelli brillant 'V'</td>
-							</tr>
-							<tr>
-								<td>Façonnage</td>
-								<td>coupe</td>
-							</tr>
-							<tr>
-								<td>Paqutage</td>
-								<td>boite</td>
-							</tr>
-							<tr>
-								<td>Livraison</td>
-								<td>A dispo</td>
-							</tr>
-							<tr>
-								<td>Remarques</td>
-								<td>Wire'o et cristal devant derrière</td>
-							</tr>
-							<tr>
-								<td>Sous traitance</td>
-								<td>DEFICOM 6 papers</td>
-							</tr>
-						</table>
-					</div>
-					</div>
-				<div class="panel panel-info">
-						<div class="panel-heading">
-							<strong>Papier(s)</strong>
-						</div>
-						<div class="panel-body">
-							<table class="table table-striped table-hover table-bordered">
-								<thead>
-									<th>Type</th>
-									<th>Grammage</th>
-									<th>Format</th>
-								</thead>						
-								<tbody>
-									<tr>
-										<td>bristol</td>
-										<td>350g</td>
-										<td>SRA3</td>
-									</tr>
-									<tr>
-										<td>couché mat</td>
-										<td>250g</td>
-										<td>110x220mm</td>
-									</tr>
-									<tr>
-										<td>XX</td>
-										<td>80</td>
-										<td>A3</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-		</div>
-    </div>
-</div>
-<% end %>
-  </div>
 
 </div>
 <p class="text-center">

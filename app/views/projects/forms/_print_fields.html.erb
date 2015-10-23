@@ -1,0 +1,100 @@
+<div role="tabpanel" class="tab-pane <%= current_user.print? ? 'active' : ''%>" id="print">
+	<div class="clearfix">
+		<div class="panel panel-default">
+			<div class='panel-heading'>
+				<strong>Informations Print:</strong>
+			</div>
+			<div class="panel-body">
+				<table class="table table-bordered table-hover table-striped">
+					<tr>
+						<td>Bon à tirer</td>
+						<td><%= f.check_box :test_print%></td>
+					</tr>
+					<tr>
+						<td>Couleur</td>
+						<td> <%= f.select(:colors, options_for_select(t("project_colors").invert, @project.colors), {prompt: 'Selectionner un type de couleur'}, class: 'form-control')%> </td>
+					</tr>
+					<tr>
+						<td>Données variables</td>
+						<td><%= f.check_box :various_input%></td>
+					</tr>
+					<tr>
+						<td>Quantité bonnes feuilles</td>
+						<td><%= f.number_field :good_sheets_qty, class: "form-control"%></td>
+					</tr>
+					<tr>
+						<td>Quantité documents finis</td>
+						<td><%= f.number_field :finished_doc_qty, class: "form-control"%></td>
+					</tr>
+					<tr>
+						<td>Laisser brut de tirage</td>
+						<td><%= f.check_box :let_raw %></td>
+					</tr>
+					<tr>
+						<td>Format ouvert (mm)</td>
+						<td><%= f.select(:open_shape, options_for_select(t("open_shapes").invert, @project.open_shape), {prompt: 'Selectionner un type de format ouvert'}, class: 'form-control')%></td>
+					</tr>
+					<tr>
+						<td>Format Fini</td>
+						<td><%= f.select(:finished_shape, options_for_select(t("finished_shapes").invert, @project.finished_shape), {prompt: 'Selectionner un type de format de produit fini'}, class: 'form-control')%></td>
+					</tr>
+					<tr>
+						<td>Pelliculage ou plastification</td>
+						<td><%= f.select(:filming, options_for_select(t("filmings").invert, @project.filming), {promt: 'Selectionner un pelliculage ou plastification'}, class: 'form-control')%></td>
+					</tr>
+					<tr>
+						<td>Façonnage</td>
+						<td><%= f.select(:shaping, options_for_select(t("shapings").invert, @project.filming), {promt: 'Selectionner un façonnage'}, class: 'form-control')%></td>
+					</tr>
+					<tr>
+						<td>Paqutage</td>
+						<td><%= f.select(:package, options_for_select(t("packages").invert, @project.filming), {promt: 'Selectionner un paquetage'}, class: 'form-control')%></td>
+					</tr>
+					<tr>
+						<td>Livraison</td>
+						<td><%= f.select(:delivery, options_for_select(t("deliveries").invert, @project.filming), {promt: 'Selectionner un mode de livraison'}, class: 'form-control')%></td>
+					</tr>
+					<tr>
+						<td>Remarques</td>
+						<td><%= f.text_area :notice, class: 'form-control'%></td>
+					</tr>
+					<tr>
+						<td>Sous traitance</td>
+						<td><%= f.text_area :outsourcing, class: 'form-control'%></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<strong>Papier(s)</strong>
+			</div>
+			<div class="panel-body">
+				<table class="table table-striped table-hover table-bordered">
+					<thead>
+						<th>Type</th>
+						<th>Grammage</th>
+						<th>Format</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td>bristol</td>
+							<td>350g</td>
+							<td>SRA3</td>
+						</tr>
+						<tr>
+							<td>couché mat</td>
+							<td>250g</td>
+							<td>110x220mm</td>
+						</tr>
+						<tr>
+							<td>XX</td>
+							<td>80</td>
+							<td>A3</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
