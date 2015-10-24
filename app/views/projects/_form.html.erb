@@ -5,6 +5,22 @@
 			document.getElementById('projectProgression').value = 'runningcrea';
 		}
 	}
+	function revealePrint() {
+		var printTab = document.getElementById('printref');
+		document.getElementById('printli').className="";
+		printTab.setAttribute('aria-controls', 'print');
+		printTab.setAttribute('role', 'tab');
+		printTab.setAttribute('data-toggle', 'tab');
+		printTab.innerHTML += 'Print';
+	}
+	function hidePrint() {
+		var printTab = document.getElementById('printref');
+		document.getElementById('printli').className="disabled";
+		printTab.setAttribute('aria-controls', '');
+		printTab.setAttribute('role', '');
+		printTab.setAttribute('data-toggle', '');
+		printTab.innerHTML = '';
+	}
 </script>
 <%= form_for(@project, :html => {class: ".form-inline"}) do |f|%>
 <div class="row clearfix">
@@ -29,7 +45,7 @@
 					</tr>
 					<tr>
 						<td> <%= f.label :type_de_projet %> </td>
-						<td> <%= f.select(:project_type, options_for_select(t("project_types").invert, @project.project_type), {prompt: 'Selectionner un type de projet'}, class: 'form-control')%> </td>
+						<td> <%= f.select(:project_type, options_for_select(t("project_types").invert, @project.project_type), {prompt: 'Selectionner un type de projet'}, class: 'form-control', onchange: 'if (this.selectedIndex == 1 || this.selectedIndex == 3 || this.selectedIndex == 6) { revealePrint();} else {hidePrint();}')%> </td>
 					</tr>
 					<tr>
 						<td> <%= f.label :description %> </td>
@@ -134,7 +150,7 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Studio</a></li>
-    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Print</a></li>
+    <li role="presentation" class="" id="printli"><a href="#print" id="printref"></a></li>
   </ul>
 
   <!-- Tab panes -->
@@ -142,7 +158,7 @@
     <div role="tabpanel" class="tab-pane active" id="home">
     	<%= render 'projects/forms/studio_fields', :f => f %>
 	</div>
-    <div role="tabpanel" class="tab-pane" id="profile">
+    <div role="tabpanel" class="tab-pane" id="print">
 		<%= render 'projects/forms/print_fields', :f => f %>
 	</div>
   </div>
