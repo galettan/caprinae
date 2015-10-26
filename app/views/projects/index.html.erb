@@ -7,6 +7,7 @@
 	<div class="panel-body">
 		<table class="table table-bordered text-center table-hover table-striped">
 			<thead>
+				<% if (!current_user.print?)%>
 				<tr>
 					<th>#</th>
 					<th>Client</th>
@@ -19,10 +20,28 @@
 					<th>nombre de retour(s) réel / estimé</th>
 					<th>Statut</th>
 				</tr>
+				<% else%>
+				<tr>
+					<th>#</th>
+					<th>Client</th>
+					<th>Nom du projet</th>
+					<th>Type de projet</th>
+					<th>Priorité</th>
+					<th>Dates</th>
+					<th>Statut</th>
+					<th>BAT</th>
+					<th>Remarques</th>
+					<th>Sous-traitance</th>
+				</tr>
+				<% end %>
 			</thead>
 			<tbody>
 			<% @projects.each do |project| %>
+				<% if (!current_user.print?)%>
 				<%= render project%>
+				<% else%>
+				<%= render 'project_print', :project => project %>
+				<% end %>
 			<% end %>
 			</tbody>
 		</table>

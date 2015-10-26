@@ -8,59 +8,59 @@
 				<table class="table table-bordered table-hover table-striped">
 					<tr>
 						<td>Bon à tirer</td>
-						<td>Oui</td>
+						<td><%= @project.test_print? ? 'oui' : 'non'%></td>
 					</tr>
 					<tr>
 						<td>Couleur</td>
-						<td>Quadri R:V</td>
+						<td><%= t @project.colors %></td>
 					</tr>
 					<tr>
 						<td>Données variables</td>
-						<td>Non</td>
+						<td><%= @project.various_input? ? 'oui' : 'non'%></td>
 					</tr>
 					<tr>
 						<td>Quantité bonnes feuilles</td>
-						<td>290</td>
+						<td><%= @project.good_sheets_qty%></td>
 					</tr>
 					<tr>
 						<td>Quantité documents finis</td>
-						<td>150</td>
+						<td><%= @project.finished_doc_qty%></td>
 					</tr>
 					<tr>
 						<td>Laisser brut de tirage</td>
-						<td>Oui</td>
+						<td><%= @project.let_raw? ? 'oui' : 'non'%></td>
 					</tr>
 					<tr>
 						<td>Format ouvert (mm)</td>
-						<td>paysage</td>
+						<td><%= t @project.open_shape %></td>
 					</tr>
 					<tr>
 						<td>Format Fini</td>
-						<td>US Letter</td>
+						<td><%= t @project.finished_shape %></td>
 					</tr>
 					<tr>
 						<td>Pelliculage ou plastification</td>
-						<td>Pelli brillant 'V'</td>
+						<td><%= t @project.filming %></td>
 					</tr>
 					<tr>
 						<td>Façonnage</td>
-						<td>coupe</td>
+						<td><%= t @project.shaping%></td>
 					</tr>
 					<tr>
 						<td>Paqutage</td>
-						<td>boite</td>
+						<td><%= t @project.package%></td>
 					</tr>
 					<tr>
 						<td>Livraison</td>
-						<td>A dispo</td>
+						<td><%= t @project.delivery%></td>
 					</tr>
 					<tr>
 						<td>Remarques</td>
-						<td>Wire'o et cristal devant derrière</td>
+						<td><%= @project.notice%></td>
 					</tr>
 					<tr>
 						<td>Sous traitance</td>
-						<td>DEFICOM 6 papers</td>
+						<td><%= @project.outsourcing%></td>
 					</tr>
 				</table>
 			</div>
@@ -77,21 +77,13 @@
 						<th>Format</th>
 					</thead>
 					<tbody>
+						<% @project.papers.each do |paper| %>
 						<tr>
-							<td>bristol</td>
-							<td>350g</td>
-							<td>SRA3</td>
+							<td><%= paper.paper %></td>
+							<td><%= paper.density%></td>
+							<td><%= paper.shape%></td>
 						</tr>
-						<tr>
-							<td>couché mat</td>
-							<td>250g</td>
-							<td>110x220mm</td>
-						</tr>
-						<tr>
-							<td>XX</td>
-							<td>80</td>
-							<td>A3</td>
-						</tr>
+						<% end %>
 					</tbody>
 				</table>
 			</div>

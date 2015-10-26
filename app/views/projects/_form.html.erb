@@ -45,7 +45,7 @@
 					</tr>
 					<tr>
 						<td> <%= f.label :type_de_projet %> </td>
-						<td> <%= f.select(:project_type, options_for_select(t("project_types").invert, @project.project_type), {prompt: 'Selectionner un type de projet'}, class: 'form-control', onchange: 'if (this.selectedIndex == 1 || this.selectedIndex == 3 || this.selectedIndex == 6) { revealePrint();} else {hidePrint();}')%> </td>
+						<td> <%= f.select(:project_type, options_for_select(t("project_types").invert, @project.project_type), {:include_blank => 'Selectionner un type de projet'}, class: 'form-control', onchange: 'if (this.selectedIndex == 1 || this.selectedIndex == 3 || this.selectedIndex == 6) { revealePrint();} else {hidePrint();}')%> </td>
 					</tr>
 					<tr>
 						<td> <%= f.label :description %> </td>
@@ -147,15 +147,27 @@
 </div>
 <div>
 
+<% if (@project.new_record?)%>
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Studio</a></li>
+    <li role="presentation" class="active"><a href="#studio" aria-controls="studio" role="tab" data-toggle="tab">Studio</a></li>
     <li role="presentation" class="" id="printli"><a href="#print" id="printref"></a></li>
   </ul>
-
+<% else %>
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="<%= current_user.print? ? '' : 'active'%>">
+			<a href="#studio" aria-controls="studio" role="tab" data-toggle="tab">Studio</a>
+		</li>
+		<% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother'%>
+		<li role="presentation" class="<%= current_user.print? ? 'active' : ''%>">
+			<a href="#print" aria-controls="print" role="tab" data-toggle="tab">Print</a>
+		</li>
+		<% end %>
+	</ul>
+<% end%>
   <!-- Tab panes -->
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="home">
+    <div role="tabpanel" class="tab-pane active" id="studio">
     	<%= render 'projects/forms/studio_fields', :f => f %>
 	</div>
     <div role="tabpanel" class="tab-pane" id="print">

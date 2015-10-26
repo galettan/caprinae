@@ -7,9 +7,10 @@ class ProjectsController < ApplicationController
   def index
     if current_user.manager?
       @projects = Project.by_owner(current_user.id).order(priority: :desc, number: :asc).paginate(page: params[:page])
-    else 
-      profile = current_user.profile == 'crea' ? 1 : 0
-      @projects = Project.by_profile(current_user.id).order(priority: :desc, number: :asc).paginate(page: params[:page])
+    elsif current_user.crea?
+      @projects = Project.for_crea(current_user.id).order(priority: :desc, number: :asc).paginate(page: params[:page])
+    else
+      @projects = Project.for_print().order(priority: :desc, number: :asc).paginate(page: params[:page])
     end
   end
 
@@ -114,9 +115,24 @@ class ProjectsController < ApplicationController
         :hours,
         :minutes,
         :departure_date,
+        :open_shape,
+        :test_print,
+        :colors,
+        :various_input,
+        :good_sheets_qty,
+        :finished_doc_qty,
+        :let_raw,
+        :finished_shape,
+        :filming,
+        :shaping,
+        :package,
+        :delivery,
+        :notice,
+        :outsourcing,
         tasks_attributes: [:id, :description, :hours, :minutes, :_destroy, :worker_id, :project_id],
         feedbacks_attributes: [:id, :description, :_destroy, :worker_id, :project_id],
-        participants_attributes: [:id, :project_id, :contact_id, :_destroy]
+        participants_attributes: [:id, :project_id, :contact_id, :_destroy],
+        papers_attributes: [:id, :project_id, :shape, :density, :paper, :_destroy]
       )
     end
 end
