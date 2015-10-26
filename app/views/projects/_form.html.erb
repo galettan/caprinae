@@ -166,14 +166,12 @@
 	</ul>
 <% end%>
   <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="studio">
+  	<div class="tab-content">
     	<%= render 'projects/forms/studio_fields', :f => f %>
-	</div>
-    <div role="tabpanel" class="tab-pane" id="print">
+		<% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother'%>
 		<%= render 'projects/forms/print_fields', :f => f %>
+		<% end %>
 	</div>
-  </div>
 
 </div>
 <p class="text-center">
