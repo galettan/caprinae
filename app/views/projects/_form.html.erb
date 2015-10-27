@@ -153,6 +153,14 @@
     <li role="presentation" class="active"><a href="#studio" aria-controls="studio" role="tab" data-toggle="tab">Studio</a></li>
     <li role="presentation" class="" id="printli"><a href="#print" id="printref"></a></li>
   </ul>
+  <div class="tab-content">
+	<div role="tabpanel" class="tab-pane active" id="studio">
+  		<%= render 'projects/forms/studio_fields', :f => f%>
+	</div>
+	<div role="tabpanel" class="tab-pane" id="print">
+	  	<%= render 'projects/forms/print_fields', :f => f %>
+	 </div>
+  </div>
 <% else %>
 	<ul class="nav nav-tabs" role="tablist">
 		<li role="presentation" class="<%= current_user.print? ? '' : 'active'%>">
@@ -164,14 +172,19 @@
 		</li>
 		<% end %>
 	</ul>
-<% end%>
-  <!-- Tab panes -->
+  
   	<div class="tab-content">
-    	<%= render 'projects/forms/studio_fields', :f => f %>
+		<div role="tabpanel" class="tab-pane <%= current_user.print? ? '' : 'active' %>" id="studio">
+	    	<%= render 'projects/forms/studio_fields', :f => f %>
+    	</div>
 		<% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother'%>
-		<%= render 'projects/forms/print_fields', :f => f %>
+		<div role="tabpanel" class="tab-pane <%= current_user.print? ? 'active' : ''%>" id="print">
+			<%= render 'projects/forms/print_fields', :f => f %>
+		</div>
 		<% end %>
 	</div>
+<% end%>
+  <!-- Tab panes -->
 
 </div>
 <p class="text-center">

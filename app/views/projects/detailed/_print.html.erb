@@ -8,7 +8,7 @@
 				<table class="table table-bordered table-hover table-striped">
 					<tr>
 						<td>Bon à tirer</td>
-						<td><%= @project.test_print? ? 'oui' : 'non'%></td>
+						<td><%= t @project.test_print%></td>
 					</tr>
 					<tr>
 						<td>Couleur</td>
@@ -79,9 +79,9 @@
 					<tbody>
 						<% @project.papers.each do |paper| %>
 						<tr>
-							<td><%= paper.paper %></td>
-							<td><%= paper.density%></td>
-							<td><%= paper.shape%></td>
+							<td><%= t paper.paper %></td>
+							<td><%= t paper.density%></td>
+							<td><%= t paper.shape%></td>
 						</tr>
 						<% end %>
 					</tbody>
