@@ -1,8 +1,11 @@
+<script>$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})</script>
 <tr>
 	<td><%= project.number%></td>
 	
 	<td><%= !project.participants.first.nil? ? project.participants.first.contact.client.name : '' %></td>	
-	<td><%= link_to project.name, project_path(project) %><% if (!project.important.blank?)%> <span class="glyphicon glyphicon-exclamation-sign" title="<%= project.important%>"></span><% end %></td>
+	<td><%= link_to project.name, project_path(project) %><% if (!project.important.blank?)%> <span class="glyphicon glyphicon-exclamation-sign" data-toggle="tooltip" data-placement="bottom" title="<%= project.important%>"></span><% end %></td>
 	
 	<td><%= t project.project_type %></td>
 	
@@ -16,9 +19,9 @@
 	</td>
 	
 	<td><%= image_tag project.worker.avatar(:thumb), title: project.worker.login%></td>
-	
+	<% spent_time = project.tasks.sum(:duration)%>
 						<td>
-							<div class="progress">
+							<div class="progress" data-toggle="tooltip" data-placement="bottom" title="réel: <%=  spent_time / 60%>h<%=spent_time % 60 %>min / estimé :<%= project.estimated_time / 60%>h<%= project.estimated_time % 60%>min">
 								<% pct_time = (project.tasks.sum(:duration) * 100) / project.estimated_time %>
 								<div class="progress-bar progress-bar-<%= (pct_time >= 80 ? (pct_time > 100 ? 'danger' : 'warning'): 'success')%> progress-bar-striped active"
 									role="progressbar"
@@ -30,16 +33,8 @@
 							</div>
 						</td>
 	
-	<td>1er retour:
-	<% if ((project.first_feedback > Date.today) && ((project.first_feedback) <= (Date.today + 7.days))) %>
-		<span class="label label-warning">
-	<% elsif (project.first_feedback <= Date.today)%>
-		<span class="label label-danger">
-	<% elsif (project.first_feedback > Date.today + 7.days) %>
-		<span class="label label-success">
-	<% end %>
-	<%= l project.first_feedback%></span>
-	Bon à tirer:
+	<td><div>1er retour:<% if ((project.first_feedback > Date.today) && ((project.first_feedback) <= (Date.today + 7.days))) %><span class="label label-warning"><% elsif (project.first_feedback <= Date.today)%><span class="label label-danger"><% elsif (project.first_feedback > Date.today + 7.days) %><span class="label label-success"><% end %><%= l project.first_feedback%></span></div>
+	<div>BAT:
 	<% if (!project.good_to_print.nil?)%>
 		<% if ((project.good_to_print > Date.today) && ((project.good_to_print) <= (Date.today + 7.days))) %>
 			<span class="label label-warning">
@@ -51,7 +46,7 @@
 			<%= l project.good_to_print %></span>
 	<% else %>
 		<span class="label label-default">Sans objet</span>
-	<% end %><p class="text-center">
+	<% end %></div><div>
 	Livraison:
 	<% if (!project.delivery_date.nil?)%>
 		<% if ((project.delivery_date > Date.today) && ((project.delivery_date) <= (Date.today + 7.days))) %>
@@ -65,7 +60,7 @@
 	<% else %>
 		<span class="label label-default">Sans objet</span>
 	<% end %>
-	</p>
+	</div>
 	<td>
 	<% if (project.feedback_number != 0)%>
 		<% if (project.feedbacks.count  / project.feedback_number > 0.8) %>
