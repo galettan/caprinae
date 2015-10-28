@@ -1,11 +1,8 @@
-<script>$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})</script>
 <tr>
 	<td><%= project.number%></td>
 	
 	<td><%= !project.participants.first.nil? ? project.participants.first.contact.client.name : '' %></td>	
-	<td><%= link_to project.name, project_path(project) %><% if (!project.important.blank?)%> <span class="glyphicon glyphicon-exclamation-sign" data-toggle="tooltip" data-placement="bottom" title="<%= project.important%>"></span><% end %></td>
+	<td><%= link_to project.name, edit_project_path(project) %><% if (!project.important.blank?)%> <span class="glyphicon glyphicon-exclamation-sign" data-toggle="tooltip" data-placement="bottom" title="<%= project.important%>"></span><% end %></td>
 	
 	<td><%= t project.project_type %></td>
 	
@@ -18,7 +15,7 @@
 		<%= project.priority %></span>
 	</td>
 	
-	<td><%= image_tag project.worker.avatar(:thumb), title: project.worker.login%></td>
+	<td><%= image_tag project.worker.avatar(:thumb), title: project.worker.login, data: {toggle: "tooltip", placement:"bottom"}%></td>
 	<% spent_time = project.tasks.sum(:duration)%>
 						<td>
 							<div class="progress" data-toggle="tooltip" data-placement="bottom" title="réel: <%=  spent_time / 60%>h<%=spent_time % 60 %>min / estimé :<%= project.estimated_time / 60%>h<%= project.estimated_time % 60%>min">
