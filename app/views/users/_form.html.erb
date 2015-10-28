@@ -36,7 +36,7 @@
 						  	<%= f.label :profil %><br>
 						</td>
 						<td>
-							<%= f.select(:profile, options_for_select([['Crea', 'crea'], ['Print', 'print'], ['Manager', 'manager']], @user.profile), {prompt: 'Selectionner un type de profil'},{class: 'form-control'})%>	
+							<%= f.select(:profile, options_for_select([['Studio', 'crea'], ['Print', 'print'], ['Manager', 'manager']], @user.profile), {prompt: 'Selectionner un type de profil'},{class: 'form-control'})%>	
 						</td>
 					</tr>
 				</table>

@@ -366,3 +366,6 @@ en:
   todoprint: 'à faire print'
   runningprint: 'en cours print'
   finishedprint: 'terminé print'
+  print: 'Print'
+  crea: 'Studio'
+  manager: 'Manager'
