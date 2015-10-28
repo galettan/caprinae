@@ -208,6 +208,11 @@ en:
     fourheightybythreethirty: '480x330 mm'
     onesixtytwobytwotwentynine: '162x229 mm'
     twotwentyninebythreetwentyfour: '229x324 mm'
+  project_status:
+    running: 'En cours'
+    waitingclient: 'En attente client'
+    validatedclient: 'Validé client'
+    finished: 'Terminé'
   layhalfmat: 'Couché demi-mat'
   laymat: 'Couché mat'
   layshine: 'Couché brillant'

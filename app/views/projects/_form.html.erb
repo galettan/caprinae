@@ -1,9 +1,15 @@
 <script>
 	function markForRunningCrea() {
-		projectType = document.getElementById('projectProgression');
-		if (projectType.value == 'todocrea') {
-			document.getElementById('projectProgression').value = 'runningcrea';
+		projectProgression = document.getElementById('projectProgression');
+		if (projectProgression.value == 'todocrea') {
+			projectProgression.value = 'runningcrea';
 		}
+	}
+	function changeProgression() {
+		projectType = document.getElementById('projectType');
+		if (projectType.value == 'print' || projectType.value == 'creaprint' || projectType.value == 'printother') {
+			document.getElementById('projectProgression').value = 'todoprint';
+		}		
 	}
 	function revealePrint() {
 		var printTab = document.getElementById('printref');
@@ -45,7 +51,7 @@
 					</tr>
 					<tr>
 						<td> <%= f.label :type_de_projet %> </td>
-						<td> <%= f.select(:project_type, options_for_select(t("project_types").invert, @project.project_type), {:include_blank => 'Selectionner un type de projet'}, class: 'form-control', onchange: 'if (this.selectedIndex == 1 || this.selectedIndex == 3 || this.selectedIndex == 6) { revealePrint();} else {hidePrint();}')%> </td>
+						<td> <%= f.select(:project_type, options_for_select(t("project_types").invert, @project.project_type), {:include_blank => 'Selectionner un type de projet'}, class: 'form-control', id: 'projectType', onchange: 'if (this.selectedIndex == 1 || this.selectedIndex == 3 || this.selectedIndex == 6) { revealePrint();} else {hidePrint();}')%> </td>
 					</tr>
 					<tr>
 						<td> <%= f.label :description %> </td>
@@ -55,7 +61,7 @@
 						<td> <%= f.label :priorite %>
 						<br>
 						</td>
-						<td> <%= f.select(:priority, options_for_select(t("project_priorities").invert, @project.priority), {prompt: 'Selectionner une priorité'}, {class: 'form-control'})%> </td>
+						<td> <%= f.select(:priority, options_for_select(t("project_priorities").invert, @project.priority), {:include_blank => 'Selectionner une priorité'}, {class: 'form-control'})%> </td>
 					</tr>
 					<% if current_user.manager?%>
 					<tr>
@@ -67,11 +73,11 @@
 						<td> <%= f.label :statut %>
 						<br>
 						</td>
-						<td> <%= f.select(:state, options_for_select([['En cours', 'running'], ['En attente client', 'waitingclient'], ['Validé client', 'validatedclient'], ['Terminé', 'finished']], @project.priority), {prompt: 'Selectionner une priorité'},{class: 'form-control'})%> </td>
+						<td> <%= f.select(:state, options_for_select(t("project_status").invert, @project.state), {:include_blank => 'Selectionner une priorité'},{class: 'form-control'})%> </td>
 					</tr>
 					<tr>
 						<td> <%= f.label :progression%> </td>
-						<td> <%= f.select(:progression, options_for_select(t("project_progression").invert, @project.progression), {prompt: 'Sélectionner un avancement du projet'}, {class: 'form-control', id: 'projectProgression'})%> </td>
+						<td> <%= f.select(:progression, options_for_select(t("project_progression").invert, @project.progression), {:include_blank => 'Sélectionner un avancement du projet'}, class: 'form-control', id: 'projectProgression', onchange: 'if (this.selectedIndex == 3) { changeProgression();}')%> </td>
 					</tr>
 					<tr>
 						<td> <%= f.label :important %>
