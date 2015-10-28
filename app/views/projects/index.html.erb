@@ -1,3 +1,6 @@
+<script>$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})</script>
 <p><%= link_to 'Nouveau Projet', new_project_path, class: 'btn btn-default'%>
 </p>
 <div class="panel panel-default">
@@ -17,7 +20,7 @@
 					<th>Asssigné à</th>
 					<th>Temps réel / estimé</th>
 					<th>Dates</th>
-					<th>nombre de retour(s) réel / estimé</th>
+					<th>Retours</th>
 					<th>Statut</th>
 				</tr>
 				<% else%>
