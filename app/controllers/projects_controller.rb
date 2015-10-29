@@ -6,19 +6,28 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @clients = Client.all
-    @projects = Project.joins(:contacts).where(nil)
+    @projects = Project.where(nil)
     @projects = @projects.passed(params[:archived]).paginate(page: params[:page]) if params[:archived].present?
     @projects = @projects.number(params[:number]).paginate(page: params[:page]) if params[:number].present?
-    @projects = @projects.user(params[:user_id]).paginate(page: params[:page]) if params[:user_id].present?
-    @projects = @projects.search_name(params[:name]).paginate(page: params[:page]) if params[:name].present?
-    @projects = @projects.client(params[:client_id]).paginate(page: params[:client_id]) if params[:client_id].present?
-    if ((!params[:archived].present? && !params[:number].present? && !params[:user_id].present? && !params[:name].present? && !params[:client_id].present?))
-      if current_user.manager?
-        @projects = Project.by_owner(current_user.id).order(priority: :desc, number: :asc).paginate(page: params[:page])
-      elsif current_user.crea?
-        @projects = Project.for_crea(current_user.id).order(priority: :desc, number: :asc).paginate(page: params[:page])
+    if params[:user_id].present?
+      if (params[:user_id] == 'all')
+        @projects = Project.where(nil).paginate(page: params[:page])
       else
-        @projects = Project.for_print().order(priority: :desc, number: :asc).paginate(page: params[:page])
+        @projects = @projects.user(params[:user_id]).paginate(page: params[:page])
+      end
+    end
+    @projects = @projects.search_name(params[:name]).paginate(page: params[:page]) if params[:name].present?
+    @projects = @projects.client(params[:client_id]).paginate(page: params[:page]) if params[:client_id].present?
+    @projects = @projects.create_date(params[:create_date], params[:create_date].to_date + 1.day).paginate(page: params[:page]) if params[:create_date].present?
+    @projects = @projects.project_type(params[:project_type]).paginate(page: params[:page]) if params[:project_type].present?
+    if ((!params[:archived].present? && !params[:number].present? && !params[:user_id].present? && !params[:name].present? && !params[:client_id].present? &&
+      !params[:create_date].present? && !params[:project_type].present? ))
+      if current_user.manager?
+        @projects = Project.by_owner(current_user.id).order(priority: :desc, number: :desc).paginate(page: params[:page])
+      elsif current_user.crea?
+        @projects = Project.for_crea(current_user.id).order(priority: :desc, number: :desc).paginate(page: params[:page])
+      else
+        @projects = Project.for_print().order(priority: :desc, number: :desc).paginate(page: params[:page])
       end
     end
   end

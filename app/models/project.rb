@@ -13,7 +13,10 @@ class Project < ActiveRecord::Base
   scope :number, -> (number) { where number: number}
   scope :user, -> (user) {where worker_id: user}
   scope :search_name, -> (name) {where("name LIKE ?", "#{name}%")}
-#  scope :client, -> (client) {where contact.client_id: client}
+  scope :client, -> (client) {distinct.joins('LEFT JOIN participants ON participants.project_id = projects.id')
+    .joins('LEFT JOIN contacts ON contacts.id = participants.contact_id').where('contacts.client_id = ? ', client)}
+  scope :create_date, -> (create_begin, create_end) {where("created_at BETWEEN DATE(?) AND DATE(?)", create_begin, create_end)}
+  scope :project_type, -> (type) {where project_type: type}
 
   accepts_nested_attributes_for :tasks, :allow_destroy => true
   accepts_nested_attributes_for :feedbacks, :allow_destroy => true
@@ -48,7 +51,7 @@ class Project < ActiveRecord::Base
   enum test_print: [:notest, :yestest, :validated]
 
   def self.by_owner(id)
-      @projects = Project.where(["owner_id = ? AND archived = false", id])
+      @projects = Project.where("archived = false")
   end
   
   def self.for_crea(id)
