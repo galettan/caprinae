@@ -57,6 +57,22 @@ class Project < ActiveRecord::Base
   def self.find_detailed(id)
       @project = Project.includes(:owner, :worker, :participants, :tasks, :feedbacks).find(id)
   end
+  
+  def self.search(search)
+    @projects = Project.where("name LIKE ?", "%#{search}%")
+  end
+  
+  def self.number(number)
+    @projects = Project.where("number = ?", "#{number}")
+  end
+
+  def self.user_id(user_id)
+    @projects = Project.where("worker_id = ?", user_id)
+  end
+
+  def self.archived(archived)
+    @projects = Project.where('archived = ?', archived)
+  end
 
   def set_estimated_time
     self.estimated_time = @hours * 60 + @minutes

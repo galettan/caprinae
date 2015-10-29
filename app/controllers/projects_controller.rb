@@ -5,13 +5,22 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    if current_user.manager?
-      @projects = Project.by_owner(current_user.id).order(priority: :desc, number: :asc).paginate(page: params[:page])
-    elsif current_user.crea?
-      @projects = Project.for_crea(current_user.id).order(priority: :desc, number: :asc).paginate(page: params[:page])
-    else
-      @projects = Project.for_print().order(priority: :desc, number: :asc).paginate(page: params[:page])
-    end
+    @clients = Client.all
+     if (!params[:search].nil? && params[:search] != '')
+        @projects = Project.search(params[:search]).order("created_at DESC").paginate(page: params[:page])
+      elsif (!params[:number].nil? && params[:number] != '')
+        @projects = Project.number(params[:number]).paginate(page: params[:page])
+      elsif (!params[:user_id].nil? && params[:user_id] != '')
+        @projects = Project.user_id(params[:user_id]).paginate(page: params[:page])
+      elsif (params[:archived])
+        @projects = Project.archived(true).paginate(page: params[:page])
+      elsif current_user.manager?
+        @projects = Project.by_owner(current_user.id).order(priority: :desc, number: :asc).paginate(page: params[:page])
+      elsif current_user.crea?
+        @projects = Project.for_crea(current_user.id).order(priority: :desc, number: :asc).paginate(page: params[:page])
+      else
+        @projects = Project.for_print().order(priority: :desc, number: :asc).paginate(page: params[:page])
+      end
   end
 
   # GET /projects/1
@@ -36,7 +45,6 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
-    @client = Client.all
 
     @project.owner_id = current_user.id
     respond_to do |format|
@@ -57,8 +65,14 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1.json
   def update
     @client = Client.all
+    @tasks = project_params['tasks_attributes']
+    @tasks.each do |t|
+      t[1]['worker_id'] = current_user.id if t[1]['id'].nil?
+    end
+    @project_data = project_params
+    @project_data['tasks_attributes'] = @tasks
     respond_to do |format|
-      if @project.update(project_params)
+      if @project.update(@project_data)
         flash[:success] = 'Projet mis à jour avec succès'
         format.html { redirect_to @project}
         format.json { render :show, status: :ok, location: @project }
@@ -132,7 +146,7 @@ class ProjectsController < ApplicationController
         tasks_attributes: [:id, :description, :hours, :minutes, :_destroy, :worker_id, :project_id],
         feedbacks_attributes: [:id, :description, :_destroy, :worker_id, :project_id],
         participants_attributes: [:id, :project_id, :contact_id, :_destroy],
-        papers_attributes: [:id, :project_id, :shape, :density, :paper, :_destroy]
+        papers_attributes: [:id, :project_id, :shape, :density, :paper, :_destroy, :note]
       )
     end
 end

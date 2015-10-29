@@ -3,7 +3,6 @@ class Task < ActiveRecord::Base
   belongs_to :worker, class_name: User, foreign_key: "worker_id"
   
   validates :description, presence: true
-  validates :worker_id, presence: true
   before_save :set_duration
  
   def set_duration
