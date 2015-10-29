@@ -6,43 +6,57 @@
 <p>
 	<%= link_to 'Nouveau Projet', new_project_path, class: 'btn btn-default'%>
 </p>
-<div class="panel panel-default">
-	<div class="panel body">Filtres :	
-		<%= form_tag(projects_path, :method => "get", id: "search-form", class: 'form-inline') do %>
-		<div class="form-group">
-			<label for="name">Nom</label>
-			<%= text_field_tag :search, params[:search], placeholder: "Nom du projet", class: 'form-control' %>
+<div class="clearfix row">
+	<div class="panel panel-default">
+		<div class="panel body">
+			Filtres :
+			<%= form_tag(projects_path, :method => "get", id: "search-form") do %>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label for="name">Nom</label>
+					<%= text_field_tag :name, params[:name], placeholder: "Nom du projet", class: 'form-control' %>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label for="number">Numéro</label>
+					<%= text_field_tag :number, params[:number], placeholder: "Numéro du projet", class: 'form-control' %>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label for="user_id">Personne assignée</label>
+					<select name="user_id" class="form-control">
+						<option value>Sélectionner un utilisateur</option>
+						<% @users = User.all%>
+						<%= @users.each do |user| %>
+						<option value="<%= user.id %>" <%= params[:user_id].to_i == user.id ? 'selected' : ''%>><%= user.login %></option>
+						<% end %>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label for="client_id">Client</label>
+					<select name="client_id" class="form-control">
+						<option value>Sélectionner un client</option>
+						<% @clients.each do |client| %>
+						<option value="<%= client.id%>"><%= client.name%></option>
+						<% end %>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label for="archived">Projet archivé</label>
+					<%= check_box_tag :archived, true, params[:archived], placeholder: 'Archivé', class: 'form-control'%>
+				</div>
+			</div>
+			<div class="form-group">
+				<%= submit_tag "Search", class: 'btn btn-success' %>
+			</div>
+			<% end %>
 		</div>
-		<div class="form-group">
-			<label for="number">Numéro</label>
-			<%= text_field_tag :number, params[:number], placeholder: "Numéro du projet", class: 'form-control' %>
-		</div>
-		<div class="form-group">
-			<label for="user_id">Personne assignée</label>
-			<select name="user_id" class="form-control">
-				<option value>Sélectionner un utilisateur</option>
-				<% @users = User.all%>
-				<%= @users.each do |user| %>
-				<option value="<%= user.id %>"><%= user.login %></option>
-				<% end %>
-			</select>
-		</div>
-		<div class="form-group">
-			<label for="archived">Projet archivé</label>
-			<%= check_box_tag :archived, true, params[:archived], placeholder: 'Archivé', class: 'form-control'%>
-		</div>
-		<div class="form-group">
-			<select name="client_id" class="form-control">
-				<option value>Sélectionner un client</option>
-				<% @clients.each do |client| %>
-					<option value="<%= client.id%>"><%= client.name%></option>
-					<% end %>
-				</select>
-		</div>
-		<div class="form-group">
-		<%= submit_tag "Search", class: 'btn btn-success' %>
-		</div>
-		<% end %>
 	</div>
 </div>
 <div class="panel panel-default">

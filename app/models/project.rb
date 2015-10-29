@@ -9,6 +9,11 @@ class Project < ActiveRecord::Base
   has_many :papers
   before_save :set_estimated_time
 
+  scope :passed, -> (archived) {where archived: true}
+  scope :number, -> (number) { where number: number}
+  scope :user, -> (user) {where worker_id: user}
+  scope :search_name, -> (name) {where("name LIKE ?", "#{name}%")}
+#  scope :client, -> (client) {where contact.client_id: client}
 
   accepts_nested_attributes_for :tasks, :allow_destroy => true
   accepts_nested_attributes_for :feedbacks, :allow_destroy => true
@@ -62,17 +67,6 @@ class Project < ActiveRecord::Base
     @projects = Project.where("name LIKE ?", "%#{search}%")
   end
   
-  def self.number(number)
-    @projects = Project.where("number = ?", "#{number}")
-  end
-
-  def self.user_id(user_id)
-    @projects = Project.where("worker_id = ?", user_id)
-  end
-
-  def self.archived(archived)
-    @projects = Project.where('archived = ?', archived)
-  end
 
   def set_estimated_time
     self.estimated_time = @hours * 60 + @minutes

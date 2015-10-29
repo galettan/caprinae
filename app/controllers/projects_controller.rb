@@ -6,21 +6,21 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @clients = Client.all
-     if (!params[:search].nil? && params[:search] != '')
-        @projects = Project.search(params[:search]).order("created_at DESC").paginate(page: params[:page])
-      elsif (!params[:number].nil? && params[:number] != '')
-        @projects = Project.number(params[:number]).paginate(page: params[:page])
-      elsif (!params[:user_id].nil? && params[:user_id] != '')
-        @projects = Project.user_id(params[:user_id]).paginate(page: params[:page])
-      elsif (params[:archived])
-        @projects = Project.archived(true).paginate(page: params[:page])
-      elsif current_user.manager?
+    @projects = Project.joins(:contacts).where(nil)
+    @projects = @projects.passed(params[:archived]).paginate(page: params[:page]) if params[:archived].present?
+    @projects = @projects.number(params[:number]).paginate(page: params[:page]) if params[:number].present?
+    @projects = @projects.user(params[:user_id]).paginate(page: params[:page]) if params[:user_id].present?
+    @projects = @projects.search_name(params[:name]).paginate(page: params[:page]) if params[:name].present?
+    @projects = @projects.client(params[:client_id]).paginate(page: params[:client_id]) if params[:client_id].present?
+    if ((!params[:archived].present? && !params[:number].present? && !params[:user_id].present? && !params[:name].present? && !params[:client_id].present?))
+      if current_user.manager?
         @projects = Project.by_owner(current_user.id).order(priority: :desc, number: :asc).paginate(page: params[:page])
       elsif current_user.crea?
         @projects = Project.for_crea(current_user.id).order(priority: :desc, number: :asc).paginate(page: params[:page])
       else
         @projects = Project.for_print().order(priority: :desc, number: :asc).paginate(page: params[:page])
       end
+    end
   end
 
   # GET /projects/1
@@ -66,11 +66,13 @@ class ProjectsController < ApplicationController
   def update
     @client = Client.all
     @tasks = project_params['tasks_attributes']
-    @tasks.each do |t|
-      t[1]['worker_id'] = current_user.id if t[1]['id'].nil?
-    end
     @project_data = project_params
-    @project_data['tasks_attributes'] = @tasks
+    if !@tasks.nil?
+      @tasks.each do |t|
+        t[1]['worker_id'] = current_user.id if t[1]['id'].nil?
+        @project_data['tasks_attributes'] = @tasks
+      end
+    end
     respond_to do |format|
       if @project.update(@project_data)
         flash[:success] = 'Projet mis à jour avec succès'
