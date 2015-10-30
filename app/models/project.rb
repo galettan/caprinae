@@ -18,6 +18,8 @@ class Project < ActiveRecord::Base
   scope :create_date, -> (create_begin, create_end) {where("created_at BETWEEN DATE(?) AND DATE(?)", create_begin, create_end)}
   scope :project_type, -> (type) {where project_type: type}
   scope :progress, -> (progress) {where progression: progress}
+  scope :status, -> (status) {where state: status}
+  scope :prio, -> (prio) {where priority: prio}
 
   accepts_nested_attributes_for :tasks, :allow_destroy => true
   accepts_nested_attributes_for :feedbacks, :allow_destroy => true

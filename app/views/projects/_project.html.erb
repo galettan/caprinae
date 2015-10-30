@@ -1,73 +1,54 @@
 <tr>
 	<td><%= project.number%></td>
-	<td><%=l project.created_at.to_date%></td>
-	
-	<td><%= !project.participants.first.nil? ? project.participants.first.contact.client.name : '' %></td>	
+	<td><%= l project.created_at.to_date%></td>
+
+	<td><%= !project.participants.first.nil? ? project.participants.first.contact.client.name : '' %></td>
 	<td><%= link_to project.name, edit_project_path(project) %><% if (!project.important.blank?)%> <span class="glyphicon glyphicon-exclamation-sign" data-toggle="tooltip" data-placement="bottom" title="<%= project.important%>"></span><% end %></td>
-	
+
 	<td><%= t project.project_type %></td>
-	
-	<td>
-		<% if (project.priority == 'normal')%>
-			<span class="label label-success">
-		<% else %>
-			<span class="label label-warning">
-		<% end %>
-		<%= project.priority %></span>
-	</td>
-	
+
+	<td> <% if (project.priority == 'normal')%> <span class="label label-success"> <% else %> <span class="label label-warning"> <% end %>
+			<%= project.priority %></span> </td>
+
 	<td><%= image_tag project.worker.avatar(:thumb), title: project.worker.login, data: {toggle: "tooltip", placement:"bottom"}%></td>
 	<% spent_time = project.tasks.sum(:duration)%>
-						<td>
-							<div class="progress" data-toggle="tooltip" data-placement="bottom" title="réel: <%=  spent_time / 60%>h<%=spent_time % 60 %>min / estimé :<%= project.estimated_time / 60%>h<%= project.estimated_time % 60%>min">
-								<% pct_time = (project.tasks.sum(:duration) * 100) / project.estimated_time %>
-								<div class="progress-bar progress-bar-<%= (pct_time >= 80 ? (pct_time > 100 ? 'danger' : 'warning'): 'success')%> progress-bar-striped active"
-									role="progressbar"
-									aria-valuenow="<%= pct_time %>"
-									aria-valuemin="0"
-									aria-valuemax="100"
-									style="width: <%= pct_time %>%;">
-    								<%= pct_time %>%</div>
-							</div>
-						</td>
-	
-	<td><div>1er retour:<% if ((project.first_feedback > Date.today) && ((project.first_feedback) <= (Date.today + 7.days))) %><span class="label label-warning"><% elsif (project.first_feedback <= Date.today)%><span class="label label-danger"><% elsif (project.first_feedback > Date.today + 7.days) %><span class="label label-success"><% end %><%= l project.first_feedback%></span></div>
-	<div>BAT:
-	<% if (!project.good_to_print.nil?)%>
+	<td>
+	<div class="progress" data-toggle="tooltip" data-placement="bottom" title="réel: <%= spent_time / 60%>h<%= spent_time % 60 %>min / estimé :<%= project.estimated_time / 60%>h<%= project.estimated_time % 60%>min">
+		<% pct_time = (project.tasks.sum(:duration) * 100) / project.estimated_time %>
+		<div class="progress-bar progress-bar-<%= (pct_time >= 80 ? (pct_time > 100 ? 'danger' : 'warning'): 'success')%> progress-bar-striped active"
+		role="progressbar"
+		aria-valuenow="<%= pct_time %>"
+		aria-valuemin="0"
+		aria-valuemax="100"
+		style="width: <%= pct_time %>%;">
+			<%= pct_time %>%
+		</div>
+	</div></td>
+
+	<td>
+	<div>
+		1er retour:<% if ((project.first_feedback > Date.today) && ((project.first_feedback) <= (Date.today + 7.days))) %><span class="label label-warning"><% elsif (project.first_feedback <= Date.today)%><span class="label label-danger"><% elsif (project.first_feedback > Date.today + 7.days) %><span class="label label-success"><% end %><%= l project.first_feedback%></span>
+	</div>
+	<div>
+		BAT:
+		<% if (!project.good_to_print.nil?)%>
 		<% if ((project.good_to_print > Date.today) && ((project.good_to_print) <= (Date.today + 7.days))) %>
-			<span class="label label-warning">
-		<% elsif (project.good_to_print <= Date.today)%>
-			<span class="label label-danger">
-		<% elsif (project.good_to_print > Date.today + 7.days) %>
-			<span class="label label-success">
-		<% end %>
-			<%= l project.good_to_print %></span>
-	<% else %>
-		<span class="label label-default">Sans objet</span>
-	<% end %></div><div>
-	Livraison:
-	<% if (!project.delivery_date.nil?)%>
+		<span class="label label-warning"> <% elsif (project.good_to_print <= Date.today)%> <span class="label label-danger"> <% elsif (project.good_to_print > Date.today + 7.days) %> <span class="label label-success"> <% end %>
+					<%= l project.good_to_print %></span> <% else %> <span class="label label-default">Sans objet</span> <% end %>
+	</div>
+	<div>
+		Livraison:
+		<% if (!project.delivery_date.nil?)%>
 		<% if ((project.delivery_date > Date.today) && ((project.delivery_date) <= (Date.today + 7.days))) %>
-			<span class="label label-warning">
-		<% elsif (project.delivery_date <= Date.today)%>
-			<span class="label label-danger">
-		<% elsif (project.delivery_date > Date.today + 7.days) %>
-			<span class="label label-success">
-		<% end %>
-		<%= l project.delivery_date%></span></td>
+		<span class="label label-warning"> <% elsif (project.delivery_date <= Date.today)%> <span class="label label-danger"> <% elsif (project.delivery_date > Date.today + 7.days) %> <span class="label label-success"> <% end %>
+					<%= l project.delivery_date%></span>
+	</td>
 	<% else %>
-		<span class="label label-default">Sans objet</span>
+	<span class="label label-default">Sans objet</span>
 	<% end %>
 	</div>
-	<td>
-	<% if (project.feedback_number != 0)%>
-		<% if (project.feedbacks.count  / project.feedback_number > 0.8) %>
-			<span class="label label-warning">
-		<% else %>
-			<span class="label label-success">
-		<% end %>
-		<%= project.feedbacks.count%> / <%= project.feedback_number%></span>
-	<% end %>
-	</td>
+	<td> <% if (project.feedback_number != 0)%>
+	<% if (project.feedbacks.count  / project.feedback_number > 0.8) %> <span class="label label-warning"> <% else %> <span class="label label-success"> <% end %>
+			<%= project.feedbacks.count%> / <%= project.feedback_number%></span> <% end %> </td>
 	<td><%= t project.state %> / <%= t project.progression %></td>
 </tr>

@@ -5,23 +5,26 @@
 			projectProgression.value = 'runningcrea';
 		}
 	}
+
 	function changeProgression() {
 		projectType = document.getElementById('projectType');
 		if (projectType.value == 'print' || projectType.value == 'creaprint' || projectType.value == 'printother') {
 			document.getElementById('projectProgression').value = 'todoprint';
-		}		
+		}
 	}
+
 	function revealePrint() {
 		var printTab = document.getElementById('printref');
-		document.getElementById('printli').className="";
+		document.getElementById('printli').className = "";
 		printTab.setAttribute('aria-controls', 'print');
 		printTab.setAttribute('role', 'tab');
 		printTab.setAttribute('data-toggle', 'tab');
 		printTab.innerHTML += 'Print';
 	}
+
 	function hidePrint() {
 		var printTab = document.getElementById('printref');
-		document.getElementById('printli').className="disabled";
+		document.getElementById('printli').className = "disabled";
 		printTab.setAttribute('aria-controls', '');
 		printTab.setAttribute('role', '');
 		printTab.setAttribute('data-toggle', '');
@@ -153,21 +156,25 @@
 </div>
 <div>
 
-<% if (@project.new_record?)%>
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#studio" aria-controls="studio" role="tab" data-toggle="tab">Studio</a></li>
-    <li role="presentation" class="" id="printli"><a href="#print" id="printref"></a></li>
-  </ul>
-  <div class="tab-content">
-	<div role="tabpanel" class="tab-pane active" id="studio">
-  		<%= render 'projects/forms/studio_fields', :f => f%>
+	<% if (@project.new_record?)%>
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active">
+			<a href="#studio" aria-controls="studio" role="tab" data-toggle="tab">Studio</a>
+		</li>
+		<li role="presentation" class="" id="printli">
+			<a href="#print" id="printref"></a>
+		</li>
+	</ul>
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="studio">
+			<%= render 'projects/forms/studio_fields', :f => f%>
+		</div>
+		<div role="tabpanel" class="tab-pane" id="print">
+			<%= render 'projects/forms/print_fields', :f => f %>
+		</div>
 	</div>
-	<div role="tabpanel" class="tab-pane" id="print">
-	  	<%= render 'projects/forms/print_fields', :f => f %>
-	 </div>
-  </div>
-<% else %>
+	<% else %>
 	<ul class="nav nav-tabs" role="tablist">
 		<li role="presentation" class="<%= current_user.print? ? '' : 'active'%>">
 			<a href="#studio" aria-controls="studio" role="tab" data-toggle="tab">Studio</a>
@@ -177,26 +184,28 @@
 			<a href="#print" aria-controls="print" role="tab" data-toggle="tab">Print</a>
 		</li>
 		<% else %>
-	    <li role="presentation" class="" id="printli"><a href="#print" id="printref"></a></li>
+		<li role="presentation" class="" id="printli">
+			<a href="#print" id="printref"></a>
+		</li>
 		<% end %>
 	</ul>
-  
-  	<div class="tab-content">
+
+	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane <%= current_user.print? ? '' : 'active' %>" id="studio">
-	    	<%= render 'projects/forms/studio_fields', :f => f %>
-    	</div>
+			<%= render 'projects/forms/studio_fields', :f => f %>
+		</div>
 		<% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother'%>
 		<div role="tabpanel" class="tab-pane <%= current_user.print? ? 'active' : ''%>" id="print">
 			<%= render 'projects/forms/print_fields', :f => f %>
 		</div>
 		<% else %>
 		<div role="tabpanel" class="tab-pane" id="print">
-		  	<%= render 'projects/forms/print_fields', :f => f %>
-		 </div>
+			<%= render 'projects/forms/print_fields', :f => f %>
+		</div>
 		<% end %>
 	</div>
-<% end%>
-  <!-- Tab panes -->
+	<% end%>
+	<!-- Tab panes -->
 
 </div>
 <p class="text-center">
