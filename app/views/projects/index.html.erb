@@ -6,17 +6,7 @@
 <p>
 	<%= link_to 'Nouveau Projet', new_project_path, class: 'btn btn-default'%>
 </p>
-<div class="clearfix">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<a class="btn btn-primary" role="button" data-toggle="collapse" href="#filters" aria-expanded="false" aria-controls="filters">Afficher de filtres</a>
-			<a class="btn btn-warning" role="button" href="<%= projects_path%>">Réinitialiser les filtres</a>
-		</div>
-		<div class="panel body collapse" id="filters">
-			<%= render 'projects/forms/filters'%>
-		</div>
-	</div>
-</div>
+<%= render 'projects/forms/filters'%>
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<strong>Liste des Projets</strong>
