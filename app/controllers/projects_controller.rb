@@ -20,8 +20,9 @@ class ProjectsController < ApplicationController
     @projects = @projects.client(params[:client_id]).paginate(page: params[:page]) if params[:client_id].present?
     @projects = @projects.create_date(params[:create_date], params[:create_date].to_date + 1.day).paginate(page: params[:page]) if params[:create_date].present?
     @projects = @projects.project_type(params[:project_type]).paginate(page: params[:page]) if params[:project_type].present?
+    @projects = @projects.progress(params[:progress]).paginate(page: params[:page]) if params[:progress].present?
     if ((!params[:archived].present? && !params[:number].present? && !params[:user_id].present? && !params[:name].present? && !params[:client_id].present? &&
-      !params[:create_date].present? && !params[:project_type].present? ))
+      !params[:create_date].present? && !params[:project_type].present? && !params[:progress].present?))
       if current_user.manager?
         @projects = Project.by_owner(current_user.id).order(priority: :desc, number: :desc).paginate(page: params[:page])
       elsif current_user.crea?

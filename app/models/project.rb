@@ -17,6 +17,7 @@ class Project < ActiveRecord::Base
     .joins('LEFT JOIN contacts ON contacts.id = participants.contact_id').where('contacts.client_id = ? ', client)}
   scope :create_date, -> (create_begin, create_end) {where("created_at BETWEEN DATE(?) AND DATE(?)", create_begin, create_end)}
   scope :project_type, -> (type) {where project_type: type}
+  scope :progress, -> (progress) {where progression: progress}
 
   accepts_nested_attributes_for :tasks, :allow_destroy => true
   accepts_nested_attributes_for :feedbacks, :allow_destroy => true
