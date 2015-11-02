@@ -4,6 +4,7 @@ class Task < ActiveRecord::Base
   
   validates :description, presence: true
   before_save :set_duration
+  before_update :set_duration
  
   def set_duration
     self.duration = @hours * 60 + @minutes
@@ -25,9 +26,4 @@ class Task < ActiveRecord::Base
    @minutes = m.to_i
   end
   
-  # def duration=(d)
-    # @hours = d / 60
-    # @minutes = d % 60
-    # self.set_duration
-  # end
 end
