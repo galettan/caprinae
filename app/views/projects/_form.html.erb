@@ -164,7 +164,7 @@
 					<tr>
 						<td> <%= f.label :temps_estimé %>
 						<% spent_time = @project.tasks.sum(:duration)%>
-						<% pct_time = (spent_time * 100) / @project.estimated_time %>
+						<% pct_time = (spent_time * 100) / (@project.estimated_time > 0 ? @project.estimated_time : 1) %>
 	<div class="progress" data-toggle="tooltip" data-placement="bottom" title="réel: <%= spent_time / 60%>h<%= spent_time % 60 %>min / estimé :<%= @project.estimated_time / 60%>h<%= @project.estimated_time % 60%>min">
 						
 							<div
