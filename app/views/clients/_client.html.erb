@@ -1,5 +1,5 @@
 <tr>
 	<td><%= link_to client.name, edit_client_path(client) %></td>
-	<td><%= client.street %> <%= client.postal_code%> <%= client.town%></td>
+	<td><%= client.street %> <%= client.adress_complement %> <%= client.postal_code%> <%= client.city%></td>
 	<td><%= client.contacts.count %></td>
 </tr>

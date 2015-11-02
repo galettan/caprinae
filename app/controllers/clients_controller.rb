@@ -3,7 +3,6 @@ class ClientsController < ApplicationController
 
   def index
     @clients = Client.paginate(page: params[:page])
-    p @clients.inspect
   end
 
   def show

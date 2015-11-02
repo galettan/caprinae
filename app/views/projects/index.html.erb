@@ -1,34 +1,60 @@
-<p><%= link_to 'Nouveau Projet', new_project_path, class: 'btn btn-default'%>
-</p><div class="panel panel-default">
+<script>
+	$(function() {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
+</script>
+<p>
+	<%= link_to 'Nouveau Projet', new_project_path, class: 'btn btn-default'%>
+</p>
+<%= render 'projects/forms/filters'%>
+<div class="panel panel-default">
 	<div class="panel-heading">
 		<strong>Liste des Projets</strong>
 	</div>
 	<div class="panel-body">
 		<table class="table table-bordered text-center table-hover table-striped">
 			<thead>
+				<% if (!current_user.print?)%>
+				<tr>
+					<th>#</th>
+					<th>Créé le</th>
+					<th>Client</th>
+					<th>Nom du projet</th>
+					<th>Type de projet</th>
+					<th>Priorité</th>
+					<th>Asssigné à</th>
+					<th>Temps réel / estimé</th>
+					<th>Dates</th>
+					<th>Retours</th>
+					<th>Statut</th>
+				</tr>
+				<% else%>
 				<tr>
 					<th>#</th>
 					<th>Client</th>
 					<th>Nom du projet</th>
 					<th>Type de projet</th>
 					<th>Priorité</th>
-					<th>Asssigné à</th>
-					<th>Temps estimé / réel</th>
-					<th>Date premier retour</th>
-					<th>Date de validation</th>
-					<th>Bon à tirer</th>
-					<th>nombre de retour estimé / réel</th>
+					<th>Dates</th>
 					<th>Statut</th>
+					<th>BAT</th>
+					<th>Remarques</th>
+					<th>Sous-traitance</th>
 				</tr>
+				<% end %>
 			</thead>
 			<tbody>
-			<% @projects.each do |project| %>
+				<% @projects.each do |project| %>
+				<% if (!current_user.print?)%>
 				<%= render project%>
-			<% end %>
+				<% else%>
+				<%= render 'project_print', :project => project %>
+				<% end %>
+				<% end %>
 			</tbody>
 		</table>
 		<div class="text-center">
 			<%= will_paginate %>
 		</div>
 	</div>
-</div>	
+</div>

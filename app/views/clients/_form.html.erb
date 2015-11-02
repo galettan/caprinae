@@ -3,41 +3,32 @@
 	<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class='panel-heading'>
-				<strong>Informations générales:</strong>
+				<strong>Informations générales :</strong>
 			</div>
 			<div class='panel-body'>
 				<table class="table table-striped table-bordered">
 					<tr>
-						<td>
-						    <%= f.label :nom %><br>
+						<td> <%= f.label :nom %>
+						<br>
 						</td>
-						<td>
-						    <%= f.text_field :name, class: 'form-control'%>
-						</td>
+						<td> <%= f.text_field :name, class: 'form-control', placeholder: 'Nom de l\'entreprise'%> </td>
 					</tr>
 					<tr>
-						<td>
-						    <%= f.label :adresse %><br>
-						</td>
-						<td>
-						    <%= f.text_field :street, class: 'form-control'%>	
-						</td>
+						<td rowspan="2"> <%= f.label :adresse %></td>
+						<td> <%= f.text_field :street, class: 'form-control', placeholder: 'Adresse'%></td>
 					</tr>
 					<tr>
-						<td>
-						  	<%= f.label :code_postal %><br>
-						</td>
-						<td>
-						  	<%= f.text_field :postal_code, class: 'form-control'%>
-						</td>
+						<td> <%= f.text_field :adress_complement, class: 'form-control', placeholder: 'Complément d\'adresse'%> </td>
 					</tr>
 					<tr>
-						<td>
-						  	<%= f.label :ville%>
+						<td> <%= f.label :code_postal %>
+						<br>
 						</td>
-						<td>
-						  	<%= f.text_field :town, class: 'form-control' %>	
-						</td>
+						<td> <%= f.text_field :postal_code, class: 'form-control', placeholder: 'ex: 75001'%> </td>
+					</tr>
+					<tr>
+						<td> <%= f.label :ville%> </td>
+						<td> <%= f.text_field :city, class: 'form-control', placeholder: 'ex: Paris' %> </td>
 					</tr>
 				</table>
 			</div>
@@ -46,19 +37,19 @@
 </div>
 <div class="panel panel-default">
 	<div class='panel-heading'>
-		<strong>Contact:</strong>
+		<strong>Contact :</strong>
 	</div>
 	<div class="panel-body">
 		<%= f.fields_for :contacts do |contact| %>
-			<% render 'contact_fields', :f => contact %>
+		<% render 'contact_fields', :f => contact %>
 		<% end %>
 		<p class="text-center">
-		<%= link_to_add_association 'Ajouter un contact', f, :contacts, class: "btn btn-success"%>
+			<%= link_to_add_association 'Ajouter un contact', f, :contacts, class: "btn btn-success"%>
 		</p>
-	</div> 	
+	</div>
 </div>
-  <p class="text-center">
+<p class="text-center">
 	<%= link_to 'Back', clients_path, class: 'btn btn-default' %>
-    <%= f.submit 'Valider', class: 'btn btn-danger'%>
-  </p>
+	<%= f.submit 'Valider', class: 'btn btn-danger'%>
+</p>
 <% end %>

@@ -20,6 +20,10 @@
   text-decoration: none;
 }
 
+#logo img, #logo span {
+    vertical-align: bottom;
+}
+
 .checkbox {
   margin-bottom: 10px;
   span {
@@ -71,6 +75,8 @@ textarea {
   }
 }
 
+.vmiddle {vertical-align:middle;}
+
 .navbar-inverse {
   background-color: #7eae00;
   border-color: #7eae00;
@@ -86,4 +92,13 @@ textarea {
 
 .pagination {
   align: center;
+}
+
+.container-full {
+    margin: 0 auto;
+    width: 95%;
+}
+
+.search-button {
+  margin-top:23px;
 }
