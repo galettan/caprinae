@@ -1,7 +1,6 @@
 class Project < ActiveRecord::Base
   belongs_to :owner, class_name: User, foreign_key: "owner_id"
   belongs_to :worker, class_name: User, foreign_key: "worker_id"
-#  belongs_to :contact, class_name: Contact, foreign_key: "contact_id"
   has_many :participants, :class_name => 'Participant'
   has_many :contacts, :through => :participants
   has_many :tasks
@@ -31,7 +30,7 @@ class Project < ActiveRecord::Base
   validates :worker, presence: true
   validates :first_feedback, presence: true
     
-  enum project_type: [:print, :crea, :other, :creaprint, :creaother, :printother]
+  enum project_type: [:print, :crea, :other, :creaprint, :creaother, :printother, :creaprintother]
   enum priority: [:normal, :urgent]
   enum state: [:running, :waitingclient, :validatedclient, :finished]
   enum progression: [:todocrea, :runningcrea, :finishedcrea, :todoprint, :runningprint, :finishedprint]
@@ -58,11 +57,11 @@ class Project < ActiveRecord::Base
   end
   
   def self.for_crea(id)
-    @projects = Project.where(["worker_id = ? AND archived = false", id])
+    @projects = Project.where(["worker_id = ? AND archived = false AND progression < 2", id])
   end
   
   def self.for_print()
-    @projects = Project.where(["project_type IN (0, 3, 5) AND archived = false AND progression >= 2"])
+    @projects = Project.where(["project_type IN (0, 3, 5,6) AND archived = false AND progression >= 2 AND progression < 5"])
   end
 
   def self.find_detailed(id)

@@ -30,35 +30,35 @@
 					<td><%= f.check_box :let_raw %></td>
 				</tr>
 				<tr>
-					<td>Format ouvert (mm)</td>
-					<td><%= f.select(:open_shape, options_for_select(t("open_shapes").invert, @project.open_shape), {:include_blank => 'Selectionner un type de format ouvert'}, class: 'form-control')%></td>
+					<td>Format ouvert</td>
+					<td><%= f.select(:open_shape, options_for_select(t("open_shapes").invert, @project.open_shape), {:include_blank => 'Sélectionner un type de format ouvert'}, class: 'form-control')%></td>
 				</tr>
 				<tr>
 					<td>Format Fini</td>
-					<td><%= f.select(:finished_shape, options_for_select(t("finished_shapes").invert, @project.finished_shape), {:include_blank => 'Selectionner un type de format de produit fini'}, class: 'form-control')%></td>
+					<td><%= f.select(:finished_shape, options_for_select(t("finished_shapes").invert, @project.finished_shape), {:include_blank => 'Sélectionner un type de format de produit fini'}, class: 'form-control')%></td>
 				</tr>
 				<tr>
 					<td>Pelliculage ou plastification</td>
-					<td><%= f.select(:filming, options_for_select(t("filmings").invert, @project.filming), {:include_blank => 'Selectionner un pelliculage ou plastification'}, class: 'form-control')%></td>
+					<td><%= f.select(:filming, options_for_select(t("filmings").invert, @project.filming), {:include_blank => 'Sélectionner un pelliculage ou plastification'}, class: 'form-control')%></td>
 				</tr>
 				<tr>
 					<td>Façonnage</td>
-					<td><%= f.select(:shaping, options_for_select(t("shapings").invert, @project.shaping), {:include_blank => 'Selectionner un façonnage'}, class: 'form-control')%></td>
+					<td><%= f.select(:shaping, options_for_select(t("shapings").invert, @project.shaping), {:include_blank => 'Sélectionner un façonnage'}, class: 'form-control')%></td>
 				</tr>
 				<tr>
-					<td>Paqutage</td>
-					<td><%= f.select(:package, options_for_select(t("packages").invert, @project.package), {:include_blank => 'Selectionner un paquetage'}, class: 'form-control')%></td>
+					<td>Paquetage</td>
+					<td><%= f.select(:package, options_for_select(t("packages").invert, @project.package), {:include_blank => 'Sélectionner un paquetage'}, class: 'form-control')%></td>
 				</tr>
 				<tr>
 					<td>Livraison</td>
-					<td><%= f.select(:delivery, options_for_select(t("deliveries").invert, @project.delivery), {:include_blank => 'Selectionner un mode de livraison'}, class: 'form-control')%></td>
+					<td><%= f.select(:delivery, options_for_select(t("deliveries").invert, @project.delivery), {:include_blank => 'Sélectionner un mode de livraison'}, class: 'form-control')%></td>
 				</tr>
 				<tr>
 					<td>Remarques</td>
 					<td><%= f.text_area :notice, class: 'form-control'%></td>
 				</tr>
 				<tr>
-					<td>Sous traitance</td>
+					<td>Sous-traitance</td>
 					<td><%= f.text_area :outsourcing, class: 'form-control'%></td>
 				</tr>
 			</table>

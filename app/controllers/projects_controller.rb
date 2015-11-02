@@ -79,11 +79,18 @@ class ProjectsController < ApplicationController
     @client = Client.all
     @tasks = project_params['tasks_attributes']
     @project_data = project_params
+    @feedbacks = project_params['feedbacks_attributes']
     if !@tasks.nil?
       @tasks.each do |t|
         t[1]['worker_id'] = current_user.id if t[1]['id'].nil?
-        @project_data['tasks_attributes'] = @tasks
       end
+      @project_data['tasks_attributes'] = @tasks
+    end
+    if !@feedbacks.nil?
+      @feedbacks.each do |f|
+        f[1]['worker_id'] = current_user.id if f[1]['id'].nil?
+      end
+      @project_data['feedbacks_attributes'] = @feedbacks
     end
     respond_to do |format|
       if @project.update(@project_data)

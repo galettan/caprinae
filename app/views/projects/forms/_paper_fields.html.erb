@@ -15,9 +15,9 @@
 			<% end%> </td>
 			<td> <%= f.label :format%>
 			<% if !@project.papers[f.index.to_i].nil? %>
-			<%= f.select(:shape, options_for_select(t("paper_shape").invert, @project.papers[f.index.to_i].shape), {:include_blank => 'Selectionner un type de format de papier'}, class: 'form-control')%>
+			<%= f.select(:shape, options_for_select(t("paper_shape").invert, @project.papers[f.index.to_i].shape), {:include_blank => 'Sélectionner un type de format de papier'}, class: 'form-control')%>
 			<% else %>
-			<%= f.select(:shape, options_for_select(t("paper_shape").invert), {:include_blank => 'Selectionner un type de format de papier'}, class: 'form-control')%>
+			<%= f.select(:shape, options_for_select(t("paper_shape").invert), {promt: 'Sélectionner un type de format de papier'}, class: 'form-control')%>
 			<% end %> </td>
 			<td rowspan=2> <%= link_to_remove_association '<span class="glyphicon glyphicon-trash"></span>'.html_safe, f, class: "btn btn-danger" %> </td>
 		</tr>

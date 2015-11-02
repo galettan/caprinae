@@ -3,7 +3,7 @@
 <td>    		<%= link_to user.login, user %></td>
 <td>      		<%= t user.profile %></td>
 <td>  		<% if (current_user.manager? || (user.manager? == false && current_user?(user)))%>
-  			<%= link_to 'parametres', edit_user_path(user), class: "btn btn-default" %>
+  			<%= link_to 'paramètres', edit_user_path(user), class: "btn btn-default" %>
   	  <% end %>
 </td>
 </tr>

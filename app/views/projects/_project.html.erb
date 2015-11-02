@@ -14,13 +14,14 @@
 	<% spent_time = project.tasks.sum(:duration)%>
 	<td>
 	<div class="progress" data-toggle="tooltip" data-placement="bottom" title="réel: <%= spent_time / 60%>h<%= spent_time % 60 %>min / estimé :<%= project.estimated_time / 60%>h<%= project.estimated_time % 60%>min">
-		<% pct_time = (project.tasks.sum(:duration) * 100) / project.estimated_time %>
-		<div class="progress-bar progress-bar-<%= (pct_time >= 80 ? (pct_time > 100 ? 'danger' : 'warning'): 'success')%> progress-bar-striped active"
+		<% pct_time = (spent_time * 100) / project.estimated_time %>
+		
+		<div class="progress-bar progress-bar-<%= (pct_time >= 80 ? (pct_time >= 100 ? 'danger' : 'warning'): 'success')%> progress-bar-striped active"
 		role="progressbar"
 		aria-valuenow="<%= pct_time %>"
 		aria-valuemin="0"
 		aria-valuemax="100"
-		style="width: <%= pct_time %>%;">
+		style="width: <%= pct_time > 100 ? 100 : pct_time %>%;">
 			<%= pct_time %>%
 		</div>
 	</div></td>

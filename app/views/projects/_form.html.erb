@@ -5,6 +5,9 @@
 			projectProgression.value = 'runningcrea';
 		}
 	}
+	$(function() {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
 
 	function changeProgression() {
 		projectType = document.getElementById('projectType');
@@ -45,7 +48,7 @@
 						<td> <%= f.text_field :name, class: 'form-control'%> </td>
 					</tr>
 					<tr>
-						<td> <%= f.label :numero %> </td>
+						<td> <%= f.label :numérotation %> </td>
 						<td> <%= f.number_field :number, class: 'form-control'%> </td>
 					</tr>
 					<tr>
@@ -54,7 +57,7 @@
 					</tr>
 					<tr>
 						<td> <%= f.label :type_de_projet %> </td>
-						<td> <%= f.select(:project_type, options_for_select(t("project_types").invert, @project.project_type), {:include_blank => 'Selectionner un type de projet'}, class: 'form-control', id: 'projectType', onchange: 'if (this.selectedIndex == 1 || this.selectedIndex == 3 || this.selectedIndex == 6) { revealePrint();} else {hidePrint();}')%> </td>
+						<td> <%= f.select(:project_type, options_for_select(t("project_types").invert, @project.project_type), {:include_blank => 'Sélectionner un type de projet'}, class: 'form-control', id: 'projectType', onchange: 'if (this.selectedIndex == 1 || this.selectedIndex == 3 || this.selectedIndex == 6 || this.selectedIndex == 7) { revealePrint();} else {hidePrint();}')%> </td>
 					</tr>
 					<tr>
 						<td> <%= f.label :description %> </td>
@@ -64,7 +67,7 @@
 						<td> <%= f.label :priorite %>
 						<br>
 						</td>
-						<td> <%= f.select(:priority, options_for_select(t("project_priorities").invert, @project.priority), {:include_blank => 'Selectionner une priorité'}, {class: 'form-control'})%> </td>
+						<td> <%= f.select(:priority, options_for_select(t("project_priorities").invert, @project.priority), {:include_blank => 'Sélectionner une priorité'}, {class: 'form-control'})%> </td>
 					</tr>
 					<% if current_user.manager?%>
 					<tr>
@@ -76,7 +79,7 @@
 						<td> <%= f.label :statut %>
 						<br>
 						</td>
-						<td> <%= f.select(:state, options_for_select(t("project_status").invert, @project.state), {:include_blank => 'Selectionner une priorité'},{class: 'form-control'})%> </td>
+						<td> <%= f.select(:state, options_for_select(t("project_status").invert, @project.state), {:include_blank => 'Sélectionner une priorité'},{class: 'form-control'})%> </td>
 					</tr>
 					<tr>
 						<td> <%= f.label :progression%> </td>
@@ -94,6 +97,27 @@
 				<strong>Client:</strong>
 			</div>
 			<div class="panel-body">
+				<table class="table table-striped table-bordered">
+					<% @project.participants.each do |participant| %>
+					<tr>
+						<td>Société:</td>
+						<td><%= participant.contact.client.name %></td>
+					</tr>
+					<tr>
+						<td>Contact:</td>
+						<td>
+						<p>
+							<span class="glyphicon glyphicon-user"> <%= participant.contact.first_name %> <%= participant.contact.last_name %></span>
+						</p>
+						<p>
+							<span class="glyphicon glyphicon-send"> <%= mail_to participant.contact.email %></span>
+						</p>
+						<p>
+							<span class="glyphicon glyphicon-phone-alt"> <%= participant.contact.phone_nbr %></span>
+						</p></td>
+					</tr>
+					<% end %>
+				</table>
 				<%= f.fields_for :participants do |p| %>
 				<% render 'projects/forms/participant_fields', :f => p %>
 				<% end %>
@@ -119,7 +143,7 @@
 						<td> <%= f.date_field :good_to_print, class: 'form-control'%> </td>
 					</tr>
 					<tr>
-						<td> <%= f.label :date_de_depart%> </td>
+						<td> <%= f.label :date_de_départ%> </td>
 						<td> <%= f.date_field :departure_date, class: 'form-control'%> </td>
 					</tr>
 					<tr>
@@ -139,12 +163,24 @@
 				<table class="table table-bordered table-striped">
 					<tr>
 						<td> <%= f.label :temps_estimé %>
-						<br>
-						</td>
+						<% spent_time = @project.tasks.sum(:duration)%>
+						<% pct_time = (spent_time * 100) / @project.estimated_time %>
+	<div class="progress" data-toggle="tooltip" data-placement="bottom" title="réel: <%= spent_time / 60%>h<%= spent_time % 60 %>min / estimé :<%= @project.estimated_time / 60%>h<%= @project.estimated_time % 60%>min">
+						
+							<div
+							class="progress-bar progress-bar-<%= (pct_time >= 80 ? (pct_time > 100 ? 'danger' : 'warning'): 'success')%> progress-bar-striped active"
+							role="progressbar"
+							aria-valuenow="<%= pct_time %>"
+							aria-valuemin="0"
+							aria-valuemax="100"
+							style="width: <%= pct_time %>%;">
+								<%= pct_time %>% du temps consommé</div>
+							</div>
+						</div></td>
 						<td> <%= f.text_field :hours, class: 'form-control' %>Heures <%= f.text_field :minutes, class: 'form-control'%>Minutes </td>
 					</tr>
 					<tr>
-						<td> <%= f.label :nombre_de_retour_prévus %>
+						<td> <%= f.label :nombre_de_retours_prévus %>
 						<br>
 						</td>
 						<td> <%= f.number_field :feedback_number, class: 'form-control'%> </td>
@@ -209,7 +245,12 @@
 
 </div>
 <p class="text-center">
-	<%= link_to 'Back', projects_path, class: 'btn btn-default'%>
+	<%= link_to 'Retour', projects_path, class: 'btn btn-default'%>
 	<%= f.submit 'Valider', class: 'btn btn-danger'%>
 </p>
+<% if current_user.manager?%>
+<p class="text-right">
+	<%= link_to '<span class="glyphicon glyphicon-trash"></span>Supprimer le projet'.html_safe, @project ,class: 'btn btn-warning', method: :delete, data: {confirm: 'Êtes-vous sûre ?'} %>
+</p>
+<% end %>
 <% end %>

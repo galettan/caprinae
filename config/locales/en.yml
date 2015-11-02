@@ -35,6 +35,7 @@ en:
     other: 'Autre'
     creaother: 'Studio-autre'
     printother: 'Print-autre' 
+    creaprintother: 'Studio-Print-autre' 
   project_priorities:
       normal: 'Normal'
       urgent: 'Urgent'
@@ -380,3 +381,4 @@ en:
   other: 'Autre'
   creaother: 'Studio-autre'
   printother: 'Print-autre' 
+  creaprintother: 'Studio-Print-autre' 
