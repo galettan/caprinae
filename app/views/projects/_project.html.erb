@@ -11,7 +11,9 @@
 			<%= project.priority %></span> </td>
 
 	<td><%= image_tag project.worker.avatar(:thumb), title: project.worker.login, data: {toggle: "tooltip", placement:"bottom"}%></td>
-	<% spent_time = project.tasks.sum(:duration)%>
+	<% spent_time = project.tasks.sum(:duration)
+		project.estimated_time = project.estimated_time == 0 ? 1 : project.estimated_time
+	%>
 	<td>
 	<div class="progress" data-toggle="tooltip" data-placement="bottom" title="réel: <%= spent_time / 60%>h<%= spent_time % 60 %>min / estimé :<%= project.estimated_time / 60%>h<%= project.estimated_time % 60%>min">
 		<% pct_time = (spent_time * 100) / project.estimated_time %>

@@ -118,10 +118,10 @@
 			<div class="panel-body">
 				<table class="table table-bordered table-striped">
 					<tr>
-						<td>Temps estimé:<%= @project.hours %> heure<%= @project.hours > 1? 's' : ''%> <%= @project.minutes%> minute<%= @project.minutes > 1? 's' : ''%></td>
+						<td>Temps estimé:<%= @project.hours %> heure(s) <%= @project.minutes%> minute(s)</td>
 						<td>
 						<div class="progress">
-							<% pct_time = (@spent_time * 100) / @project.estimated_time %>
+							<% pct_time = (@spent_time * 100) / (@project.estimated_time == 0 ? 1 : @project.estimated_time) %>
 							<div class="progress-bar progress-bar-<%= (pct_time >= 80 ? (pct_time > 100 ? 'danger' : 'warning'): 'success')%> progress-bar-striped active"
 							role="progressbar"
 							aria-valuenow="<%= pct_time %>"
