@@ -5,7 +5,7 @@ accepts_nested_attributes_for :contacts, :allow_destroy => true
 
 validates :name, presence: true
 validates :street, presence: true
-validates :town, presence: true
+validates :city, presence: true
 validates :postal_code, presence: true
 
 
