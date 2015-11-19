@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   validates :login, presence: true,
                     uniqueness: true
   validates :password, presence: true,
-                       length: {minimum: 5},
+                       length: {minimum: 4},
                        allow_nil: true
                        
   has_attached_file :avatar,
