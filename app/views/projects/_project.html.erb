@@ -1,8 +1,7 @@
 <tr>
 	<td><%= project.number%></td>
 	<td><%= l project.created_at.to_date%></td>
-
-	<td><%= !project.participants.first.nil? ? project.participants.first.contact.client.name : '' %></td>
+ 	<td><%= !project.participants.first.nil? ? project.participants.first.contact.client.name : '' %></td>
 	<td><%= link_to project.name, edit_project_path(project) %><% if (!project.important.blank?)%> <span class="glyphicon glyphicon-exclamation-sign" data-toggle="tooltip" data-placement="bottom" title="<%= project.important%>"></span><% end %></td>
 
 	<td><%= t project.project_type %></td>
@@ -30,7 +29,11 @@
 
 	<td>
 	<div>
-		1er retour:<% if ((project.first_feedback > Date.today) && ((project.first_feedback) <= (Date.today + 7.days))) %><span class="label label-warning"><% elsif (project.first_feedback <= Date.today)%><span class="label label-danger"><% elsif (project.first_feedback > Date.today + 7.days) %><span class="label label-success"><% end %><%= l project.first_feedback%></span>
+		1er retour:
+		<% if (!project.first_feedback.nil? )%>
+		<% if ((project.first_feedback > Date.today) && ((project.first_feedback) <= (Date.today + 7.days))) %>
+		<span class="label label-warning"><% elsif (project.first_feedback <= Date.today)%><span class="label label-danger"><% elsif (project.first_feedback > Date.today + 7.days) %> <span class="label label-success"><% end %>
+			<%= l project.first_feedback%></span> <% else %> <span class="label label-default">Sans objet</span><% end %>
 	</div>
 	<div>
 		BAT:

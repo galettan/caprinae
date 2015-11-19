@@ -12,7 +12,8 @@ $(".js-example-basic-single").select2({
 				  	<%= f.label :client %>	  			
 				</td>
 				<td>
-<%= f.grouped_collection_select(:contact_id, @client, :contacts, :name, :id, :first_name_and_last_name, {:include_blank => true}, {class: 'js-example-basic-single form-control'} )%> 					<%= f.hidden_field :project_id, :value => @project.id%>
+<%= f.grouped_collection_select(:contact_id, @client, :contacts, :name, :id, :first_name_and_last_name, {:include_blank => true}, {class: 'js-example-basic-single form-control'} )%>
+<%= f.hidden_field :project_id, :value => @project.id%>
 				</td>
 				<td>
 		<%= link_to_remove_association '<span class="glyphicon glyphicon-trash"></span>'.html_safe, f, class: "btn btn-danger" %></td>
