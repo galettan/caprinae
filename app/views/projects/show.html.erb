@@ -80,11 +80,13 @@
 			</div>
 			<div class="panel-body">
 				<table class="table table-striped table-bordered">
+					<% if (!@project.first_feedback.nil?) %>
 					<tr>
 						<td>Date de premier retour:</td>
 						<td> <% if ((@project.first_feedback > Date.today) && ((@project.first_feedback) <= (Date.today + 7.days))) %> <span class="label label-warning"> <% elsif (@project.first_feedback < Date.today)%> <span class="label label-danger"> <% elsif (@project.first_feedback > Date.today + 7.days) %> <span class="label label-success"> <% end %>
 									<%= l @project.first_feedback%></span></td>
 					</tr>
+					<% end %>
 					<% if (!@project.good_to_print.nil?) %>
 					<tr>
 						<td>Bon à tirer:</td>

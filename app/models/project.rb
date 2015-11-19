@@ -28,7 +28,6 @@ class Project < ActiveRecord::Base
   validates :name, presence: true
   validates :number, presence: true
   validates :worker, presence: true
-  validates :first_feedback, presence: true
     
   enum project_type: [:print, :crea, :other, :creaprint, :creaother, :printother, :creaprintother]
   enum priority: [:normal, :urgent]
