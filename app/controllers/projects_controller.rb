@@ -56,6 +56,7 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
+    @client = Client.all
     @project = Project.new(project_params)
 
     @project.owner_id = current_user.id

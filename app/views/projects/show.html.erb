@@ -53,11 +53,13 @@
 					<% @project.participants.each do |participant| %>
 					<tr>
 						<td>Société:</td>
-						<td><%= participant.contact.client.name %></td>
+						<% if !participant.contact_id.nil? %>
+						<td><%= participant.contact.client.name %></td><% end %>
 					</tr>
 					<tr>
 						<td>Contact:</td>
 						<td>
+							<% if !participant.contact_id.nil? %>
 						<p>
 							<span class="glyphicon glyphicon-user"> <%= participant.contact.first_name %> <%= participant.contact.last_name %></span>
 						</p>
@@ -66,7 +68,7 @@
 						</p>
 						<p>
 							<span class="glyphicon glyphicon-phone-alt"> <%= participant.contact.phone_nbr %></span>
-						</p></td>
+						</p><%end %></td>
 					</tr>
 					<% end %>
 				</table>
