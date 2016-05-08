@@ -2,7 +2,7 @@ class ClientsController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :index, :destroy]
 
   def index
-    @clients = Client.paginate(page: params[:page])
+    @clients = Client.order(:name).paginate(page: params[:page])
   end
 
   def show
