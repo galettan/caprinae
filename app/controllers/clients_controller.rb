@@ -2,13 +2,9 @@ class ClientsController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :index, :destroy]
 
   def index
-    @clients = Client.where(nil)
-      @clients = @clients.search_name(params[:name]).order(:name).paginate(page: params[:page]) if params[:name].present?
-      @clients = @clients.contact_email(params[:email]).order(:name).paginate(page: params[:page]) if params[:email].present?
-      if params[:email].nil? && params[:name].nil?
-        @clients = Client.order(:name).paginate(page: params[:page])
-      end
-    end
+    @clients = Client.order(:name).paginate(page: params[:page])
+    @clients = @clients.search_name(params[:name]).order(:name).paginate(page: params[:page]) if params[:name].present?  
+    @clients = @clients.contact_email(params[:email]).order(:name).paginate(page: params[:page]) if params[:email].present?
   end
 
   def show
@@ -76,3 +72,5 @@ class ClientsController < ApplicationController
         contacts_attributes: [:id, :_destroy, :first_name, :last_name, :email, :phone_nbr, :client_id]
       )
     end
+    
+end
