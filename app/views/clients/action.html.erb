@@ -1,0 +1,70 @@
+<h3><%= @client.name %></h3>
+<%= @client.street %>
+<%= @client.adress_complement %>
+<%= @client.postal_code %>
+<%= @client.city %>
+
+<h3>Contacts :</h3>
+<table class="table table-striped text-center table-bordered table-hover">
+	<thead>
+		<th>Nom:</th>
+		<th>Prénom:</th>
+		<th>Adresse Email:</th>
+		<th>Numéro de téléphone:</th>
+	</thead>
+	<tbody>
+		<% @client.contacts.each do |contact| %>
+		<tr>
+			<td> <%= contact.first_name %> </td>
+			<td> <%= contact.last_name %> </td>
+			<td> <%= contact.email %> </td>
+			<td> <%= contact.phone_nbr %> </td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+<h3>Projets :</h3>
+<table class="table table-striped text-center table-bordered table-hover">
+	<thead>
+		<th>#</th>
+		<th>Nom du projet</th>
+		<th>Type de projet</th>
+		<th>Statut</th>
+		<th>Sous-traitance</th>
+		<th>Archivé ?</th>
+	</thead>
+	<tbody>
+		<% @client.contacts.each do |contact| %>
+			<% contact.participant.each do |participant| %>
+				<tr>
+					<td> <%= participant.project.number %> </td>
+					<td> <%= participant.project.name %> </td>
+					<td> <%= participant.project.project_type %> </td>
+					<td> <%= participant.project.state %> / <%= participant.project.progression %> </td>
+					<td> <%= participant.project.outsourcing %> </td>
+					<td> <%= participant.project.archived? %> </td>
+				</tr>
+			<% end%>
+		<% end %>
+	</tbody>
+</table>
+<p class="text-center">
+	<% if !@client.disable %>
+	<div class="alert alert-danger" align="center">
+		Désactiver un client archivera tous ses projets, le rendra invisible dans le listing des clients, et vous ne pourrez plus selectionner ses contacts dans de novueaux projets.
+	</div>
+	<% else %>
+	<div class="alert alert-success" align="center">
+		Activer un client le rendra visible dans le listing et permettra de sélectionner ses contacts dans les nouveaux projets. Les projets archivés lors de la désactivation le resteront.
+	</div>
+	<% end %>
+	<div align="center">
+		<%= link_to 'Retour', clients_path,  {class: 'btn btn-default'}%>
+		<% if !@client.disable %>
+		<%= link_to 'Désactiver', {controller: :clients, action: :deactivate}, method: :post, class: "btn btn-danger"%>
+		<% else %>
+		<%= link_to 'Activer', {controller: :clients, action: :activate}, method: :post, class: "btn btn-success"%>
+		<% end%>
+	</div>
+
+</p>

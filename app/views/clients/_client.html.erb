@@ -2,4 +2,9 @@
 	<td><%= link_to client.name, edit_client_path(client) %></td>
 	<td><%= client.street %> <%= client.adress_complement %> <%= client.postal_code%> <%= client.city%></td>
 	<td><%= client.contacts.count %></td>
+	<% if ! client.disable?%>
+	<td><%= link_to 'Désactiver', controller: :clients, action: :action, id: client%></td>
+	<%else%>
+	<td><%= link_to 'Activer', controller: :clients, action: :action, id: client%></td>
+	<% end%>
 </tr>

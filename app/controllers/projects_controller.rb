@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @clients = Client.all
+    @clients = Client.where('disable IS NULL')
     @projects = Project.where(nil)
     @projects = @projects.passed(params[:archived]).paginate(page: params[:page]) if params[:archived].present?
     @projects = @projects.number(params[:number]).paginate(page: params[:page]) if params[:number].present?
@@ -45,7 +45,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
-    @client = Client.all
+    @client = Client.where('disable IS NULL')
   end
 
   # GET /projects/1/edit

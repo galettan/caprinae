@@ -20,6 +20,12 @@
 						<%= text_field_tag :email, params[:email], placeholder: "Email du contact", class: 'form-control' %>
 					</div>
 				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label for="archived">Clients désactivés
+							<%= check_box_tag :disabled, true, params[:disabled], placeholder: 'Désactivé', class: "form-control"%></label>
+					</div>
+				</div>
 				<%= submit_tag "Search", class: 'btn btn-success search-button' %>
 				<% end %>
 			</fieldset>

@@ -8,6 +8,7 @@ class Client < ActiveRecord::Base
   validates :city, presence: true
   validates :postal_code, presence: true
 
+  scope :disabled, -> (disabled) {where("disable = 1")}
   scope :search_name, -> (name) {where("name LIKE ?", "#{name}%")}
   scope :contact_email, -> (email) {distinct.joins('LEFT JOIN contacts ON contacts.client_id = clients.id')
     .where('contacts.email LIKE ? ', email)}

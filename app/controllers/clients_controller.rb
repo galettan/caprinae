@@ -3,6 +3,12 @@ class ClientsController < ApplicationController
 
   def index
     @clients = Client.order(:name).paginate(page: params[:page])
+    if params[:disabled].present?
+      @clients = @clients.disabled(params[:disabled]).paginate(page: params[:page])
+    else
+      @clients = @clients.where('disable IS NULL')
+    end
+    @projects = @projects.passed(params[:archived]).paginate(page: params[:page]) if params[:archived].present?
     @clients = @clients.search_name(params[:name]).order(:name).paginate(page: params[:page]) if params[:name].present?  
     @clients = @clients.contact_email(params[:email]).order(:name).paginate(page: params[:page]) if params[:email].present?
   end
@@ -35,7 +41,48 @@ class ClientsController < ApplicationController
     end
   end
   
+  def action
+    @client = Client.find(params[:id])
+  end
+
+  def deactivate
+    @client = Client.find(params[:id])
+    @client.contacts.each do |contact|
+      contact.participant.each do |participant|
+        @project = Project.find(participant.project_id)
+        if @project.estimated_time?
+          @project.hours = @project.estimated_time / 60
+          @project.minutes = @project.estimated_time % 60
+        end
+        @project.archived = true
+        if @project.save
+          flash[:warning] = 'Projets archivés'
+        else
+          flash[:danger] = 'Projets non archivés'
+        end
+      end
+    end
+    @client.disable = true
+    if @client.save
+      flash[:warning] = 'Client désactivé' 
+      redirect_to clients_url
+    else
+      falsh[:danger] ='Un problème est survenu lors de la désactivation du client'
+    end
+  end
   
+  def activate
+    @client = Client.find(params[:id])
+    @client.disable = nil
+    if @client.save
+      flash[:success] = 'Client activé' 
+      redirect_to clients_url
+    else
+      falsh[:danger] = 'Un problème est survenu lors de l\'activation du client'
+    end
+    
+  end
+ 
   def update
     @client = Client.find(params[:id])
     
@@ -48,6 +95,7 @@ class ClientsController < ApplicationController
   end
 
   def destroy
+    @client = Client.find(params[:id])
     @client.destroy
     respond_to do |format|
       format.html { redirect_to clients_url, notice: 'Client was successfully destroyed.' }
