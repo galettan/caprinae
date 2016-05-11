@@ -69,22 +69,6 @@
 						</td>
 						<td> <%= f.select(:priority, options_for_select(t("project_priorities").invert, @project.priority), {:include_blank => 'Sélectionner une priorité'}, {class: 'form-control'})%> </td>
 					</tr>
-					<% if current_user.manager?%>
-					<tr>
-						<td> <%= f.label :archiver%> </td>
-						<td> <%= f.check_box :archived%> </td>
-					</tr>
-					<% end %>
-					<tr>
-						<td> <%= f.label :statut %>
-						<br>
-						</td>
-						<td> <%= f.select(:state, options_for_select(t("project_status").invert, @project.state), {:include_blank => 'Sélectionner une priorité'},{class: 'form-control'})%> </td>
-					</tr>
-					<tr>
-						<td> <%= f.label :progression%> </td>
-						<td> <%= f.select(:progression, options_for_select(t("project_progression").invert, @project.progression), {:include_blank => 'Sélectionner un avancement du projet'}, class: 'form-control', id: 'projectProgression', onchange: 'if (this.selectedIndex == 3) { changeProgression();}')%> </td>
-					</tr>
 					<tr>
 						<td> <%= f.label :important %>
 						<br>
@@ -187,6 +171,32 @@
 						</td>
 						<td> <%= f.number_field :feedback_number, class: 'form-control'%> </td>
 					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="panel panel-danger">
+			<div class="panel-heading">
+				Avancement et état du projet:
+			</div>
+			<div class="panel-body">
+				<table class="table table-bordered table-striped">
+					<tr>
+						<td> <%= f.label :statut %>
+						</td>
+						<td> <%= f.select(:state, options_for_select(t("project_status").invert, @project.state), {:include_blank => 'Sélectionner une priorité'},{class: 'form-control'})%> </td>
+					</tr>
+					<tr>
+						<td> <%= f.label :progression%> </td>
+						<td> <%= f.select(:progression, options_for_select(t("project_progression").invert, @project.progression), {:include_blank => 'Sélectionner un avancement du projet'}, class: 'form-control', id: 'projectProgression', onchange: 'if (this.selectedIndex == 3) { changeProgression();}')%> </td>
+					</tr>
+					<% if current_user.manager?%>
+					<tr>
+						<td> <%= f.label :archiver%> </td>
+						<td> <%= f.check_box :archived%> </td>
+					</tr>
+					<% end %>
 				</table>
 			</div>
 		</div>

@@ -2,6 +2,8 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user, only: [:edit, :update, :index, :destroy]
 
+  helper_method :sort_column, :sort_direction
+
   # GET /projects
   # GET /projects.json
   def index
@@ -23,14 +25,17 @@ class ProjectsController < ApplicationController
     @projects = @projects.progress(params[:progress]).paginate(page: params[:page]) if params[:progress].present?
     @projects = @projects.status(params[:state]).paginate(page: params[:page]) if params[:state].present?
     @projects = @projects.prio(params[:priority]).paginate(page: params[:page]) if params[:priority].present?
+
+    @projects = @projects.worker_order(params[:worker_order]).paginate(page: params[:page]) if params[:worker_order].present?
+
     if ((!params[:archived].present? && !params[:number].present? && !params[:user_id].present? && !params[:name].present? && !params[:client_id].present? &&
-      !params[:create_date].present? && !params[:project_type].present? && !params[:progress].present? && !params[:pstate] && !params[:priority]))
+      !params[:create_date].present? && !params[:project_type].present? && !params[:progress].present? && !params[:pstate] && !params[:priority] && !params[:worker_order]))
       if current_user.manager?
-        @projects = Project.by_owner(current_user.id).order(priority: :desc, number: :desc).paginate(page: params[:page])
+        @projects = Project.by_owner(current_user.id).order( sort_column + " " + sort_direction).paginate(page: params[:page])
       elsif current_user.crea?
-        @projects = Project.for_crea(current_user.id).order(priority: :desc, number: :desc).paginate(page: params[:page])
+        @projects = Project.for_crea(current_user.id).order(sort_column + " " + sort_direction).paginate(page: params[:page])
       else
-        @projects = Project.for_print().order(priority: :desc, number: :desc).paginate(page: params[:page])
+        @projects = Project.for_print().order(sort_column + " " + sort_direction).paginate(page: params[:page])
       end
     end
   end
@@ -128,6 +133,15 @@ class ProjectsController < ApplicationController
         redirect_to login_url
       end
     end
+
+    def sort_column
+      Project.column_names.include?(params[:sort]) ? params[:sort] : "priority"
+    end
+    
+    def sort_direction
+      params[:direction] == ('ASC' || 'DESC') ? params[:direction] : 'DESC'
+    end
+    
 
 
     # Never trust parameters from the scary internet, only allow the white list through.
