@@ -28,18 +28,6 @@
 						<td><%= @project.description %></td>
 					</tr>
 					<tr>
-						<td>Archivé:</td>
-						<td><%= @project.archived? ? 'oui' : 'non'%></td>
-					</tr>
-					<tr>
-						<td>État:</td>
-						<td><%= t @project.state%></td>
-					</tr>
-					<tr>
-						<td>Avancement:</td>
-						<td><%= t @project.progression%></td>
-					</tr>
-					<tr>
 						<td>Important:</td>
 						<td><%= @project.important%></td>
 					</tr>
@@ -150,6 +138,29 @@
 								<%= @project.feedbacks.count %> effectué<%= @project.feedbacks.count > 1 ? 's' : '' %>
 							</div>
 						</div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="panel panel-danger">
+			<div class="panel-heading">
+				Avancement et état du projet
+			</div>
+			<div class="panel-body">
+				<table class="table table-bordered table-striped">
+					<tr>
+						<td>État:</td>
+						<td><%= t @project.state%></td>
+					</tr>
+					<tr>
+						<td>Avancement:</td>
+						<td><%= t @project.progression%></td>
+					</tr>
+					<tr>
+						<td>Archivé:</td>
+						<td><%= @project.archived? ? 'oui' : 'non'%></td>
 					</tr>
 				</table>
 			</div>
