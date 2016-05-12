@@ -8,8 +8,11 @@
 
 	<td> <% if (project.priority == 'normal')%> <span class="label label-success"> <% else %> <span class="label label-warning"> <% end %>
 			<%= project.priority %></span> </td>
-
-	<td><%= image_tag project.worker.avatar(:thumb), title: project.worker.login, data: {toggle: "tooltip", placement:"bottom"}%></td>
+	<% if  !project.worker.nil? %>
+		<td><%= image_tag project.worker.avatar(:thumb), title: project.worker.login, data: {toggle: "tooltip", placement:"bottom"}%></td>
+	<% else %>
+		<td><%= image_tag "/system/A_attribuer.jpg", title: "Non assigné", data: {toggle: "tooltip", placement:"bottom"}%></td>
+	<% end%>
 	<% spent_time = project.tasks.sum(:duration)
 		project.estimated_time = project.estimated_time == 0 ? 1 : project.estimated_time
 	%>

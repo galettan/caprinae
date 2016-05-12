@@ -19,11 +19,11 @@
 				</tr>
 				<tr>
 					<td>Quantité bonnes feuilles</td>
-					<td><%= f.number_field :good_sheets_qty, class: "form-control"%></td>
+					<td><%= f.text_field :good_sheets_qty, class: "form-control"%></td>
 				</tr>
 				<tr>
 					<td>Quantité documents finis</td>
-					<td><%= f.number_field :finished_doc_qty, class: "form-control"%></td>
+					<td><%= f.text_field :finished_doc_qty, class: "form-control"%></td>
 				</tr>
 				<tr>
 					<td>Laisser brut de tirage</td>
@@ -38,12 +38,20 @@
 					<td><%= f.select(:finished_shape, options_for_select(t("finished_shapes").invert, @project.finished_shape), {:include_blank => 'Sélectionner un type de format de produit fini'}, class: 'form-control')%></td>
 				</tr>
 				<tr>
+					<td>Format spécial</td>
+					<td><%= f.text_field :special_shape, class: "form-control"%></td>
+				</tr>
+				<tr>
 					<td>Pelliculage ou plastification</td>
 					<td><%= f.select(:filming, options_for_select(t("filmings").invert, @project.filming), {:include_blank => 'Sélectionner un pelliculage ou plastification'}, class: 'form-control')%></td>
 				</tr>
 				<tr>
 					<td>Façonnage</td>
 					<td><%= f.select(:shaping, options_for_select(t("shapings").invert, @project.shaping), {:include_blank => 'Sélectionner un façonnage'}, class: 'form-control')%></td>
+				</tr>
+				<tr>
+					<td>Façonnage divers</td>
+					<td><%= f.text_field :diverse_shape, class: "form-control"%></td>
 				</tr>
 				<tr>
 					<td>Paquetage</td>

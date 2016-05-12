@@ -36,6 +36,7 @@ en:
     creaother: 'Studio-autre'
     printother: 'Print-autre' 
     creaprintother: 'Studio-Print-autre' 
+    web: "Web"
   project_priorities:
       normal: 'Normal'
       urgent: 'Urgent'
@@ -46,6 +47,7 @@ en:
       todoprint: 'à faire print'
       runningprint: 'en cours print'
       finishedprint: 'terminé print'
+      outsource: "Chez le sous-traitant"
   project_colors:
       quadrir: "Quadri R:"
       quadrirv: "Quadri R:V:"
@@ -372,6 +374,7 @@ en:
   todoprint: 'à faire print'
   runningprint: 'en cours print'
   finishedprint: 'terminé print'
+  outsource: "Chez le sous-traitant"
   print: 'Print'
   crea: 'Studio'
   manager: 'Manager'
@@ -382,3 +385,4 @@ en:
   creaother: 'Studio-autre'
   printother: 'Print-autre' 
   creaprintother: 'Studio-Print-autre' 
+  web: 'Web'

@@ -29,12 +29,11 @@ class Project < ActiveRecord::Base
   
   validates :name, presence: true
   validates :number, presence: true
-  validates :worker, presence: true
     
-  enum project_type: [:print, :crea, :other, :creaprint, :creaother, :printother, :creaprintother]
+  enum project_type: [:print, :crea, :other, :creaprint, :creaother, :printother, :creaprintother, :web]
   enum priority: [:normal, :urgent]
   enum state: [:running, :waitingclient, :validatedclient, :finished]
-  enum progression: [:todocrea, :runningcrea, :finishedcrea, :todoprint, :runningprint, :finishedprint]
+  enum progression: [:todocrea, :runningcrea, :finishedcrea, :todoprint, :runningprint, :finishedprint, :outsource]
 
   enum colors: [:quadrir, :quadrirv, :quadrirnbv, :nbr, :nbrv]
   enum open_shape: [:a3oshape, :a4oshape, :a5oshape, :hundredseventybyfiftyfour, :hundredseventybyheightyfive, :twohundredbytwoten,
@@ -58,7 +57,7 @@ class Project < ActiveRecord::Base
   end
   
   def self.for_crea(id)
-    @projects = Project.where(["worker_id = ? AND archived = false AND progression < 2", id])
+    @projects = Project.where(["(worker_id = ? OR worker_id IS NULL) AND archived = false AND progression < 2", id])
   end
   
   def self.for_print()

@@ -17,7 +17,7 @@
 					</tr>
 					<tr>
 						<td>Assigné à:</td>
-						<td><%= @project.worker.login %></td>
+						<td><%= @project.worker.nil? ? 'Non assigné' : @project.worker.login %></td>
 					</tr>
 					<tr>
 						<td>Type de projet:</td>
@@ -42,7 +42,7 @@
 					<tr>
 						<td>Société:</td>
 						<% if !participant.contact_id.nil? %>
-						<td><%= participant.contact.client.name %></td><% end %>
+						<td>						<%= link_to participant.contact.client.name, edit_client_path(participant.contact.client.id) %></td><% end %>
 					</tr>
 					<tr>
 						<td>Contact:</td>
