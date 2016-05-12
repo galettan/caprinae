@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @clients = Client.where('disable IS NULL')
+    @clients = Client.where('disable IS NULL').order(:name => :asc)
     @projects = Project.where(nil)
     @projects = @projects.passed(params[:archived]).paginate(page: params[:page]) if params[:archived].present?
     @projects = @projects.number(params[:number]).paginate(page: params[:page]) if params[:number].present?
@@ -55,13 +55,13 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-    @client = Client.all
+    @client = Client.where('disable IS NULL').order(:name => :asc)
   end
 
   # POST /projects
   # POST /projects.json
   def create
-    @client = Client.all
+    @client = Client.where('disable IS NULL').order(:name => :asc)
     @project = Project.new(project_params)
 
     @project.owner_id = current_user.id
@@ -82,7 +82,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
-    @client = Client.all
+    @client = Client.where('disable IS NULL').order(:name => :asc)
     @tasks = project_params['tasks_attributes']
     @project_data = project_params
     @feedbacks = project_params['feedbacks_attributes']
