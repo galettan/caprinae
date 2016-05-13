@@ -31,11 +31,11 @@ class ProjectsController < ApplicationController
     if ((!params[:archived].present? && !params[:number].present? && !params[:user_id].present? && !params[:name].present? && !params[:client_id].present? &&
       !params[:create_date].present? && !params[:project_type].present? && !params[:progress].present? && !params[:pstate] && !params[:priority] && !params[:worker_order]))
       if current_user.manager?
-        @projects = Project.by_owner(current_user.id).order( sort_column + " " + sort_direction).paginate(page: params[:page])
+        @projects = Project.by_owner(current_user.id).order( sort_column + " " + sort_direction).order("number ASC").paginate(page: params[:page])
       elsif current_user.crea?
-        @projects = Project.for_crea(current_user.id).order(sort_column + " " + sort_direction).paginate(page: params[:page])
+        @projects = Project.for_crea(current_user.id).order(sort_column + " " + sort_direction).order("number ASC").paginate(page: params[:page])
       else
-        @projects = Project.for_print().order(sort_column + " " + sort_direction).paginate(page: params[:page])
+        @projects = Project.for_print().order(sort_column + " " + sort_direction).order("number ASC").paginate(page: params[:page])
       end
     end
   end
