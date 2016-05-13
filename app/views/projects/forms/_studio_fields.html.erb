@@ -1,7 +1,7 @@
 <div class=" clearfix">
 	<div class="panel panel-info">
 		<div class='panel-heading'>
-			<strong>Travaux effectués:</strong>
+			<strong>Travaux effectués :</strong>
 		</div>
 		<div class="panel-body">
 			<%= f.fields_for :tasks do |t| %>
@@ -17,17 +17,17 @@
 			</p>
 		</div>
 		<div class='panel-heading'>
-			<strong>Retours clients:</strong>
+			<strong>Retours clients :</strong>
 		</div>
 		<div class="panel-body">
 			<%= f.fields_for :feedbacks do |feed| %>
 			<% render 'projects/forms/feedback_fields', :f => feed %>
 			<% end %>
-			<p class="text-left">
+			<p>
 				<%= link_to_add_association '<span class="glyphicon glyphicon-plus"></span>'.html_safe,
 				f,
 				:feedbacks,
-				class: "btn btn-success",
+				class: "btn btn-success mleft",
 				onclick: "markForRunningCrea();",
 				:partial => '/projects/forms/feedback_fields'%>
 			</p>
