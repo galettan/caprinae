@@ -47,7 +47,7 @@ class Project < ActiveRecord::Base
   enum filming: [:shinyrv, :dullrv, :shinyr, :dullr, :shinylaminating, :dulllaminating, :thirtysevenhalfmc, :heightymc, :hundredtwentyfivemc, :hundredseventyfivemc]
   enum shaping: [:cut, :rainage, :pierced, :piercedandbent, :cutting, :straddlesting, :rainageandstraddlesting, :cutrainagebent, :leftcornersting, :manualbending,
     :mechanicbending, :binding, :wireowhite, :wireosilver, :wireoblack, :frontcristal, :bothcristal, :flatback, :topofmindgluing, :leftgluing, :roundedcorner, 
-    :badgepin, :hanginghole, :ringbinderhole, :variousshaping, :assemblygluing, :no]
+    :badgepin, :hanginghole, :ringbinderhole, :variousshaping, :assemblygluing, :no_shape]
   enum package: [:film, :kraft, :elasticedby, :packagedby, :box, :pallet, :carton]
   enum delivery: [:available, :wedeliver, :steed, :tnt, :ups, :clientups, :standardmail]
   enum test_print: [:notest, :yestest, :validated]

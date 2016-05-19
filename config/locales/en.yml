@@ -140,7 +140,7 @@ en:
     ringbinderhole: '4 trous classeur'
     variousshaping: 'Façonnage divers'
     assemblygluing: 'Assemblage  collage'
-    no: 'Aucun'
+    no_shape: 'Aucun'
   packages:
     film: 'Film'
     kraft: 'Kraft'
@@ -292,7 +292,7 @@ en:
   ringbinderhole: '4 trous classeur'
   variousshaping: 'Façonnage divers'
   assemblygluing: 'Assemblage  collage'
-  no: 'Aucun'
+  no_shape: 'Aucun'
   available: 'À dispo'
   wedeliver: 'Livraison par nos soins'
   steed: 'Coursier'

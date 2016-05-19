@@ -55,7 +55,11 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-    @client = Client.where('disable IS NULL').order(:name => :asc)
+    if !@project.participants.first.nil? 
+      @client = Client.where(id: @project.participants.first.contact.client_id)
+    else 
+      @client = Client.where('disable IS NULL').order(:name => :asc)
+    end
   end
 
   # POST /projects
