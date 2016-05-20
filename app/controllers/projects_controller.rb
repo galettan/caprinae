@@ -26,16 +26,27 @@ class ProjectsController < ApplicationController
     @projects = @projects.status(params[:state]).paginate(page: params[:page]) if params[:state].present?
     @projects = @projects.prio(params[:priority]).paginate(page: params[:page]) if params[:priority].present?
 
-    @projects = @projects.worker_order(params[:worker_order]).paginate(page: params[:page]) if params[:worker_order].present?
-
     if ((!params[:archived].present? && !params[:number].present? && !params[:user_id].present? && !params[:name].present? && !params[:client_id].present? &&
-      !params[:create_date].present? && !params[:project_type].present? && !params[:progress].present? && !params[:pstate] && !params[:priority] && !params[:worker_order]))
+      !params[:create_date].present? && !params[:project_type].present? && !params[:progress].present? && !params[:pstate] && !params[:priority]))
+      sort = sort_column
       if current_user.manager?
-        @projects = Project.by_owner(current_user.id).order( sort_column + " " + sort_direction).order("number ASC").paginate(page: params[:page])
+        if sort === 'worker'
+          @projects = Project.by_owner(current_user.id).joins(:worker).order('login' + " " + sort_direction).paginate(page: params[:page])
+        else
+          @projects = Project.by_owner(current_user.id).order( sort_column + " " + sort_direction).order("number ASC").paginate(page: params[:page])
+        end
       elsif current_user.crea?
-        @projects = Project.for_crea(current_user.id).order(sort_column + " " + sort_direction).order("number ASC").paginate(page: params[:page])
+        if sort === 'worker'
+          @projects = Project.for_crea(current_user.id).joins(:worker).order('login' + " " + sort_direction).paginate(page: params[:page])
+        else
+          @projects = Project.for_crea(current_user.id).order(sort_column + " " + sort_direction).order("number ASC").paginate(page: params[:page])
+        end
       else
-        @projects = Project.for_print().order(sort_column + " " + sort_direction).order("number ASC").paginate(page: params[:page])
+        if sort === 'worker'
+          @projects = Project.fort_print().joins(:worker).order('login' + " " + sort_direction).paginate(page: params[:page])
+        else
+          @projects = Project.for_print().order(sort_column + " " + sort_direction).order("number ASC").paginate(page: params[:page])
+        end
       end
     end
   end
@@ -139,7 +150,11 @@ class ProjectsController < ApplicationController
     end
 
     def sort_column
-      Project.column_names.include?(params[:sort]) ? params[:sort] : "priority"
+      if (params[:sort] === 'worker')
+        "worker"
+      else
+        Project.column_names.include?(params[:sort]) ? params[:sort] : "priority"
+      end
     end
     
     def sort_direction

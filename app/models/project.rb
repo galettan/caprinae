@@ -20,7 +20,6 @@ class Project < ActiveRecord::Base
   scope :status, -> (status) {where state: status}
   scope :prio, -> (prio) {where priority: prio}
 
-  scope :worker_order, -> (order) { joins('LEFT JOIN users on projects.worker_id = users.id').order("users.login #{order == 'desc' ? 'desc' : 'asc'}") }
 
   accepts_nested_attributes_for :tasks, :allow_destroy => true
   accepts_nested_attributes_for :feedbacks, :allow_destroy => true
