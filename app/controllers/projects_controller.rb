@@ -98,15 +98,20 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1.json
   def update
     @client = Client.where('disable IS NULL').order(:name => :asc)
-    @tasks = project_params['tasks_attributes']
     @project_data = project_params
+    @tasks = project_params['tasks_attributes']
     @feedbacks = project_params['feedbacks_attributes']
-    if !@tasks.nil?
-      @tasks.each do |t|
-        t[1]['worker_id'] = current_user.id if t[1]['id'].nil?
-      end
+    @tasks.each do |t, value|
+      if !value['id'].nil?
+        task = Task.find(value['id'])
+        value.delete('_destroy')        
+        if task.update(value)
+        end
+      else
+        value['worker_id'] = current_user.id
+      end 
       @project_data['tasks_attributes'] = @tasks
-    end
+    end       
     if !@feedbacks.nil?
       @feedbacks.each do |f|
         f[1]['worker_id'] = current_user.id if f[1]['id'].nil?
@@ -114,7 +119,7 @@ class ProjectsController < ApplicationController
       @project_data['feedbacks_attributes'] = @feedbacks
     end
     respond_to do |format|
-      if @project.update(@project_data)
+      if @project.update_attributes(@project_data)
         flash[:success] = 'Projet mis à jour avec succès'
         format.html { redirect_to @project}
         format.json { render :show, status: :ok, location: @project }
