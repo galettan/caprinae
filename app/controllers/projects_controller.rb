@@ -101,16 +101,20 @@ class ProjectsController < ApplicationController
     @project_data = project_params
     @tasks = project_params['tasks_attributes']
     @feedbacks = project_params['feedbacks_attributes']
-    @tasks.each do |t, value|
-      if !value['id'].nil?
-        task = Task.find(value['id'])
-        value.delete('_destroy')        
-        if task.update(value)
-        end
-      else
-        value['worker_id'] = current_user.id
-      end 
-      @project_data['tasks_attributes'] = @tasks
+    if !@tasks.nil?
+      @tasks.each do |t, value|
+        if !value['id'].nil?
+          task = Task.find(value['id'])
+          value.delete('_destroy')        
+          if task.update(value)
+          else
+            flash[:danger] = 'Mise à jour de la tâche impossible'
+          end
+        else
+          value['worker_id'] = current_user.id
+        end 
+        @project_data['tasks_attributes'] = @tasks
+      end
     end       
     if !@feedbacks.nil?
       @feedbacks.each do |f|
