@@ -6,6 +6,7 @@ class Project < ActiveRecord::Base
   has_many :tasks
   has_many :feedbacks
   has_many :papers
+  belongs_to :carrier, class_name: Carrier, foreign_key: "carrier_id"
   before_save :set_estimated_time
 
   scope :passed, -> (archived) {where archived: true}

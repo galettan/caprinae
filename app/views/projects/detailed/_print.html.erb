@@ -52,7 +52,21 @@
 					</tr>
 					<tr>
 						<td>Livraison</td>
-						<td><%= t @project.delivery%></td>
+						<td><%= t @project.carrier.name%></td>
+					</tr>
+					<% if !@project.tracking_nbr.empty?%>
+					<tr>
+						<td>Numéro de suivi</td>
+						<td><%= t @project.tracking_nbr%></td>
+					</tr>
+					<% end%>
+					<tr>
+						<td>Nombre de colis</td>
+						<td><%= t @project.package_nbr.nil? ? 0 : @project.package_nbr%></td>
+					</tr>
+					<tr>
+						<td>Adresse de livraison (si différente de fiche client)</td>
+						<td><%= @project.delivery_address.nil? ? '' : @project.delivery_address%></td>
 					</tr>
 					<tr>
 						<td>Remarques</td>

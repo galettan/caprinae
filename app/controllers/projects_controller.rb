@@ -58,6 +58,20 @@ class ProjectsController < ApplicationController
     @spent_time = @project.tasks.sum(:duration)
   end
 
+  def delivery_form
+    @project = Project.find_detailed(params[:id])
+    @spent_time = @project.tasks.sum(:duration)
+    respond_to do |format|
+      format.pdf do
+         render :pdf => 'bdl_' + @project.number,
+        :layout => "delivery_form.pdf.erb",
+    :print_media_type => true,
+    :page_size => "A4",
+    :disable_smart_shrinking => true,
+    :footer => { :right => '[page] of [topage]' }      end
+    end
+  end
+
   # GET /projects/new
   def new
     @project = Project.new
@@ -82,6 +96,12 @@ class ProjectsController < ApplicationController
     @project.owner_id = current_user.id
     respond_to do |format|
       if @project.save
+        if @project.create_email == true
+          if (@project.project_type == 'crea' || @project.project_type == 'creaprint' || @project.project_type == 'creaother' || @project.project_type == 'creaprintother' || @project.project_type == 'web')
+            WelcomeMailer.creation_email(@project).deliver
+          end
+        end
+    
         flash[:success] = 'Projet créé'
         format.html { redirect_to @project }
         format.json { render :show, status: :created, location: @project }
@@ -124,6 +144,12 @@ class ProjectsController < ApplicationController
     end
     respond_to do |format|
       if @project.update_attributes(@project_data)
+        p @project.tracking_email?
+        if (@project.tracking_email? && !@project_data['tracking_email'].nil?)
+          if (@project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother' || @project.project_type == 'creaprintother')
+            WelcomeMailer.track_email(@project).deliver
+          end
+        end
         flash[:success] = 'Projet mis à jour avec succès'
         format.html { redirect_to @project}
         format.json { render :show, status: :ok, location: @project }
@@ -213,6 +239,12 @@ class ProjectsController < ApplicationController
         :photo_price,
         :paper_gtp,
         :send_gtp,
+        :create_email,
+        :tracking_email,
+        :tracking_nbr,
+        :package_nbr,
+        :carrier_id,
+        :delivery_address,
         tasks_attributes: [:id, :description, :hours, :minutes, :_destroy, :worker_id, :project_id],
         feedbacks_attributes: [:id, :description, :_destroy, :worker_id, :project_id],
         participants_attributes: [:id, :project_id, :contact_id, :_destroy],

@@ -59,7 +59,31 @@
 				</tr>
 				<tr>
 					<td>Livraison</td>
-					<td><%= f.select(:delivery, options_for_select(t("deliveries").invert, @project.delivery), {:include_blank => 'Sélectionner un mode de livraison'}, class: 'form-control')%></td>
+					<td><%= f.select(:carrier_id, options_from_collection_for_select(Carrier.all, :id, :name, @project.carrier_id), {:include_blank => 'Sélectionner un mode de livraison'}, class: 'form-control')%></td>
+				</tr>
+				<tr>
+					<td>Numéro de suivi</td>
+					<td><%= f.text_field :tracking_nbr, class: 'form-control'%></td>
+				</tr>
+				<tr>
+					<td>Nombre de colis</td>
+					<td><%= f.text_field :package_nbr, class: 'form-control'%></td>
+				</tr>
+				<tr>
+					<td>Envoyer le mail de suivi</td>
+					<% if !@project.tracking_email? %>
+					<td><%= f.check_box :tracking_email, class: 'form-control'%></td>
+					<% else %>
+					<td>L'email de suivi à déjà été envoyé.</td>
+					<% end %>
+				</tr>
+				<tr>
+					<td>Adresse de livraison (si différente de la fiche client)
+
+					<% if !@project.new_record? %>
+					<%= link_to "Voir le Bon de livraison", delivery_form_path(@project.id, :format => :pdf), class: "btn btn-danger"%>
+					<% end %> </td>
+					<td><%= f.text_area :delivery_address, class: 'form-control'%></td>
 				</tr>
 				<tr>
 					<td>Remarques</td>

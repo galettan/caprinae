@@ -71,10 +71,16 @@
 							<td> <%= f.select(:priority, options_for_select(t("project_priorities").invert, @project.priority), {:include_blank => 'Sélectionner une priorité'}, {class: 'form-control'})%> </td>
 						</tr>
 						<tr>
-							<td> <%= f.label :important %>
-							<br>
-							</td>
-							<td> <%= f.text_area :important, class: 'form-control'%> </td>
+							<td><%= f.label :important %></td>
+							<td><%= f.text_area :important, class: 'form-control'%></td>
+						</tr>
+						<tr>
+							<td><%= f.label :Envoyer_un_mail_de_création %></td>
+							<% if !@project.create_email? %>
+							<td><%= f.check_box :create_email%></td>
+							<% else %>
+							<td>L'email de création de projet à déjà été envoyé.</td>
+							<% end %>
 						</tr>
 					</table>
 				</div>

@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<%= javascript_include_tag :defaults %>
+		<%= stylesheet_link_tag 'application'%>
+		<%= yield :head %>
+	</head>
+	<body>
+		<img src="http://images.rubrikc.com/entete_suivi.png" width="800px" height="150px">
+		<h3><%= @contact %></h3>
+		<p>
+			Nous vous informons que votre commande : <span style="color: #7eae00"><%= @project.name%></span> - <span style="color: #7eae00"><%= @project.number%></span>
+		</p>
+		<p>
+			<% if @project.carrier_id != 4 %>
+				<% if @project.carrier_id == 3%>
+					<span style="color: #7eae00">sera livré par nos soins</span>.
+				<% else %>
+					part en livraison par <span style="color: #7eae00"><%= @project.carrier.name %></span>.
+					<% if !@project.tracking_nbr.empty? %>
+						Voici son numéro de suivi : <span style="color: #7eae00"><%= @project.tracking_nbr%></span>.
+					<% end %>
+				<% end %>
+			<% else%>
+				<span style="color: #7eae00">est disponible dans nos locaux</span>.
+			<%end %>
+		</p>
+		<% if !@project.carrier.url.nil? && !@project.tracking_nbr.nil? %>
+		<p>
+			Vous pouvez suivre la livraison en <a href=<%= @project.carrier.url + @project.tracking_nbr%>>cliquant sur ce lien</a>
+		</p>
+		<% end %>
+		<p>
+			Nous vous remercions encore pour votre confiance.
+		</p>
+		<p>
+			RUBRIK C team
+		</p>
+	</body>
+</html>

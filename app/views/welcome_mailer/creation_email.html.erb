@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<%= javascript_include_tag :defaults %>
+		<%= stylesheet_link_tag 'application'%>
+		<%= yield :head %>
+	</head>
+	<body>
+		<img src="http://images.rubrikc.com/entete_creation.png" width="800px" height="150px">
+		<h3><%= @contact %></h3>
+		<p>
+			Nous accusons réception de votre demande concernant le projet : <span style="color: #7eae00"><%= @project.name%></span>
+		</p>
+		<p>
+			Votre dossier est enregistré sous la référence :
+			<span style="color: #7eae00"> <%= @project.number%> </span>
+		</p>
+		Vos contacts privilégiés sont désormais : </p>
+		<ul>
+			<li>
+				<%= @project.owner.login %>
+				pour le suivi administratif et technique.
+			</li>
+			<% if  (!@project.worker.nil?) %>
+			<li>
+				<%= @project.worker.login%> qui assurera la réalisation de votre projet.
+			</li>
+			<% end %>
+		</ul>
+		<p>
+			<% if !@project.delivery_date.nil? %>
+			Nous avons bien noté la date de livraison souhaitée : <%= l @project.delivery_date%>
+			<% else%>
+			Pensez à nous communiquer la date de livraison ou de mise à disposition souhaitée.
+			<% end%>
+		</p>
+		Nous vous remercions encore pour votre confiance.
+		<p>
+			RUBRIK C team
+		</p>
+	</body>
+</html>
