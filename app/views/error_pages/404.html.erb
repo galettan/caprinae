@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<% i = [0,1].sample%>
+		<% if i == 0 %>
+		<title>DOH !</title>
+		<% else %>
+		<title>OH NOES</title>
+		<% end %>
+		<%= stylesheet_link_tag 'application'%>
+
+		<meta name="csrf-param" content="authenticity_token" />
+		<meta name="csrf-token" content="TTE2svH5tcfDc3B+NlU7y9UH/K4phqOS5P0Y7YQNthBShA9nOj0F3tUIY59ABtHuiO0lunw291JqLDicezdx2Q==" />
+		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+		<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+		<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+	</head>
+	<body>
+		<header class="navbar navbar-fixed-top navbar-inverse">
+			<div class="container container-full">
+				<a href="/" id="logo"><img src="/assets/djobi_djoba-1da793ac4bf56be2d97201cf855de4900d616328138fad2957c08727c4d45269.png" alt="Djobi djoba 1da793ac4bf56be2d97201cf855de4900d616328138fad2957c08727c4d45269" width="200" height="30" /></a>
+				<nav>
+					<ul class="nav navbar-nav navbar-right ">
+						<li>
+							<a href="/">Home</a>
+						</li>
+						<li>
+							<a href="http://localhost:3000/clients">Clients</a>
+						</li>
+						<li>
+							<a href="/projects/new">Nouveau Projet</a>
+						</li>
+						<li>
+							<a href="http://localhost:3000/projects">Projets</a>
+						</li>
+						<li>
+							<a href="http://localhost:3000/users">Utilisateurs</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img width="25px" src="/system/users/avatars/000/000/004/thumb/herve.jpg?1445318955" alt="Herve" /> <b class="caret"></b> </a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="/users/4">Profil</a>
+								</li>
+								<li>
+									<a href="/users/4/edit">Parametres</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a rel="nofollow" data-method="delete" href="/logout">Log out</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<div class="container container-full">
+			<div class="col-md-12">
+				<% if i == 0 %>
+				<div class="col-md-6">
+					<img src="/system/homer_doh.png", title: "DOH !"/>
+				</div>
+				<div class="col-md-6">
+					<h1>Il y a eu un petit soucis ! Peut-être faut-il retenter après un donut ?</h1>
+				</div>
+				<% else %>
+				<div class="col-md-6">
+					<img src="/system/sad_spongebob.png", title: "Oh snap !">
+				</div>
+				<div class="col-md-6">
+					<h1>Il y a eu un petit soucis ! Peut-être faut-il retenter après un Crabe croustillant ?</h1>
+				</div>
+				<%end %>
+			</div>
+		</div>
+	</body>
+</html>

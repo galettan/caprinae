@@ -50,6 +50,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem "paperclip", "~> 4.3"
 
+gem "figaro"
+
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
