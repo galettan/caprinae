@@ -81,7 +81,7 @@
 					<td>Adresse de livraison (si différente de la fiche client)
 
 					<% if !@project.new_record? %>
-					<%= link_to "Voir le Bon de livraison", delivery_form_path(@project.id, :format => :pdf), class: "btn btn-danger"%>
+					<%= link_to "Voir le Bon de livraison", delivery_form_path(@project.id, :format => :pdf), class: "btn btn-danger", :target => "_blank"%>
 					<% end %> </td>
 					<td><%= f.text_area :delivery_address, class: 'form-control'%></td>
 				</tr>
