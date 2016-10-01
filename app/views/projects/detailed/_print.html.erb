@@ -52,7 +52,7 @@
 					</tr>
 					<tr>
 						<td>Livraison</td>
-						<td><%= t @project.carrier.name%></td>
+						<td><%= @project.carrier.nil? ? '' : @project.carrier.name%></td>
 					</tr>
 					<% if !@project.tracking_nbr.empty?%>
 					<tr>

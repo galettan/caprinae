@@ -144,7 +144,11 @@ class ProjectsController < ApplicationController
     end
     respond_to do |format|
       if @project.update_attributes(@project_data)
-        p @project.tracking_email?
+        if (@project.create_email == true && @project_data['create_email'] == "1")
+          if (@project.project_type == 'crea' || @project.project_type == 'creaprint' || @project.project_type == 'creaother' || @project.project_type == 'creaprintother' || @project.project_type == 'web')
+            WelcomeMailer.creation_email(@project).deliver
+          end
+        end
         if (@project.tracking_email? && !@project_data['tracking_email'].nil?)
           if (@project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother' || @project.project_type == 'creaprintother')
             WelcomeMailer.track_email(@project).deliver
