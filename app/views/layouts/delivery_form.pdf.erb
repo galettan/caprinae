@@ -9,12 +9,27 @@
 <div class="row clearfix">
 	<div class="col-md-6">
 		<div class="panel panel-default">
+			<div class="panel-heading">
+				<strong>Projet</strong>
+			</div>
+			<div class="panel-body">
+				<table class="table">
+					<thead>
+						<td><%= @project.number %></td>
+						<td><%= @project.name %></td>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="panel panel-default">
 			<div class='panel-heading'>
 				<strong>Adresse de livraison</strong>
 			</div>
 			<div class='panel-body'>
-				<table class="table table-striped table-bordered">
-					<tr>
+				<table class="table">
+					<thead>
 						<% if @project.delivery_address.nil? || @project.delivery_address.empty? %>
 						<% if @project.participants.first.nil? %>
 						<td>NON RENSEIGNÉ</td>
@@ -28,28 +43,7 @@
 						<% else %>
 						<td><%= simple_format(@project.delivery_address)%></td>
 						<% end%>
-					</tr>
-				</table>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-6">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<strong>Projet</strong>
-			</div>
-			<div class="panel-body">
-				<table class="table table-strimped tabled-bordered">
-					<thead>
-						<td>Projet #</td>
-						<td>Nom du projet</td>
 					</thead>
-					<tbody>
-						<tr>
-							<td><%= @project.number %></td>
-							<td><%= @project.name %></td>
-						</tr>
-					</tbody>
 				</table>
 			</div>
 		</div>
@@ -61,17 +55,15 @@
 			<strong>Informations</strong>
 		</div>
 		<div class="panel-body">
-			<table class="table table-striped table-bordered">
+			<table class="table">
 				<thead>
 					<td>Quantité</td>
 					<td>Nombre de colis</td>
 				</thead>
-				<tbody>
 					<tr>
 						<td><%= @project.finished_doc_qty%></td>
 						<td><%= @project.package_nbr%></td>
 					</tr>
-				</tbody>
 			</table>
 		</div>
 	</div>
@@ -82,13 +74,12 @@
 			<strong>Signature et tampon</strong>
 		</div>
 		<div class="panel-body">
-			<table class="table table-striped table-bordered">
-				<tr>
-					<td>Le :
+			<table class="table">
+				<thead>
+					<td>Le : <%= Date.today.to_formatted_s(:rfc822) %>
 					<br />
 					À :</td>
-				</tr>
-
+				</thead>
 			</table>
 		</div>
 	</div>

@@ -1,4 +1,3 @@
-# Files in the config/locales directory are used for internationalization
 # and are automatically loaded by Rails. If you want to use locales other
 # than English, add the necessary files in this directory.
 #
@@ -144,7 +143,7 @@ en:
   packages:
     film: 'Film'
     kraft: 'Kraft'
-    elasticedby: 'Sous éastique par'
+    elasticedby: 'Sous élastique par'
     packagedby: 'Par paquet de'
     box: 'Boîte'
     pallet: 'Palette'
@@ -172,8 +171,8 @@ en:
     reprocolor: 'Repro couleur'
     opale: 'Opale'
     bristol: 'Bristol'
-    retightadhesiv: 'Adhésif retendu'
-    adhesivnoretight: 'Adh;esif non retendu'
+    retightadhesiv: 'Adhésif refendu'
+    adhesivnoretight: 'Adh;esif non refendu'
     piercedadhesiv: 'Adhésif perforé'
     labelboard: 'Planche étiquettes'
     windowenvelope: 'Enveloppe à fenêtre'
@@ -302,7 +301,7 @@ en:
   standardmail: 'Départ Courrier'
   film: 'Film'
   kraft: 'Kraft'
-  elasticedby: 'Sous éastique par'
+  elasticedby: 'Sous élastique par'
   packagedby: 'Par paquet de'
   box: 'Boîte'
   pallet: 'Palette'
