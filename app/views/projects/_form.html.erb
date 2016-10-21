@@ -77,7 +77,7 @@
 						<tr>
 							<td><%= f.label :Envoyer_un_mail_de_création %></td>
 							<% if !@project.create_email? %>
-							<td><%= f.check_box :create_email%> (Projet studio, studio-print, studio-print-autre, studio-autre, web)</td>
+							<td><%= f.check_box :create_email%></td>
 							<% else %>
 							<td>L'email de création de projet à déjà été envoyé.</td>
 							<% end %>

@@ -16,7 +16,7 @@
 				<table class="table">
 					<thead>
 						<td><%= @project.number %></td>
-						<td><%= @project.name %></td>
+						<td><%= @project.name.first(42) %></td>
 					</thead>
 				</table>
 			</div>
@@ -34,11 +34,16 @@
 						<% if @project.participants.first.nil? %>
 						<td>NON RENSEIGNÉ</td>
 						<% else %>
-						<td><%= @project.participants.first.contact.client.name%>
+						<tr>
+							<td><%= @project.participants.first.contact.first_name%> <%= @project.participants.first.contact.last_name%>-<%= @project.participants.first.contact.phone_nbr%></td>
+						</tr>
+						<tr><td>
 						<br/>
 						<%= @project.participants.first.contact.client.street%>
 						<br />
-						<%= @project.participants.first.contact.client.postal_code%> <%= @project.participants.first.contact.client.city%> </td>
+						<%= @project.participants.first.contact.client.postal_code%> <%= @project.participants.first.contact.client.city%> 
+						</td>
+						</tr>
 						<%end %>
 						<% else %>
 						<td><%= simple_format(@project.delivery_address)%></td>
