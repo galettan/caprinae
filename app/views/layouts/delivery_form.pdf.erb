@@ -1,4 +1,4 @@
-<head>
+  <head>
 	<%= javascript_include_tag "jquery", "application"%>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<%= stylesheet_link_tag "templates", media: "all" %>
@@ -35,10 +35,11 @@
 						<td>NON RENSEIGNÉ</td>
 						<% else %>
 						<tr>
-							<td><%= @project.participants.first.contact.first_name%> <%= @project.participants.first.contact.last_name%>-<%= @project.participants.first.contact.phone_nbr%></td>
+              <td>Société: <%= @project.participants.first.contact.client.name%><br />
+							Contact: <%= @project.participants.first.contact.first_name%> <%= @project.participants.first.contact.last_name%>-<%= @project.participants.first.contact.phone_nbr%></td>
 						</tr>
 						<tr><td>
-						<br/>
+						Adresse: <br/>
 						<%= @project.participants.first.contact.client.street%>
 						<br />
 						<%= @project.participants.first.contact.client.postal_code%> <%= @project.participants.first.contact.client.city%> 
