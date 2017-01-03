@@ -139,12 +139,21 @@ class ProjectsController < ApplicationController
         end 
         @project_data['tasks_attributes'] = @tasks
       end
-    end       
+    end
     if !@feedbacks.nil?
-      @feedbacks.each do |f|
-        f[1]['worker_id'] = current_user.id if f[1]['id'].nil?
+      @feedbacks.each do |t, value|
+        if !value['id'].nil?
+          feedback = Feedback.find(value['id'])
+          value.delete('_destroy')
+          if feedback.update(value)
+          else
+            flash[:danger] = 'Mise à jour du retour impossible'
+          end
+        else
+          value['worker_id'] = current_user.id
+        end
+        @project_data['feedbacks_attributes'] = @feedbacks
       end
-      @project_data['feedbacks_attributes'] = @feedbacks
     end
     respond_to do |format|
       if @project.update_attributes(@project_data)
@@ -206,7 +215,7 @@ class ProjectsController < ApplicationController
 
     def sort_column
       if current_user.print?
-        Project.column_names.include?(params[:sort]) ? params[:sort] : "departure_date"
+        Project.column_names.include?(params[:sort]) ? params[:sort] : "priority DESC , departure_date"
       else
         if (params[:sort] === 'worker')
           "worker"
