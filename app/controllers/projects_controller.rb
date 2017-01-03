@@ -205,15 +205,23 @@ class ProjectsController < ApplicationController
     end
 
     def sort_column
-      if (params[:sort] === 'worker')
-        "worker"
+      if current_user.print?
+        Project.column_names.include?(params[:sort]) ? params[:sort] : "departure_date"
       else
-        Project.column_names.include?(params[:sort]) ? params[:sort] : "priority"
+        if (params[:sort] === 'worker')
+          "worker"
+        else
+          Project.column_names.include?(params[:sort]) ? params[:sort] : "priority"
+        end
       end
     end
     
     def sort_direction
-      params[:direction] == ('ASC' || 'DESC') ? params[:direction] : 'DESC'
+      if current_user.print?
+        params[:direction] == ('ASC' || 'DESC') ? params[:direction] : 'ASC'
+      else
+        params[:direction] == ('ASC' || 'DESC') ? params[:direction] : 'DESC'
+      end
     end
     
 
