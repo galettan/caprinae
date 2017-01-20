@@ -220,7 +220,7 @@ class ProjectsController < ApplicationController
         if (params[:sort] === 'worker')
           "worker"
         else
-          Project.column_names.include?(params[:sort]) ? params[:sort] : "priority DESC, created_at"
+          Project.column_names.include?(params[:sort]) ? params[:sort] : "priority DESC, number"
         end
       end
     end
