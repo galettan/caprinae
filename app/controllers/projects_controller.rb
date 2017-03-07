@@ -212,9 +212,19 @@ class ProjectsController < ApplicationController
     else
       @client = Client.where('disable IS NULL').order(:name => :asc)
     end
+    @existing_project.participants.each do |participant|
+      @project.participants = [
+          participant.dup
+      ]
+    end
+    @existing_project.papers.each do |paper|
+      @project.papers = [
+          paper.dup
+      ]
+    end
+    p @project.participants
     @project.tasks = []
     @project.feedbacks = []
-    @project.participants = []
     @project.first_feedback = nil
     @project.good_to_print = nil
     @project.departure_date = nil
