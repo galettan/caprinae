@@ -218,6 +218,8 @@ class ProjectsController < ApplicationController
     @project.good_to_print = nil
     @project.departure_date = nil
     @project.delivery_date = nil
+    @project.important = 'Copie du projet #' + @existing_project.number
+    @project.number = 0
     respond_to do |format|
       format.html { render :new}
     end
