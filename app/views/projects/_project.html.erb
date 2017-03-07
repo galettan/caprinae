@@ -3,7 +3,7 @@
 	<td><%= l project.created_at.to_date%></td>
  	<td><%= !project.participants.first.nil? ? project.participants.first.contact.client.name : '' %></td>
 	<td><%= link_to project.name, edit_project_path(project) %><% if (!project.important.blank?)%> <span class="glyphicon glyphicon-exclamation-sign" data-toggle="tooltip" data-placement="bottom" title="<%= project.important%>"></span><% end %></td>
-  <% current_user.manager? %><td><%= link_to 'Dupliquer', project_path(project) + '/clone'%></td>
+  <% if current_user.manager? %><td><%= link_to 'Dupliquer', project_path(project) + '/clone'%></td><%else%><%end%>
 	<td><%= t project.project_type %></td>
 
 	<td> <% if (project.priority == 'normal')%> <span class="label label-success"> <% else %> <span class="label label-warning"> <% end %>
