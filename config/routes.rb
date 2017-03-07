@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   post 'clients/:id/deactivate' => 'clients#deactivate'
   post 'clients/:id/activate' => 'clients#activate'
 
+  get '/projects/:id/clone' => 'projects#clone', as: :clone_project
   get 'projects/:id/delivery_form' => 'projects#delivery_form', as: :delivery_form
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

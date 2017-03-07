@@ -200,6 +200,31 @@ class ProjectsController < ApplicationController
     end
   end
 
+  # GET /project/ID/clone
+  def clone
+    @existing_project = Project.find(params[:id])
+    @project = Project.new(@existing_project.attributes)
+    @project.name += ' - copie'
+    @project.number += ' - copie'
+    if !@project.participants.first.nil?
+      @client = Client.where(id: @project.participants.first.contact.client_id)
+    else
+      @client = Client.where('disable IS NULL').order(:name => :asc)
+    end
+    @project.tasks = []
+    @project.feedbacks = []
+    @project.participants = []
+    @project.first_feedback = nil
+    @project.good_to_print = nil
+    @project.departure_date = nil
+    @project.delivery_date = nil
+    respond_to do |format|
+      format.html { render :new}
+    end
+
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
