@@ -207,8 +207,8 @@ class ProjectsController < ApplicationController
 
     @project.name += ' - copie'
     @project.number += ' - copie'
-    if !@project.participants.first.nil?
-      @client = Client.where(id: @project.participants.first.contact.client_id)
+    if !@existing_project.participants.first.nil?
+      @client = Client.where(id: @existing_project.participants.first.contact.client_id)
     else
       @client = Client.where('disable IS NULL').order(:name => :asc)
     end
