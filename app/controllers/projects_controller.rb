@@ -203,7 +203,8 @@ class ProjectsController < ApplicationController
   # GET /project/ID/clone
   def clone
     @existing_project = Project.find(params[:id])
-    @project = Project.new(@existing_project.attributes)
+    @project = @existing_project.dup
+
     @project.name += ' - copie'
     @project.number += ' - copie'
     if !@project.participants.first.nil?
@@ -218,8 +219,9 @@ class ProjectsController < ApplicationController
     @project.good_to_print = nil
     @project.departure_date = nil
     @project.delivery_date = nil
-    @project.important = 'Copie du projet #' + @existing_project.number
+    @project.important = !@project.important.empty?? @project.important + ' Copie du projet #' + @existing_project.number : 'Copie du projet #' + @existing_project.number
     @project.number = 0
+    @project.create_email = 0
     respond_to do |format|
       format.html { render :new}
     end
