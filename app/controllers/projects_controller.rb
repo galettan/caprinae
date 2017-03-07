@@ -226,9 +226,10 @@ class ProjectsController < ApplicationController
     @project.tasks = []
     @project.feedbacks = []
     @project.first_feedback = nil
-    @project.good_to_print = nil
     @project.departure_date = nil
     @project.delivery_date = nil
+    @project.estimated_time = 0
+    @project.feedback_number = 0
     @project.important = !@project.important.empty?? @project.important + ' Copie du projet #' + @existing_project.number : 'Copie du projet #' + @existing_project.number
     @project.number = 0
     @project.create_email = 0
