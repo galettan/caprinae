@@ -289,7 +289,10 @@
 
 </div>
 <p class="text-center">
-	<%= link_to 'Retour', projects_path, class: 'btn btn-default'%>
+  <% if current_user.manager?%>
+  <%= link_to 'Dupliquer', project_path + '/clone', class: 'btn btn-primary'%>
+  <% end %>
+  <%= link_to 'Retour', projects_path, class: 'btn btn-default'%>
 	<%= f.submit 'Valider', class: 'btn btn-danger'%>
 </p>
 <% if current_user.manager?%>

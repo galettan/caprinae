@@ -20,7 +20,6 @@
 					<th><%= sortable "created_at", "Créé le" %></th>
 					<th>Client</th>
 					<th><%= sortable "name", "Nom du projet" %></th>
-          <% if current_user.manager?%><th>Clone</th><% else%> <% end %>
 					<th><%= sortable "project_type", "Type de projet" %></th>
 					<th><%= sortable "priority", "Priorité" %></th>
 					<th><%= sortable "worker", "Assigné à"%></th>
