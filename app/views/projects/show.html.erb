@@ -130,7 +130,7 @@
 							<td>Retours prévus : <%= @project.feedback_number%> retours</td>
 							<td>
 							<div class="progress">
-								<% pct_feedback = (@project.feedbacks.count * 100) / @project.feedback_number %>
+								<% pct_feedback = (@project.feedbacks.count * 100) / (@project.feedback_number > 0 ? @project.feedback_number : 1) %>
 								<div class="progress-bar progress-bar-<%= (pct_feedback >= 80  ? (pct_feedback >= 100 ? 'danger' : 'warning') : 'success')%> progress-bar-striped active"
 								role="progressbar"
 								aria-valuenow="<%= pct_feedback %>"
