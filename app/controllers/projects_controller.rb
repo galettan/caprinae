@@ -230,7 +230,7 @@ class ProjectsController < ApplicationController
     @project.delivery_date = nil
     @project.estimated_time = 0
     @project.feedback_number = 0
-    @project.important = !@project.important.empty?? @project.important + ' Copie du projet #' + @existing_project.number : 'Copie du projet #' + @existing_project.number
+    @project.description = 'Copie du projet #' + @existing_project.number + "\n" + @existing_project.description
     @project.number = 0
     @project.create_email = 0
     respond_to do |format|
