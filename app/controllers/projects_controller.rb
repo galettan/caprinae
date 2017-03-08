@@ -230,6 +230,7 @@ class ProjectsController < ApplicationController
     @project.delivery_date = nil
     @project.estimated_time = 0
     @project.feedback_number = 0
+    @project.good_to_print = nil
     @project.description = 'Copie du projet #' + @existing_project.number + "\n" + @existing_project.description
     @project.number = 0
     @project.create_email = 0
