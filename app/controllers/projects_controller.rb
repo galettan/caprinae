@@ -234,6 +234,7 @@ class ProjectsController < ApplicationController
     @project.archived = nil
     @project.progression = nil
     @project.state = nil
+    @project.priority = 0
     @project.description = 'Copie du projet #' + @existing_project.number + "\n" + @existing_project.description
     @project.number = 0
     @project.create_email = 0
