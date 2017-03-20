@@ -236,7 +236,7 @@
 </div>
 <div>
 
-	<% if (@project.colors.nil?)%>
+	<% if (@project.blank?)%>
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs" role="tablist">
 		<li role="presentation" class="active">
@@ -259,7 +259,7 @@
 		<li role="presentation" class="<%= current_user.print? ? '' : 'active'%>">
 			<a href="#studio" aria-controls="studio" role="tab" data-toggle="tab">Studio</a>
 		</li>
-		<% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother'%>
+		<% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother' || @project.project_type == 'creaprintother'%>
 		<li role="presentation" class="<%= current_user.print? ? 'active' : ''%>">
 			<a href="#print" aria-controls="print" role="tab" data-toggle="tab">Print</a>
 		</li>
@@ -292,7 +292,7 @@
   <%= link_to 'Retour', projects_path, class: 'btn btn-default'%>
 	<%= f.submit 'Valider', class: 'btn btn-danger'%>
 </p>
-<% if current_user.manager?  && !@project.new_record? %>%>
+<% if current_user.manager?  && !@project.new_record?%>
 <p class="text-right">
   <%= link_to 'Dupliquer', project_path + '/clone', class: 'btn btn-primary'%>
 	<%= link_to '<span class="glyphicon glyphicon-trash"></span>Supprimer le projet'.html_safe, @project ,class: 'btn btn-warning', method: :delete, data: {confirm: 'Êtes-vous sûre ?'} %>

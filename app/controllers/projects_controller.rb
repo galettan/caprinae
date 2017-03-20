@@ -222,7 +222,6 @@ class ProjectsController < ApplicationController
           paper.dup
       ]
     end
-    p @project.participants
     @project.tasks = []
     @project.feedbacks = []
     @project.first_feedback = nil
