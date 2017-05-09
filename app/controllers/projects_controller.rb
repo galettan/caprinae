@@ -80,7 +80,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-    if !@project.participants.first.nil? 
+    if !@project.participants.first.contact.nil?
       @client = Client.where(id: @project.participants.first.contact.client_id)
     else 
       @client = Client.where('disable IS NULL').order(:name => :asc)
