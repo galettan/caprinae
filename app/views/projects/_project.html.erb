@@ -1,7 +1,7 @@
 <tr>
 	<td><%= project.number%></td>
 	<td><%= l project.created_at.to_date%></td>
- 	<td><%= project.participants.first.contact.nil? ? '' : project.participants.first.contact.client.name %></td>
+ 	<td><%= project.participants.first.nil?  ? '' : (project.participants.first.contact.nil? ? '' : project.participants.first.contact.client.name) %></td>
 	<td><%= link_to project.name, edit_project_path(project) %><% if (!project.important.blank?)%> <span class="glyphicon glyphicon-exclamation-sign" data-toggle="tooltip" data-placement="bottom" title="<%= project.important%>"></span><% end %></td>
 	<td><%= t project.project_type %></td>
 
