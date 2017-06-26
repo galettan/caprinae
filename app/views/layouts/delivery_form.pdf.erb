@@ -35,11 +35,11 @@
 						<td>NON RENSEIGNÉ</td>
 						<% else %>
 						<tr>
-              <td>Société: <%= @project.participants.first.contact.client.name%><br />
-							Contact: <%= @project.participants.first.contact.first_name%> <%= @project.participants.first.contact.last_name%>-<%= @project.participants.first.contact.phone_nbr%></td>
+                <td>Société : <%= @project.participants.first.contact.client.name%><br />
+							Contact : <%= @project.participants.first.contact.first_name%> <%= @project.participants.first.contact.last_name%>-<%= @project.participants.first.contact.phone_nbr%></td>
 						</tr>
 						<tr><td>
-						Adresse: <br/>
+						Adresse : <br/>
 						<%= @project.participants.first.contact.client.street%>
 						<br />
 						<%= @project.participants.first.contact.client.postal_code%> <%= @project.participants.first.contact.client.city%> 
@@ -62,15 +62,16 @@
 		</div>
 		<div class="panel-body">
 			<table class="table">
-				<thead>
-					<td>Quantité</td>
-					<td>Nombre de colis</td>
-				</thead>
-					<tr>
-						<td><%= @project.finished_doc_qty%></td>
-						<td><%= @project.package_nbr%></td>
-					</tr>
-			</table>
+        <tr>
+          <td>Quantité :</td>
+          <td><%= @project.finished_doc_qty%></td>
+          <td>Nombre de colis :</td>
+          <td><%= @project.package_nbr%></td>
+        </tr>
+        <tr>
+          <td colspan="4"><%= @project.note.nil?? '' : @project.note %></td>
+        </tr>
+      </table>
 		</div>
 	</div>
 </div>
@@ -82,7 +83,7 @@
 		<div class="panel-body">
 			<table class="table">
 				<thead>
-					<td>Le : <%= Date.today.to_formatted_s(:rfc822) %>
+					<td>Le : <%=  Date.today.strftime("%d/%m/%Y") %>
 					<br />
 					À :</td>
 				</thead>
