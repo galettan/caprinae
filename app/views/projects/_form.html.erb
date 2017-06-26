@@ -256,9 +256,12 @@
 	</div>
 	<% else %>
 	<ul class="nav nav-tabs" role="tablist">
-		<li role="presentation" class="<%= current_user.print? ? '' : 'active'%>">
-			<a href="#studio" aria-controls="studio" role="tab" data-toggle="tab">Studio</a>
-		</li>
+    <li role="presentation" class="<%= current_user.print? ? '' : 'active'%>">
+      <a href="#studio" aria-controls="studio" role="tab" data-toggle="tab">Studio</a>
+    </li>
+    <li role="presentation" class="<%= current_user.print? ? '' : 'active'%>">
+      <a href="#livraison" aria-controls="livraison" role="tab" data-toggle="tab">Livraison</a>
+    </li>
 		<% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother' || @project.project_type == 'creaprintother'%>
 		<li role="presentation" class="<%= current_user.print? ? 'active' : ''%>">
 			<a href="#print" aria-controls="print" role="tab" data-toggle="tab">Print</a>
@@ -271,9 +274,12 @@
 	</ul>
 
 	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane <%= current_user.print? ? '' : 'active' %>" id="studio">
-			<%= render 'projects/forms/studio_fields', :f => f %>
-		</div>
+    <div role="tabpanel" class="tab-pane <%= current_user.print? ? '' : 'active' %>" id="studio">
+      <%= render 'projects/forms/studio_fields', :f => f %>
+    </div>
+    <div role="tabpanel" class="tab-pane <%= current_user.print? ? '' : 'active' %>" id="livraison">
+      <%= render 'projects/forms/delivery_fields', :f => f %>
+    </div>
 		<% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother'%>
 		<div role="tabpanel" class="tab-pane <%= current_user.print? ? 'active' : ''%>" id="print">
 			<%= render 'projects/forms/print_fields', :f => f %>

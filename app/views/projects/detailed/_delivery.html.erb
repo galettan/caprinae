@@ -1,0 +1,33 @@
+<div class="clearfix">
+  <div class="panel panel-default">
+    <div class='panel-heading'>
+      <strong>Informations Livraison :</strong>
+    </div>
+    <div class="panel-body">
+				<table class="table table-bordered table-hover table-striped">
+					<tr>
+						<td>Livraison</td>
+						<td><%= @project.carrier.nil? ? '' : @project.carrier.name%></td>
+					</tr>
+					<% if !@project.tracking_nbr.empty?%>
+					<tr>
+						<td>Numéro de suivi</td>
+						<td><%= t @project.tracking_nbr%></td>
+					</tr>
+					<% end%>
+					<tr>
+						<td>Nombre de colis</td>
+						<td><%= t @project.package_nbr.nil? ? 0 : @project.package_nbr%></td>
+					</tr>
+					<tr>
+						<td>Adresse de livraison (si différente de fiche client)</td>
+						<td><%= @project.delivery_address.nil? ? '' : @project.delivery_address%></td>
+					</tr>
+					<tr>
+						<td>Notes (Imprimées sur le BDL)</td>
+						<td><%= @project.note%></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>

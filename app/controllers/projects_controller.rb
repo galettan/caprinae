@@ -330,6 +330,7 @@ class ProjectsController < ApplicationController
         :package_nbr,
         :carrier_id,
         :delivery_address,
+        :note,
         tasks_attributes: [:id, :description, :hours, :minutes, :_destroy, :worker_id, :project_id],
         feedbacks_attributes: [:id, :description, :_destroy, :worker_id, :project_id],
         participants_attributes: [:id, :project_id, :contact_id, :_destroy],
