@@ -199,16 +199,12 @@
     <li role="presentation" class="<%= current_user.print? ? '' : 'active'%>">
       <a href="#studio" aria-controls="studio" role="tab" data-toggle="tab">Studio</a>
     </li>
-    <li role="presentation" class="<%= current_user.print? ? '' : 'active'%>">
+    <li role="presentation" class=" ">
       <a href="#livraison" aria-controls="livraison" role="tab" data-toggle="tab">Livraison</a>
     </li>
     <% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother' || @project.project_type == 'creaprintother'%>
         <li role="presentation" class="<%= current_user.print? ? 'active' : ''%>">
           <a href="#print" aria-controls="print" role="tab" data-toggle="tab">Print</a>
-        </li>
-    <% else %>
-        <li role="presentation" class="" id="printli">
-          <a href="#print" id="printref"></a>
         </li>
     <% end %>
   </ul>
@@ -217,17 +213,11 @@
     <div role="tabpanel" class="tab-pane <%= current_user.print? ? '' : 'active' %>" id="studio">
       <%= render 'projects/detailed/studio'%>
     </div>
-    <div role="tabpanel" class="tab-pane <%= current_user.print? ? '' : 'active' %>" id="livraison">
+    <div role="tabpanel" class="tab-pane " id="livraison">
       <%= render 'projects/detailed/delivery' %>
     </div>
     <% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother'%>
-        <div role="tabpanel" class="tab-pane <%= current_user.print? ? 'active' : ''%>" id="print">
           <%= render 'projects/detailed/print' %>
-        </div>
-    <% else %>
-        <div role="tabpanel" class="tab-pane" id="print">
-          <%= render 'projects/detailed/print' %>
-        </div>
     <% end %>
   </div>
   </div>
