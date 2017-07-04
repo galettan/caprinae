@@ -1,0 +1,33 @@
+<h1>Maître du temps</h1>
+
+<% @days_from_this_week.each do |day| %>
+<% if day.today? %>
+<div class="panel panel-info">
+      <div class="panel-heading">
+       <strong><%= day.strftime("%d-%m-%Y") %></strong>
+      </div>
+<% else %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= day.strftime("%d-%m-%Y") %>
+  </div>
+<%end %>
+<% @act.each do |date, name| %>
+  <% if date == day.strftime("%d-%m-%Y") %>
+  <table class="table table-bordered text-center table-hover table-striped">
+  <% name.each do |user, duration| %>
+    <tr>
+      <td rowspan="<%= duration['details'].count%>"><%= user.login %><br /><%= image_tag user.avatar(:thumb), title: user.login, data: {toggle: "tooltip", placement:"bottom"}%></td>
+      <td rowspan="<%= duration['details'].count%>"><%= duration['total'] / 60%>H<%= duration['total'] % 60%></td>
+      <% duration['details'].each do |project, time| %>
+      <td><%= link_to project.name, edit_project_path(project) %></td>
+      <td><%= time / 60 %>H<%= (time % 60) %></td>
+          </tr><tr>
+      <% end %>
+  <% end %>
+  </table>
+  <% end %>
+<% end %>
+</div>
+<% end %>
+</div>

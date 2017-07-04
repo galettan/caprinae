@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   resources :projects
   resources :clients
+  resources :activities
   get 'sessions/new'
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -24,6 +25,8 @@ Rails.application.routes.draw do
 
   get '/projects/:id/clone' => 'projects#clone', as: :clone_project
   get 'projects/:id/delivery_form' => 'projects#delivery_form', as: :delivery_form
+
+  get '/activities' => 'activities#index'
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

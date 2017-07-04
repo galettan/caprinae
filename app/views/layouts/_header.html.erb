@@ -3,24 +3,27 @@
   	<a href="<%= root_path%>" id="logo"><%=image_tag("djobi_djoba.png", size: "200x30")%></a> 
     <nav>
     	<ul class="nav navbar-nav navbar-right ">
+        <% if manager? %>
+        <li><%= link_to "Rapport d'activités", activities_path %></li>
+        <% end %>
         	<li><%= link_to "Home",   root_path %></li>
         	<% if logged_in? %>
         		<li><%= link_to "Clients", clients_url%></li>
         		<li><%= link_to "Nouveau Projet", new_project_path %></li>
         		<li><%= link_to "Projets", projects_url%></li>
         		<li><%= link_to "Utilisateurs", users_url %></li>
-				<li class="dropdown">
-            		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              		<%= image_tag(current_user.avatar(:thumb), width: "25px") %> <b class="caret"></b>
-            	</a>	
-            	<ul class="dropdown-menu">
-                	<li><%= link_to "Profil", current_user %></li>
-          			<li><%= link_to "Parametres", edit_user_path(current_user) %></li>
-              		<li class="divider"></li>
-              		<li>
-                		<%= link_to "Log out", logout_path, method: "delete" %>
-              		</li>
-          		</ul>
+            <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <%= image_tag(current_user.avatar(:thumb), width: "25px") %> <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to "Profil", current_user %></li>
+                    <li><%= link_to "Parametres", edit_user_path(current_user) %></li>
+                      <li class="divider"></li>
+                      <li>
+                        <%= link_to "Log out", logout_path, method: "delete" %>
+                      </li>
+                  </ul>
           		</li>
     		<% else %>
         	  <li><%= link_to "Log in", login_path %></li>
