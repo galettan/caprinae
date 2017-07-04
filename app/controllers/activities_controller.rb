@@ -22,7 +22,7 @@ class ActivitiesController < ApplicationController
       @act[activity.created_at.strftime("%d-%m-%Y")][activity.worker] = Hash.new unless @act[activity.created_at.strftime("%d-%m-%Y")].key?(activity.worker)
       if (@act[activity.created_at.strftime("%d-%m-%Y")][activity.worker].key?('total'))
         @act[activity.created_at.strftime("%d-%m-%Y")][activity.worker]['total'] += activity.duration
-        if (@act[activity.created_at.strftime("%d-%m-%Y")][activity.worker]['details'].key?(activity.project_id))
+        if (@act[activity.created_at.strftime("%d-%m-%Y")][activity.worker]['details'].key?(activity.project))
           @act[activity.created_at.strftime("%d-%m-%Y")][activity.worker]['details'][activity.project] += activity.duration
         else
           @act[activity.created_at.strftime("%d-%m-%Y")][activity.worker]['details'][activity.project] = activity.duration
