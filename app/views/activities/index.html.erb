@@ -29,11 +29,11 @@
   <% name.each do |user, duration| %>
     <tr>
       <td rowspan="<%= duration['details'].count%>"><%= user.login %><br /><%= image_tag user.avatar(:thumb), title: user.login, data: {toggle: "tooltip", placement:"bottom"}%></td>
-      <td rowspan="<%= duration['details'].count%>"><%= duration['total'] / 60%>H<%= duration['total'] % 60%></td>
+      <td rowspan="<%= duration['details'].count%>"><%= duration['total'] / 60%>H<%= (duration['total'] % 60) < 10 ? '0' : '' %><%= duration['total'] % 60%></td>
 
       <% duration['details'].each do |project, time| %>
       <td><%= link_to project.number + " - " + project.name, edit_project_path(project) %></td>
-      <td><%= time / 60 %>H<%= (time % 60) %></td>
+      <td><%= time / 60 %>H<%= (time % 60) < 10 ? '0' : ''%><%= (time % 60) %></td>
           </tr><tr>
       <% end %>
   <% end %>
