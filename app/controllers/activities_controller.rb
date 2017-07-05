@@ -5,9 +5,10 @@ class ActivitiesController < ApplicationController
 
 
   def index
-    today = Date.today # Today's date
-    monday = today.at_beginning_of_week
+    day_of_the_week = params[:week_date].present? ? Date.parse(params[:week_date]) : Date.today
+    monday = day_of_the_week.at_beginning_of_week
     friday = monday + 4.days
+
     @activities = Task
                       .select('tasks.created_at, sum(duration) as duration, tasks.project_id, tasks.worker_id')
                       .joins(:worker)
@@ -15,7 +16,7 @@ class ActivitiesController < ApplicationController
                       .where("tasks.created_at >= '#{monday.strftime("%Y-%m-%d")} 00:00:00'
   AND tasks.created_at <= '#{friday} 23:59:59'")
                       .group('tasks.created_at')
-    @days_from_this_week = (today.at_beginning_of_week..friday).map
+    @days_from_this_week = (monday..friday).map
     @act = Hash.new()
     @activities.each do |activity|
       @act[activity.created_at.strftime("%d-%m-%Y")] = Hash.new unless @act.key?(activity.created_at.strftime("%d-%m-%Y"))

@@ -1,17 +1,28 @@
 <h1>Maître du temps</h1>
-
-<% @days_from_this_week.each do |day| %>
-<% if day.today? %>
-<div class="panel panel-info">
-      <div class="panel-heading">
-       <strong><%= day.strftime("%d-%m-%Y") %></strong>
-      </div>
-<% else %>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <%= day.strftime("%d-%m-%Y") %>
+<div class="clearfix">
+  <div class="panel panel-success">
+    <div class="panel-heading">Date
+    </div>
+    <div class="panel body" id="filters">
+      <fieldset>
+        <%= form_tag(activities_path, :method => "get", id: "search-form") do %>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label for="week_date">Date</label>
+                <%= date_field_tag :week_date, params[:week_date], placeholder: "Date recherchée", class: 'form-control', id: 'date_picker' %>
+              </div>
+            </div>
+        <% end %>
+      </fieldset>
+    </div>
   </div>
-<%end %>
+</div>
+  <% @days_from_this_week.each do |day| %>
+    <% level = day.today? ? 'success' : day.strftime("%Y-%m-%d") === params[:week_date] ? 'info'  : 'default' %>
+  <div class="panel panel-<%= level %>">
+      <div class="panel-heading">
+       <%= day.strftime("%d-%m-%Y") %>
+      </div>
 <% @act.each do |date, name| %>
   <% if date == day.strftime("%d-%m-%Y") %>
   <table class="table table-bordered text-center table-hover table-striped">
@@ -21,7 +32,7 @@
       <td rowspan="<%= duration['details'].count%>"><%= duration['total'] / 60%>H<%= duration['total'] % 60%></td>
 
       <% duration['details'].each do |project, time| %>
-      <td><%= link_to project.number + " " + project.name, edit_project_path(project) %></td>
+      <td><%= link_to project.number + " - " + project.name, edit_project_path(project) %></td>
       <td><%= time / 60 %>H<%= (time % 60) %></td>
           </tr><tr>
       <% end %>
@@ -32,3 +43,10 @@
 </div>
 <% end %>
 </div>
+</div>
+
+<script>
+  $("#date_picker").bind("change", function(event){
+    $("#search-form").submit();
+  });
+</script>
