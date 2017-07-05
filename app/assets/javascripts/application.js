@@ -16,3 +16,6 @@
 //= require_tree .
 //= require bootstrap.min
 //= require cocoon
+//= require moment
+//= require fullcalendar
+//= require fullcalendar/locale-all

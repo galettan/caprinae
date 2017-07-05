@@ -1,1 +1,48 @@
+<div class="clearfix">
+  <div class="panel panel-default">
+    <div class="panel-heading">Légende</div>
+    <div class="panel body" id="filters">
+            <div class="col-md-2">
+              <div class="form-group">
+                <div class="btn" style="background-color: GreenYellow">Date de départ</div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <div class="btn" style="background-color: green">Bon à tirer</div>
+              </div>
+            </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <div class="btn" style="background-color: orange">Date de livraison</div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <div class="btn" style="background-color: DodgerBlue">Date de premier retour</div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="clearfix">
 <div id="calendar"></div>
+</div>
+<script>
+  $(document).ready(function() {
+    $('#calendar').fullCalendar({
+      locale: 'fr',
+      hiddenDays: [ 6,0 ],
+      weekNumbers: true,
+      header: {
+        left: 'month,basicWeek,basicDay',
+        center: 'title',
+      },
+      displayEventTime: true,
+      events: <%= @events.html_safe %>
+    });
+  }
+);
+
+</script>
+
