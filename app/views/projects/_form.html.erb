@@ -280,7 +280,7 @@
     <div role="tabpanel" class="tab-pane " id="livraison">
       <%= render 'projects/forms/delivery_fields', :f => f %>
     </div>
-		<% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother'%>
+		<% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother' || @project.project_type == 'creaprintother'%>
 		<div role="tabpanel" class="tab-pane <%= current_user.print? ? 'active' : ''%>" id="print">
 			<%= render 'projects/forms/print_fields', :f => f %>
 		</div>

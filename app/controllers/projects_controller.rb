@@ -283,6 +283,7 @@ class ProjectsController < ApplicationController
           url: project_url(project),
           date: project.good_to_print,
           color: 'green'
+
       }
     end
     projects = Project.where("departure_date >= '#{first_day.strftime("%Y-%m-%d")}'
@@ -292,7 +293,7 @@ class ProjectsController < ApplicationController
           title: project.number + ' - ' + project.name,
           url: project_url(project),
           date: project.departure_date,
-          color: 'GreenYellow'
+          color: 'YellowGreen'
       }
     end
 

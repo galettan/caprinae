@@ -29,7 +29,7 @@
 	<% end %>
 	</p>
 	<td><%= t project.state %> / <%= t project.progression %></td>
-	<td><%= project.test_print? ? 'oui' : 'non'%></td>
+	<td><%= project.test_print == 'yestest' ? 'Oui' : 'Non' %></td>
 	<td><%= project.notice%></td>
 	<td><%= project.outsourcing%></td>
 </tr>

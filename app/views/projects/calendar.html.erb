@@ -4,7 +4,7 @@
     <div class="panel body" id="filters">
             <div class="col-md-2">
               <div class="form-group">
-                <div class="btn" style="background-color: GreenYellow">Date de départ</div>
+                <div class="btn" style="background-color: YellowGreen">Date de départ</div>
               </div>
             </div>
             <div class="col-md-2">
@@ -38,6 +38,7 @@
         left: 'month,basicWeek,basicDay',
         center: 'title',
       },
+      eventTextColor: 'black',
       displayEventTime: true,
       events: <%= @events.html_safe %>
     });
