@@ -1,23 +1,23 @@
 <script>
 	(function($) {
-		$.widget("ui.combobox", {
+		$j.widget("ui.combobox", {
 			_create : function() {
 				var input,
 				    self = this,
 				    select = this.element.hide(),
 				    selected = select.children(":selected"),
 				    value = selected.val() ? selected.text() : "",
-				    wrapper = this.wrapper = $("<span>").addClass("ui-combobox").insertAfter(select);
+				    wrapper = this.wrapper = $j("<span>").addClass("ui-combobox").insertAfter(select);
 
-				input = $("<input>").appendTo(wrapper).val(value).addClass("ui-state-default ui-combobox-input").autocomplete({
+				input = $j("<input>").appendTo(wrapper).val(value).addClass("ui-state-default ui-combobox-input").autocomplete({
 					delay : 0,
 					minLength : 0,
 					source : function(request, response) {
 						var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
 
 						response(select.find("option").map(function() {
-							var text = $(this).text(),
-							    category = $(this).closest("optgroup").attr("label");
+							var text = $j(this).text(),
+							    category = $j(this).closest("optgroup").attr("label");
 							if (this.value && (!request.term || matcher.test(text) || matcher.test(category)))
 								return {
 									label : text.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + $.ui.autocomplete.escapeRegex(request.term) + ")(?![^<>]*>)(?![^&;]+;)", "gi"), "<strong>$1</strong>"),
@@ -26,7 +26,7 @@
 									category : category
 								};
 							//MK
-							$('#test').attr('style', 'display: none;');
+							$j('#test').attr('style', 'display: none;');
 						}).get());
 					},
 					select : function(event, ui) {
@@ -37,18 +37,18 @@
 					},
 					change : function(event, ui) {
 						if (!ui.item) {
-							var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex($(this).val()) + "$", "i"),
+							var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex($j(this).val()) + "$", "i"),
 							    valid = false;
 							select.children("option").each(function() {
-								if ($(this).text().match(matcher)) {
+								if ($j(this).text().match(matcher)) {
 									this.selected = valid = true;
 									return false;
 								}
 							});
 							if (!valid) {
-								$('#test').attr('style', 'display: block;');
+								$j('#test').attr('style', 'display: block;');
 								// remove invalid value, as it didn't match anything
-								//$( this ).val( "" );
+								//$j( this ).val( "" );
 								//select.val( "" );
 								//input.data( "autocomplete" ).term = "";
 								//return false;
@@ -58,7 +58,7 @@
 				}).addClass("ui-widget ui-widget-content ui-corner-left");
 
 				input.data("autocomplete")._renderItem = function(ul, item) {
-					return $("<li></li>").data("item.autocomplete", item).append("<a>" + item.label + "</a>").appendTo(ul);
+					return $j("<li></li>").data("item.autocomplete", item).append("<a>" + item.label + "</a>").appendTo(ul);
 				};
 
 				input.data("autocomplete")._renderMenu = function(ul, items) {
@@ -75,7 +75,7 @@
 					});
 				};
 
-				$("<a>").attr("tabIndex", -1).attr("title", "Show All Items").appendTo(wrapper).button({
+				$j("<a>").attr("tabIndex", -1).attr("title", "Show All Items").appendTo(wrapper).button({
 					icons : {
 						primary : "ui-icon-triangle-1-s"
 					},
@@ -88,7 +88,7 @@
 					}
 
 					// work around a bug (likely same cause as #5265)
-					$(this).blur();
+					$j(this).blur();
 
 					// pass empty string as value to search for, displaying all results
 					input.autocomplete("search", "");
@@ -104,10 +104,10 @@
 		});
 	})(jQuery);
 
-	$(function() {
-		$(".select3").combobox();
-		$("#toggle").click(function() {
-			$("#combobox").toggle();
+	$j(function() {
+		$j(".select3").combobox();
+		$j("#toggle").click(function() {
+			$j("#combobox").toggle();
 		});
 	}); 
 </script>
