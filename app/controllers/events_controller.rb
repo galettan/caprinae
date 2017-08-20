@@ -71,7 +71,7 @@ class EventsController < ApplicationController
       personnal_events.each do |personnal_event|
         @events << {
             title: personnal_event.title + ' - ' + personnal_event.user.login,
-            url: event_url(personnal_event),
+            url: personnal_event.user_id == current_user.id ? edit_event_url(personnal_event) : event_url(personnal_event),
             start: personnal_event.time_begin,
             end: personnal_event.time_end,
             color: 'GrayText',

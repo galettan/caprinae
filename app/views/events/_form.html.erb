@@ -1,4 +1,3 @@
-<%= form_for(event) do |f| %>
   <% if event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -10,31 +9,61 @@
       </ul>
     </div>
   <% end %>
+<%= form_for(event) do |f| %>
+    <div class="row clearfix">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class='panel-heading'>
+            <strong>Informations générales:</strong>
+          </div>
+          <div class='panel-body'>
+            <table class="table table-striped table-bordered">
+              <tr>
+                <td>
+                  <%= f.label :titre %>
+                </td>
+                <td>
+                  <%= f.text_field :title, class: 'form-control' %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <%= f.label :détails %>
+                </td>
+                <td>
+                  <%= f.text_area :details, class: 'form-control' %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <%= f.label :début %>
+                </td>
+                <td>
+                  <%= f.datetime_select :time_begin, class: 'form-control' %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <%= f.label :fin %>
+                </td>
+                <td>
+                  <%= f.datetime_select :time_end, class: 'form-control' %>
+                </td>
+              </tr>
 
-  <%= f.hidden_field :user_id, :value => current_user.id %>
+              <% if @event.user_id? %>
+                <%= f.hidden_field :user_id, :value => @event.user_id %>
+              <% else %>
+                <%= f.hidden_field :user_id, :value => current_user.id %>
+              <% end %>
+            </table>
+          </div>
+        </div>
+      </div>
 
-
-    <div class="field">
-      <%= f.label :title %>
-      <%= f.text_field :title %>
-    </div>
-
-    <div class="field">
-      <%= f.label :details %>
-      <%= f.text_area :details %>
-    </div>
-
-    <div class="field">
-      <%= f.label :time_begin %>
-      <%= f.datetime_select :time_begin %>
-    </div>
-
-    <div class="field">
-      <%= f.label :time_end %>
-      <%= f.datetime_select :time_end %>
-    </div>
-
-    <div class="actions">
-      <%= f.submit %>
   </div>
+<p class="text-center">
+  <%= link_to 'Retour', users_path,  {class: 'btn btn-default'}%>
+  <%= f.submit 'Valider', class: 'btn btn-danger'%>
+</p>
 <% end %>
