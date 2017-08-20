@@ -13,10 +13,11 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: root
-  password:
+  username: caprinae
+  password: toto42sh
   socket: /tmp/mysql.sock
-
+  variables:
+    sql_mode: TRADITIONAL
 development:
   <<: *default
   database: Caprinae_development

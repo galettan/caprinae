@@ -247,59 +247,6 @@ class ProjectsController < ApplicationController
 
   end
 
-  def calendar
-    day_of_the_week = Date.today
-    first_day = day_of_the_week.at_beginning_of_year
-    end_day = day_of_the_week.at_end_of_month + 6.month
-
-
-    projects = Project.where("first_feedback >= '#{first_day.strftime("%Y-%m-%d")}'
-     AND first_feedback <= '#{end_day}'")
-
-    @events = Array.new
-    projects.each do |project|
-      @events << {
-          title: project.number + ' - ' + project.name,
-          url: project_url(project),
-          date: project.first_feedback,
-          color: 'DodgerBlue'
-      }
-    end
-    projects = Project.where("delivery_date >= '#{first_day.strftime("%Y-%m-%d")}'
-     AND delivery_date <= '#{end_day}'")
-    projects.each do |project|
-      @events << {
-          title: project.number + ' - ' + project.name,
-          url: project_url(project),
-          date: project.delivery_date,
-          color: 'orange'
-      }
-    end
-    projects = Project.where("good_to_print >= '#{first_day.strftime("%Y-%m-%d")}'
-     AND good_to_print <= '#{end_day}'")
-    projects.each do |project|
-      @events << {
-          title: project.number + ' - ' + project.name,
-          url: project_url(project),
-          date: project.good_to_print,
-          color: 'green'
-
-      }
-    end
-    projects = Project.where("departure_date >= '#{first_day.strftime("%Y-%m-%d")}'
-     AND departure_date <= '#{end_day}'")
-    projects.each do |project|
-      @events << {
-          title: project.number + ' - ' + project.name,
-          url: project_url(project),
-          date: project.departure_date,
-          color: 'YellowGreen'
-      }
-    end
-
-    @events = @events.to_json
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project

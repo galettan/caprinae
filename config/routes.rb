@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :events
   resources :projects
   resources :clients
   resources :activities
@@ -25,8 +26,6 @@ Rails.application.routes.draw do
 
   get '/projects/:id/clone' => 'projects#clone', as: :clone_project
   get 'projects/:id/delivery_form' => 'projects#delivery_form', as: :delivery_form
-
-  get '/projects_calendar' => 'projects#calendar'
 
   get '/activities' => 'activities#index'
   # Example of named route that can be invoked with purchase_url(id: product.id)
