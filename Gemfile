@@ -45,6 +45,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Calendar
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

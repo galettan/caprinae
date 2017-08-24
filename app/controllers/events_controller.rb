@@ -67,7 +67,7 @@ class EventsController < ApplicationController
       end
     end
     if (params[:team_events].present? || !@filter_present)
-      personnal_events = Event.all
+      personnal_events = Event.where("private = false")
       personnal_events.each do |personnal_event|
         @events << {
             title: personnal_event.title + ' - ' + personnal_event.user.login,
@@ -75,6 +75,19 @@ class EventsController < ApplicationController
             start: personnal_event.time_begin,
             end: personnal_event.time_end,
             color: 'GrayText',
+            textColor: 'white'
+        }
+      end
+    end
+    if (params[:private_events].present? || !@filter_present)
+      private_events = Event.where("user_id = #{current_user.id} AND private = true")
+      private_events.each do |private_event|
+        @events << {
+            title: private_event.title + ' - ' + private_event.user.login,
+            url: private_event.user_id == current_user.id ? edit_event_url(private_event) : event_url(private_event),
+            start: private_event.time_begin,
+            end: private_event.time_end,
+            color: 'HotPink',
             textColor: 'white'
         }
       end
@@ -102,6 +115,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
 
+    abort @event.inspect
     respond_to do |format|
       if @event.save
         format.html { redirect_to events_path, notice: 'Event was successfully created.' }
@@ -145,6 +159,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:user_id, :time_begin, :time_end, :title, :details)
+      params.require(:event).permit(:user_id, :time_begin, :time_end, :title, :details, :private)
     end
 end

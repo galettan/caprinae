@@ -39,7 +39,7 @@
                   <%= f.label :début %>
                 </td>
                 <td>
-                  <%= f.datetime_select :time_begin, class: 'form-control' %>
+                  <input type='text' class="form-control" name="event[time_begin]" id="datetimepickerBegin"/>
                 </td>
               </tr>
               <tr>
@@ -47,10 +47,45 @@
                   <%= f.label :fin %>
                 </td>
                 <td>
-                  <%= f.datetime_select :time_end, class: 'form-control' %>
+                  <input type='text' class="form-control" name="event[time_end]"  id="datetimepickerEnd"/>
                 </td>
               </tr>
-
+              <tr>
+                <td>
+                  <%= f.label :Événement_privé %>
+                </td>
+                <td>
+                  <%= f.check_box :private, class: 'form-contarol' %>
+                </td>
+              </tr>
+              <div class="container">
+                <div class="row">
+                  <div class='col-sm-6'>
+                    </div>
+                  </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepickerBegin').datetimepicker({
+                            locale: 'fr',
+                            sideBySide: true,
+                            daysOfWeekDisabled: [0, 6]
+                        });
+                        $('#datetimepickerEnd').datetimepicker({
+                            locale: 'fr',
+                            daysOfWeekDisabled: [0, 6],
+                            sideBySide: true,
+                            useCurrent: false //Important! See issue #1075
+                        });
+                        $("#datetimepickerBegin").on("dp.change", function (e) {
+                            $('#datetimepickerEnd').data("DateTimePicker").minDate(e.date);
+                        });
+                        $("#datetimepickerEnd").on("dp.change", function (e) {
+                            $('#datetimepickerBegin').data("DateTimePicker").maxDate(e.date);
+                        });
+                    });
+                </script>
+              </div>
+              </div>
               <% if @event.user_id? %>
                 <%= f.hidden_field :user_id, :value => @event.user_id %>
               <% else %>

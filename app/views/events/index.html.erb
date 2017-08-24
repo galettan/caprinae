@@ -7,36 +7,41 @@
     <div class="panel body collapse in" id="filters">
       <fieldset>
         <%= form_tag(events_path, :method => "get", id: "filter-form") do %>
+          <div class="col-md-2">
+            <div class="form-group">
+              <div class="btn form-control" style="background-color: DodgerBlue"><%= check_box_tag :first_feedback, true, @filter_present ? params[:first_feedback] : true%> Date de premier retour</div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <div class="btn form-control" style="background-color: green"><%= check_box_tag :good_to_print, true, @filter_present ? params[:good_to_print] : true%> Bon à tirer</div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <div class="btn form-control" style="background-color: YellowGreen"><%= check_box_tag :departure_date, true, @filter_present ? params[:departure_date] : true%> Date de départ</div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <div class="btn form-control" style="background-color: orange"><%= check_box_tag :delivery_date, true, @filter_present ? params[:delivery_date] : true%> Date de livraison</div>
+            </div>
+          </div>
             <div class="col-md-2">
               <div class="form-group">
-                <div class="btn form-control" style="background-color: YellowGreen"><%= check_box_tag :departure_date, true, @filter_present ? params[:departure_date] : true%> Date de départ</div>
+                <div class="btn form-control" style="background-color: GrayText"><%= check_box_tag :team_events, true, @filter_present ? params[:team_events] : true%> Événements équipe</div>
               </div>
             </div>
             <div class="col-md-2">
               <div class="form-group">
-                <div class="btn form-control" style="background-color: green"><%= check_box_tag :good_to_print, true, @filter_present ? params[:good_to_print] : true%> Bon à tirer</div>
+                <div class="btn form-control" style="background-color: HotPink"><%= check_box_tag :private_events, true, @filter_present ? params[:private_events] : true%> Événements Privés</div>
               </div>
             </div>
-        <div class="col-md-2">
-          <div class="form-group">
-            <div class="btn form-control" style="background-color: orange"><%= check_box_tag :delivery_date, true, @filter_present ? params[:delivery_date] : true%> Date de livraison</div>
+          <div class="col-md-1">
+            <div class="form-group">
+              <input type="submit" name="commit" value="Filtrer" class="btn btn-default button">
+            </div>
           </div>
-        </div>
-      <div class="col-md-2">
-        <div class="form-group">
-          <div class="btn form-control" style="background-color: DodgerBlue"><%= check_box_tag :first_feedback, true, @filter_present ? params[:first_feedback] : true%> Date de premier retour</div>
-        </div>
-      </div>
-        <div class="col-md-2">
-          <div class="form-group">
-            <div class="btn form-control" style="background-color: GrayText"><%= check_box_tag :team_events, true, @filter_present ? params[:team_events] : true%> Événements équipe</div>
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="form-group">
-            <input type="submit" name="commit" value="Filtrer" class="btn btn-default button">
-          </div>
-        </div>
         <% end %>
       </fieldset>
     </div>
