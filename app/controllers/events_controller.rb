@@ -115,7 +115,6 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
 
-    abort @event.inspect
     respond_to do |format|
       if @event.save
         format.html { redirect_to events_path, notice: 'Event was successfully created.' }
