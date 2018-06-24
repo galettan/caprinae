@@ -14,6 +14,10 @@
 					<td> <%= f.select(:colors, options_for_select(t("project_colors").invert, @project.colors), {:include_blank => 'Selectionner un type de couleur'}, class: 'form-control')%> </td>
 				</tr>
 				<tr>
+					<td>Orientation</td>
+					<td> <%= f.select(:orientation, options_for_select(t("orientation").invert, @project.orientation), {:include_blank => 'Selectionner un type d\'orientation'}, class: 'form-control')%> </td>
+				</tr>
+				<tr>
 					<td>Données variables</td>
 					<td><%= f.check_box :various_input%></td>
 				</tr>

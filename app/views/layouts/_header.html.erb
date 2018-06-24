@@ -4,10 +4,12 @@
     <nav>
     	<ul class="nav navbar-nav navbar-right ">
         <% if manager? %>
+        <li><%= link_to "NEW : Stock Papier !",   paperstocks_path %></li>
+        <li><%= link_to "NEW : Stock Divers !",   various_stocks_path %></li>
         <li><%= link_to "Rapport d'activité", activities_path %></li>
         <% end %>
         	<% if logged_in? %>
-          	<li><%= link_to "Calendrier",   events_path %></li>
+            <li><%= link_to "Calendrier",   events_path %></li>
         		<li><%= link_to "Clients", clients_url %></li>
         		<li><%= link_to "Nouveau Projet", new_project_path %></li>
         		<li><%= link_to "Projets", projects_url %></li>

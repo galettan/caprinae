@@ -30,20 +30,21 @@ class Project < ActiveRecord::Base
   validates :name, presence: true
   validates :number, presence: true
     
-  enum project_type: [:print, :crea, :other, :creaprint, :creaother, :printother, :creaprintother, :web]
+  enum project_type: [:print, :crea, :other, :creaprint, :creaother, :printother, :creaprintother, :web, :webother, :webprint, :webprintother]
   enum priority: [:normal, :urgent]
-  enum state: [:running, :waitingclient, :validatedclient, :finished]
+  enum state: [:running, :waitingclient, :validatedclient, :finished, :waitingbriefclient]
   enum progression: [:todocrea, :runningcrea, :finishedcrea, :todoprint, :runningprint, :finishedprint, :outsource]
 
   enum colors: [:quadrir, :quadrirv, :quadrirnbv, :nbr, :nbrv]
+  enum orientation: [:portraitor, :landscapeor]
   enum open_shape: [:a3oshape, :a4oshape, :a5oshape, :hundredseventybyfiftyfour, :hundredseventybyheightyfive, :twohundredbytwoten,
     :twofortybyhundred, :twoninetysevenbyhundred, :twoninetysevenbyoneofive, :threehundredbyoneandhalf, :fourtwentybytwoten, :fourtwentybyhundred,
-    :fourtwentybyhundredandhalf, :fourfortybytwoten, :portrait, :landscape]
+    :fourtwentybyhundredandhalf, :fourfortybytwoten, :fourtwentybytwoninetyseven, :fiveninetyfourbytwoten, :sixthirtybytwoninetyseven]
   enum finished_shape: [:indicatedshape, :various, :fortybythirtyheight, :heightyfivebyfifty, :heightyfivebyfiftyfour,
     :ninetybyfifty, :ninetybyfiftyfour, :ninetyfivebyfiftyfour, :heightyfivesq, :heightbyhundred, :heightytwobyhundredtwentyheight,
     :heightyfivebyhundred, :ninetyninebytwoten, :hundredbytwoten, :hundredfivebytwoten, :hundredtenbytwoten, :twotenbyhundredfifty,
     :twofivebyhundredten, :hundredbytwoninetyseven, :hundredfortybytwoninetyseven, :hundredfiftysq, :hundredheightytwobytwofiftyseven,
-    :twotensq, :a3, :a4, :a5, :a6, :usletter, :seenotice, :sra3]
+    :twotensq, :a3, :a4, :a5, :a6, :usletter, :seenotice, :sra3, :multipleshapes]
   enum filming: [:shinyrv, :dullrv, :shinyr, :dullr, :shinylaminating, :dulllaminating, :thirtysevenhalfmc, :heightymc, :hundredtwentyfivemc, :hundredseventyfivemc]
   enum shaping: [:cut, :rainage, :pierced, :piercedandbent, :cutting, :straddlesting, :rainageandstraddlesting, :cutrainagebent, :leftcornersting, :manualbending,
     :mechanicbending, :binding, :wireowhite, :wireosilver, :wireoblack, :frontcristal, :bothcristal, :flatback, :topofmindgluing, :leftgluing, :roundedcorner, 

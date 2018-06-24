@@ -40,7 +40,8 @@
 						</tr>
 						<tr><td>
 						Adresse : <br/>
-						<%= @project.participants.first.contact.client.street%>
+              <%= @project.participants.first.contact.client.street%><br />
+              <%= @project.participants.first.contact.client.adress_complement%>
 						<br />
 						<%= @project.participants.first.contact.client.postal_code%> <%= @project.participants.first.contact.client.city%> 
 						</td>

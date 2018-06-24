@@ -23,10 +23,14 @@
 						<td>Adresse de livraison (si différente de fiche client)</td>
 						<td><%= @project.delivery_address.nil? ? '' : @project.delivery_address%></td>
 					</tr>
-					<tr>
-						<td>Notes (Imprimées sur le BDL)</td>
-						<td><%= @project.note%></td>
-					</tr>
+          <tr>
+            <td>Notes (Imprimées sur le BDL)</td>
+            <td><%= @project.note%></td>
+          </tr>
+          <tr>
+            <td>Notes (NON imprimées sur le BDL)</td>
+            <td><%= @project.secret_note%></td>
+          </tr>
 				</table>
 			</div>
 		</div>

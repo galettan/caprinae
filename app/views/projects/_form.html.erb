@@ -262,33 +262,33 @@
     <li role="presentation" class=" ">
       <a href="#livraison" aria-controls="livraison" role="tab" data-toggle="tab">Livraison</a>
     </li>
-		<% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother' || @project.project_type == 'creaprintother'%>
-		<li role="presentation" class="<%= current_user.print? ? 'active' : ''%>">
-			<a href="#print" aria-controls="print" role="tab" data-toggle="tab">Print</a>
-		</li>
-		<% else %>
-		<li role="presentation" class="" id="printli">
-			<a href="#print" id="printref"></a>
-		</li>
-		<% end %>
+	<li role="presentation" class="<%= current_user.print? ? 'active' : ''%>">
+		<a href="#print" aria-controls="print" role="tab" data-toggle="tab">Print</a>
+	</li>
+    <li role="presentation" class=" ">
+      <a href="#paperstock" aria-controls="paperstock" role="tab" data-toggle="tab">Stock Papier</a>
+    </li>
+    <li role="presentation" class=" ">
+      <a href="#variousstock" aria-controls="variousstock" role="tab" data-toggle="tab">Stock Divers</a>
+    </li>
 	</ul>
 
 	<div class="tab-content">
-    <div role="tabpanel" class="tab-pane <%= current_user.print? ? '' : 'active' %>" id="studio">
-      <%= render 'projects/forms/studio_fields', :f => f %>
-    </div>
-    <div role="tabpanel" class="tab-pane " id="livraison">
-      <%= render 'projects/forms/delivery_fields', :f => f %>
-    </div>
-		<% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother' || @project.project_type == 'creaprintother'%>
+	    <div role="tabpanel" class="tab-pane <%= current_user.print? ? '' : 'active' %>" id="studio">
+	      <%= render 'projects/forms/studio_fields', :f => f %>
+	    </div>
+	    <div role="tabpanel" class="tab-pane " id="livraison">
+	      <%= render 'projects/forms/delivery_fields', :f => f %>
+	    </div>
 		<div role="tabpanel" class="tab-pane <%= current_user.print? ? 'active' : ''%>" id="print">
 			<%= render 'projects/forms/print_fields', :f => f %>
 		</div>
-		<% else %>
-		<div role="tabpanel" class="tab-pane" id="print">
-			<%= render 'projects/forms/print_fields', :f => f %>
-		</div>
-		<% end %>
+	    <div role="tabpanel" class="tab-pane " id="paperstock">
+	      <%= render 'projects/detailed/paperstock'%>
+	    </div>
+	    <div role="tabpanel" class="tab-pane " id="variousstock">
+	      <%= render 'projects/detailed/variousstock'%>
+	    </div>
 	</div>
 	<% end%>
 	<!-- Tab panes -->

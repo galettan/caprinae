@@ -1,0 +1,18 @@
+<p><%= link_to 'Nouveau Stock divers', new_various_stock_path, class: 'btn btn-default'%></p>
+</p><div class="panel panel-default">
+  <div class="panel-heading">
+    <strong>Liste des Stocks divers</strong>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped text-center table-bordered table-hover">
+      <thead>
+        <th colspan="4">Nom</th>
+      </thead>
+      <tbody>
+          <% @various_stocks.each do |various_stock| %>
+          <%= render various_stock%>
+          <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

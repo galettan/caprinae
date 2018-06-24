@@ -4,12 +4,14 @@ body {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+  margin: 33px;
 }
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+  margin: 33px;
 }
 
 pre {
@@ -20,6 +22,26 @@ pre {
 
 a {
   color: #000;
+
+  &:visited {
+    color: #666;
+  }
+
+  &:hover {
+    color: #fff;
+    background-color: #000;
+  }
+}
+
+th {
+  padding-bottom: 5px;
+}
+
+td {
+  padding-bottom: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
 
 div {
   &.field, &.actions {
@@ -61,4 +83,7 @@ div {
     list-style: square;
   }
 }
+
+label {
+  display: block;
 }

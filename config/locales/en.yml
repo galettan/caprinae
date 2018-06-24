@@ -25,8 +25,17 @@ en:
       default: "%d/%m/%Y"
   running: "En cours"
   waitingclient: "En attente client"
+  waitingbriefclient: "En attente brief client"
   validatedclient: "Validé client"
   finished: "Terminé"
+  portraitor: "Portrait"
+  landscapeor: "Paysage"
+  fourtwentybytwoninetyseven: "420x297"
+  fiveninetyfourbytwoten: "594x210"
+  sixthirtybytwoninetyseven: "630x297"
+  multipleshapes: "Plusieurs formats"
+  pelisofttouchr: "Pelli Soft-touch R°"
+  pelisofttouchrv: "Pelli Soft-touch R°V°"
   project_types:
     print: 'Print'
     crea: 'Studio'
@@ -36,6 +45,9 @@ en:
     printother: 'Print-autre' 
     creaprintother: 'Studio-Print-autre' 
     web: "Web"
+    webother: "Web-autre"
+    webprint: "Web-Print"
+    webprintother: "Web-print-autre"
   project_priorities:
       normal: 'Normal'
       urgent: 'Urgent'
@@ -53,6 +65,13 @@ en:
       quadrirnbv: "Quadri R: N&B V:"
       nbr: "N&B R:"
       nbrv: "N&B R:V:"
+      couvquadriintnb: "Couv. Quadri - Int. N&B"
+      quadrieqpantr: "Quadri équivalence pantone R°"
+      quadrieqpantrv: "Quadri équivalence pantone R°V°"
+      pantone: "Pantone"
+  orientation:
+      portraitor: "Portrait"
+      landscapeor: "Paysage"
   open_shapes:
     a3oshape: 'A3'
     a4oshape: 'A4'
@@ -68,8 +87,9 @@ en:
     fourtwentybyhundred: '420x100'
     fourtwentybyhundredandhalf: '420x150'
     fourfortybytwoten: '440x210'
-    portrait: 'portrait'
-    landscape: 'paysage'
+    fourtwentybytwoninetyseven: "420x297"
+    fiveninetyfourbytwoten: "594x210"
+    sixthirtybytwoninetyseven: "630x297"
   finished_shapes:
     indicatedshape: 'Format indiqué'
     various: 'Divers'
@@ -101,17 +121,14 @@ en:
     usletter: 'A7'
     seenotice: 'Voir remarques'
     sra3: 'SRA3'
+    multipleshapes: "Plusieurs formats"
   filmings:
     shinyrv: 'Pelli Brillant R:V:'
     dullrv: 'Pelli Mat R:V'
     shinyr: 'Pelli Brillant R:'
     dullr: 'Pelli Mat R:'
-    shinylaminating: 'Plastification Brillante'
-    dulllaminating: 'Plastification Mat'
-    thirtysevenhalfmc: '37.5 µ'
-    heightymc: '80µ'
-    hundredtwentyfivemc: '125µ'
-    hundredseventyfivemc: '175µ'
+    pelisofttouchr: "Pelli Soft-touch R°"
+    pelisofttouchrv: "Pelli Soft-touch R°V°"
   shapings:
     cut: 'Coupe'
     rainage: 'Rainage'
@@ -215,6 +232,7 @@ en:
     waitingclient: 'En attente client'
     validatedclient: 'Validé client'
     finished: 'Terminé'
+    waitingbriefclient: 'En attente brief client'
   layhalfmat: 'Couché demi-mat'
   laymat: 'Couché mat'
   layshine: 'Couché brillant'

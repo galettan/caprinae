@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong>Liste des Stocks divers</strong>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped text-center table-bordered table-hover">
+      <thead>
+        <th colspan="4">Nom</th>
+      </thead>
+      <tbody>
+          <% @various_stocks.each do |various_stock| %>
+            <tr>
+              <td colspan="4" bgcolor="<%= various_stock.color.html_safe %>"><%= various_stock.name%></td>
+            </tr>
+              <% various_stock.variousStockItems.each do |stock_item|%>
+                <tr>
+                  <td><%= stock_item.name %></td>
+                  <td><%= stock_item.quantity %></td>
+                </tr>
+              <% end %>
+          <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -202,11 +202,15 @@
     <li role="presentation" class=" ">
       <a href="#livraison" aria-controls="livraison" role="tab" data-toggle="tab">Livraison</a>
     </li>
-    <% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother' || @project.project_type == 'creaprintother'%>
-        <li role="presentation" class="<%= current_user.print? ? 'active' : ''%>">
-          <a href="#print" aria-controls="print" role="tab" data-toggle="tab">Print</a>
-        </li>
-    <% end %>
+    <li role="presentation" class="<%= current_user.print? ? 'active' : ''%>">
+      <a href="#print" aria-controls="print" role="tab" data-toggle="tab">Print</a>
+      </li>
+    <li role="presentation" class=" ">
+      <a href="#paperstock" aria-controls="paperstock" role="tab" data-toggle="tab">Stock Papier</a>
+    </li>
+    <li role="presentation" class=" ">
+      <a href="#variousstock" aria-controls="variousstock" role="tab" data-toggle="tab">Stock Divers</a>
+    </li>
   </ul>
 
   <div class="tab-content">
@@ -216,9 +220,15 @@
     <div role="tabpanel" class="tab-pane " id="livraison">
       <%= render 'projects/detailed/delivery' %>
     </div>
-    <% if @project.project_type == 'print' || @project.project_type == 'creaprint' || @project.project_type == 'printother'%>
-          <%= render 'projects/detailed/print' %>
-    <% end %>
+    <div role="tabpanel" class="tab-pane " id="print">
+      <%= render 'projects/detailed/print' %>
+    </div>
+    <div role="tabpanel" class="tab-pane " id="paperstock">
+      <%= render 'projects/detailed/paperstock' %>
+    </div>
+    <div role="tabpanel" class="tab-pane " id="variousstock">
+      <%= render 'projects/detailed/variousstock' %>
+    </div>
   </div>
   </div>
 	<!-- Nav tabs -->

@@ -33,6 +33,10 @@
           <td>Notes (Imprimées sur le BDL)</td>
           <td><%= f.text_area :note, class: 'form-control'%></td>
         </tr>
+        <tr>
+          <td>Notes (NON imprimées sur le BDL)</td>
+          <td><%= f.text_area :secret_note, class: 'form-control'%></td>
+        </tr>
         <td colspan="2">
           <% if !@project.new_record? %>
               <%= link_to "Voir le Bon de livraison", delivery_form_path(@project.id, :format => :pdf), class: "btn btn-success", :target => "_blank"%>

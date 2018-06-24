@@ -1,0 +1,22 @@
+<div class="nested-fields">
+	<table class="table table-striped table-bordered">
+		<tr>
+			<td> <%= f.label :nom%> </td>
+			<td> <%= f.text_field :name, class: "form-control", placeholder: 'Nom du papier'%> </td>
+		</tr>
+		<tr>
+			<td><label>32x45</label></td>
+			<td> <%= f.number_field :thirtytwofortyfive, class: "form-control", placeholder: 'Quantité 32x45'%> </td>
+		</tr>
+		<tr>
+			<td><label>52x72</label></td>
+			<td> <%= f.number_field :fiftytwoseventytwo, class: "form-control", placeholder: 'Quantité 52x72'%> </td>
+		</tr>
+		<tr>
+			<td><label>À commander</label></td>
+			<td> <%= f.number_field :toorder, class: "form-control", placeholder: 'Quantité à commander'%> </td>
+		</tr>
+	</table>
+	<p class="text-left">
+	</p>
+</div>

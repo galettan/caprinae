@@ -55,6 +55,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find_detailed(params[:id])
+    @paperstocks = Paperstock.all
+    @various_stocks = VariousStock.all
     @spent_time = @project.tasks.sum(:duration)
   end
 
@@ -80,6 +82,8 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    @paperstocks = Paperstock.all
+    @various_stocks = VariousStock.all
     if !@project.participants.first.nil?
         if !@project.participants.first.contact.nil?
           @client = Client.where(id: @project.participants.first.contact.client_id)
@@ -126,6 +130,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1.json
   def update
     @client = Client.where('disable IS NULL').order(:name => :asc)
+
     @project_data = project_params
     @tasks = project_params['tasks_attributes']
     @feedbacks = project_params['feedbacks_attributes']
@@ -208,19 +213,12 @@ class ProjectsController < ApplicationController
   def clone
     @existing_project = Project.find(params[:id])
     @project = @existing_project.dup
+    @paperstocks = Paperstock.all
+    @various_stocks = VariousStock.all
 
     @project.name += ' - copie'
     @project.number += ' - copie'
-    if !@existing_project.participants.first.nil?
-      @client = Client.where(id: @existing_project.participants.first.contact.client_id)
-    else
-      @client = Client.where('disable IS NULL').order(:name => :asc)
-    end
-    @existing_project.participants.each do |participant|
-      @project.participants = [
-          participant.dup
-      ]
-    end
+    @client = Client.where('disable IS NULL').order(:name => :asc)
     @existing_project.papers.each do |paper|
       @project.papers = [
           paper.dup
@@ -330,6 +328,8 @@ class ProjectsController < ApplicationController
         :carrier_id,
         :delivery_address,
         :note,
+        :secret_note,
+        :orientation,
         tasks_attributes: [:id, :description, :hours, :minutes, :_destroy, :worker_id, :project_id],
         feedbacks_attributes: [:id, :description, :_destroy, :worker_id, :project_id],
         participants_attributes: [:id, :project_id, :contact_id, :_destroy],

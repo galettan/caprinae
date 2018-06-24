@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :various_stocks
+  resources :paperstocks
   resources :events
   resources :projects
   resources :clients

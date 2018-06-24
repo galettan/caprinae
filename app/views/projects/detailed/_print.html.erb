@@ -14,6 +14,10 @@
 						<td><%= t @project.colors %></td>
 					</tr>
 					<tr>
+						<td>Orientation</td>
+						<td><%= t @project.orientation %></td>
+					</tr>
+					<tr>
 						<td>Données variables</td>
 						<td><%= @project.various_input? ? 'oui' : 'non'%></td>
 					</tr>
@@ -43,7 +47,7 @@
 					</tr>
 					<tr>
 						<td>Façonnage</td>
-						<td><%= t @project.shaping%></td>
+			            <td><%= t @project.shaping %></td>
 					</tr>
 					<tr>
 						<td>Paqutage</td>

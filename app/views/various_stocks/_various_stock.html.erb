@@ -1,0 +1,9 @@
+<tr>
+	<td colspan="4" bgcolor="<%= various_stock.color.html_safe %>"><%= link_to various_stock.name, edit_various_stock_path(various_stock) %></td>
+</tr>
+	<% various_stock.variousStockItems.each do |stock_item|%>
+		<tr>
+			<td><%= stock_item.name %></td>
+			<td><%= stock_item.quantity %></td>
+		</tr>
+	<% end %>
