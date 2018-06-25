@@ -67,16 +67,19 @@ class ProjectsController < ApplicationController
       format.pdf do
          render :pdf => 'bdl_' + @project.number,
         :layout => "delivery_form.pdf.erb",
-    :print_media_type => true,
-    :page_size => "A4",
-    :disable_smart_shrinking => true,
-    :footer => { :right => '[page] of [topage]' }      end
+        :print_media_type => true,
+        :page_size => "A4",
+        :disable_smart_shrinking => true,
+        :footer => { :right => '[page] of [topage]' }
+      end
     end
   end
 
   # GET /projects/new
   def new
     @project = Project.new
+    @paperstocks = Paperstock.all
+    @various_stocks = VariousStock.all
     @client = Client.where('disable IS NULL')
   end
 
