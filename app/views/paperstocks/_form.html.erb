@@ -13,6 +13,12 @@
             </td>
             <td> <%= f.text_field :name, class: 'form-control', placeholder: 'Nom du stock'%> </td>
           </tr>
+          <tr>
+            <td> <%= f.label :couleur %>
+            <br>
+            </td>
+            <td> <%= f.text_field :color, class: 'form-control', placeholder: 'Couleur'%> </td>
+          </tr>
         </table>
       </div>
     </div>
@@ -34,5 +40,6 @@
 <p class="text-center">
   <%= link_to 'Retour', paperstocks_path, class: 'btn btn-default' %>
   <%= f.submit 'Valider', class: 'btn btn-danger'%>
+  <%= link_to '<span class="glyphicon glyphicon-trash"></span>Supprimer le stock papier'.html_safe, @paperstock ,class: 'btn btn-warning', method: :delete, data: {confirm: 'Êtes-vous sûre ?'} %>
 </p>
 <% end %>

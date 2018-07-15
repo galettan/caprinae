@@ -1,9 +1,9 @@
 <tr>
-	<td colspan="4" bgcolor="#0033cc"><%= link_to paperstock.name, edit_paperstock_path(paperstock) %></td>
+	<td colspan="4" bgcolor="<%= paperstock.color.nil? ? "#FFFFFF" : paperstock.color.html_safe %>"><%= link_to paperstock.name, edit_paperstock_path(paperstock) %></td>
 </tr>
 	<% paperstock.paperstock_items.each do |paperstock_item|%>
 		<tr>
-			<td bgcolor="#3399ff"><%= paperstock_item.name %></td>
+			<td ><%= paperstock_item.name %></td>
 			<td bgcolor=<%= paperstock_item.thirtytwofortyfive < 1000 ? "#FF0000" : "#FFA500" %>><%= paperstock_item.thirtytwofortyfive %></td>
 			<td bgcolor=<%= paperstock_item.fiftytwoseventytwo < 1000 ? "#FF0000" : "#FFA500" %>><%= paperstock_item.fiftytwoseventytwo %></td>
 			<td><%= paperstock_item.toorder%></td>

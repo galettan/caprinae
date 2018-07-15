@@ -55,6 +55,9 @@ class PaperstocksController < ApplicationController
   # DELETE /paperstocks/1
   # DELETE /paperstocks/1.json
   def destroy
+    @paperstock.paperstock_items.each do |paperstock_item|
+      paperstock_item.destroy
+    end
     @paperstock.destroy
     respond_to do |format|
       format.html { redirect_to paperstocks_url, notice: 'Paperstock was successfully destroyed.' }
@@ -72,6 +75,7 @@ class PaperstocksController < ApplicationController
     def paperstock_params
       params.require(:paperstock).permit(
         :name,
+        :color,
         paperstock_items_attributes: [:id, :_destroy, :name, :thirtytwofortyfive, :fiftytwoseventytwo, :toorder]
       )
     end
