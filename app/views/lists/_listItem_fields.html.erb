@@ -1,0 +1,11 @@
+<div class="nested-fields">
+	<table class="table table-striped table-bordered">
+		<tr>
+			<td> <%= f.label :nom %> </td>
+			<td> <%= f.text_field :name, class: "form-control", placeholder: 'Nom de l\'élément'%> </td>
+		</tr>
+	</table>
+	<p class="text-left">
+		<%= link_to_remove_association '<span class="glyphicon glyphicon-trash"></span>'.html_safe, f, class: "btn btn-danger" %>
+	</p>
+</div>

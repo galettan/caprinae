@@ -3,9 +3,12 @@
   	<a href="<%= root_path%>" id="logo"><%=image_tag("djobi_djoba.png", size: "200x30")%></a> 
     <nav>
     	<ul class="nav navbar-nav navbar-right ">
+        <% if manager?  || print? %>
+        <li><%= link_to "Nouveau : Lists Administrables !",   lists_path %></li>
+        <li><%= link_to "Stock Papier",   paperstocks_path %></li>
+        <li><%= link_to "Stock Divers",   various_stocks_path %></li>
+        <% end %>
         <% if manager? %>
-        <li><%= link_to "NEW : Stock Papier !",   paperstocks_path %></li>
-        <li><%= link_to "NEW : Stock Divers !",   various_stocks_path %></li>
         <li><%= link_to "Rapport d'activité", activities_path %></li>
         <% end %>
         	<% if logged_in? %>

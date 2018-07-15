@@ -1,0 +1,27 @@
+<p><%= link_to 'Nouvelle Liste administrable', new_list_path, class: 'btn btn-default'%></p>
+</p><div class="panel panel-default">
+  <div class="panel-heading">
+    <strong>Liste des listes administrables</strong>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped text-center table-bordered table-hover">
+      <thead>
+        <th colspan="4">Nom</th>
+      </thead>
+      <% i = 0 %>
+      <tbody>
+          <% @lists.each do |list_stock| %>
+          <% i += 1 %>
+          <tr>
+            <td colspan="4">Liste #<%= i %> : <%= link_to list_stock.name, edit_list_path(list_stock) %></td>
+          </tr>
+            <% list_stock.listItems.each do |list_item|%>
+              <tr>
+                <td bgcolor="#FFFFFF"><%= list_item.name %></td>
+              </tr>
+            <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

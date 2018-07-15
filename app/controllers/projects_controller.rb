@@ -87,6 +87,8 @@ class ProjectsController < ApplicationController
   def edit
     @paperstocks = Paperstock.all
     @various_stocks = VariousStock.all
+    @shapings = ListItem.where(list_id: 1)
+    @filmings = ListItem.where(list_id: 2)
     if !@project.participants.first.nil?
         if !@project.participants.first.contact.nil?
           @client = Client.where(id: @project.participants.first.contact.client_id)
@@ -312,8 +314,6 @@ class ProjectsController < ApplicationController
         :finished_doc_qty,
         :let_raw,
         :finished_shape,
-        :filming,
-        :shaping,
         :package,
         :delivery,
         :notice,
@@ -333,6 +333,10 @@ class ProjectsController < ApplicationController
         :note,
         :secret_note,
         :orientation,
+        :shaping_one,
+        :shaping_two,
+        :shaping_three,
+        :filming_id,
         tasks_attributes: [:id, :description, :hours, :minutes, :_destroy, :worker_id, :project_id],
         feedbacks_attributes: [:id, :description, :_destroy, :worker_id, :project_id],
         participants_attributes: [:id, :project_id, :contact_id, :_destroy],

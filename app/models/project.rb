@@ -6,6 +6,7 @@ class Project < ActiveRecord::Base
   has_many :tasks
   has_many :feedbacks
   has_many :papers
+  has_many :listItems
   belongs_to :carrier, class_name: Carrier, foreign_key: "carrier_id"
   before_save :set_estimated_time
 

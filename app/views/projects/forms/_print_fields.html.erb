@@ -7,67 +7,78 @@
 			<table class="table table-bordered table-hover table-striped">
 				<tr>
 					<td>Bon à tirer</td>
-					<td><%= f.select(:test_print, options_for_select(t("test_print").invert, @project.test_print), {:include_blank => 'Sélectionner un statut de bon à tirer'}, class: 'form-control')%></td>
+					<td colspan=3><%= f.select(:test_print, options_for_select(t("test_print").invert, @project.test_print), {:include_blank => 'Sélectionner un statut de bon à tirer'}, class: 'form-control')%></td>
 				</tr>
 				<tr>
 					<td>Couleur</td>
-					<td> <%= f.select(:colors, options_for_select(t("project_colors").invert, @project.colors), {:include_blank => 'Selectionner un type de couleur'}, class: 'form-control')%> </td>
+					<td colspan=3> <%= f.select(:colors, options_for_select(t("project_colors").invert, @project.colors), {:include_blank => 'Selectionner un type de couleur'}, class: 'form-control')%> </td>
 				</tr>
 				<tr>
 					<td>Orientation</td>
-					<td> <%= f.select(:orientation, options_for_select(t("orientation").invert, @project.orientation), {:include_blank => 'Selectionner un type d\'orientation'}, class: 'form-control')%> </td>
+					<td colspan=3> <%= f.select(:orientation, options_for_select(t("orientation").invert, @project.orientation), {:include_blank => 'Selectionner un type d\'orientation'}, class: 'form-control')%> </td>
 				</tr>
 				<tr>
 					<td>Données variables</td>
-					<td><%= f.check_box :various_input%></td>
+					<td colspan=3><%= f.check_box :various_input%></td>
 				</tr>
 				<tr>
 					<td>Quantité bonnes feuilles</td>
-					<td><%= f.text_field :good_sheets_qty, class: "form-control"%></td>
+					<td colspan=3><%= f.text_field :good_sheets_qty, class: "form-control"%></td>
 				</tr>
 				<tr>
 					<td>Quantité documents finis</td>
-					<td><%= f.text_field :finished_doc_qty, class: "form-control"%></td>
+					<td colspan=3><%= f.text_field :finished_doc_qty, class: "form-control"%></td>
 				</tr>
 				<tr>
 					<td>Laisser brut de tirage</td>
-					<td><%= f.check_box :let_raw %></td>
+					<td colspan=3><%= f.check_box :let_raw %></td>
 				</tr>
 				<tr>
 					<td>Format ouvert</td>
-					<td><%= f.select(:open_shape, options_for_select(t("open_shapes").invert, @project.open_shape), {:include_blank => 'Sélectionner un type de format ouvert'}, class: 'form-control')%></td>
+					<td colspan=3><%= f.select(:open_shape, options_for_select(t("open_shapes").invert, @project.open_shape), {:include_blank => 'Sélectionner un type de format ouvert'}, class: 'form-control')%></td>
 				</tr>
 				<tr>
 					<td>Format Fini</td>
-					<td><%= f.select(:finished_shape, options_for_select(t("finished_shapes").invert, @project.finished_shape), {:include_blank => 'Sélectionner un type de format de produit fini'}, class: 'form-control')%></td>
+					<td colspan=3><%= f.select(:finished_shape, options_for_select(t("finished_shapes").invert, @project.finished_shape), {:include_blank => 'Sélectionner un type de format de produit fini'}, class: 'form-control')%></td>
 				</tr>
 				<tr>
 					<td>Format spécial</td>
-					<td><%= f.text_field :special_shape, class: "form-control"%></td>
+					<td colspan=3><%= f.text_field :special_shape, class: "form-control"%></td>
 				</tr>
 				<tr>
-					<td>Pelliculage ou plastification</td>
-					<td><%= f.select(:filming, options_for_select(t("filmings").invert, @project.filming), {:include_blank => 'Sélectionner un pelliculage ou plastification'}, class: 'form-control')%></td>
+					<td>Pelliculage ou plastification (Ancienne version, ne plus utiliser)</td>
+					<td colspan=3><%= f.select(:filming, options_for_select(t("filmings").invert, @project.filming), {:include_blank => 'Sélectionner un pelliculage ou plastification'}, disabled: 'disabled', class: 'form-control')%></td>
 				</tr>
 				<tr>
-					<td>Façonnage</td>
-					<td><%= f.select(:shaping, options_for_select(t("shapings").invert, @project.shaping), {:include_blank => 'Sélectionner un façonnage'}, class: 'form-control')%></td>
+					<td>Pelliculage ou plastification (Nouvelle version)</td>
+					<td colspan=3><%= f.collection_select(:filming_id, @filmings, :id, :name, {:include_blank => 'Sélectionner un pelliculage ou plastification'}, class: 'form-control')%></td>
+
 				</tr>
+				<tr>
+					<td>Façonnage (Ancienne version, ne plus utiliser)</td>
+					<td colspan=3><%= f.select(:shaping, options_for_select(t("shapings").invert, @project.shaping), {:include_blank => 'Sélectionner un façonnage'}, disabled: 'disabled', class: 'form-control')%></td>
+				</tr>
+				<tr>
+					<td>Façonnage (Nouvelle version)</td>
+					<td><%= f.collection_select(:shaping_one, @shapings, :id, :name, {:include_blank => 'Sélectionner un façonnage'}, class: 'form-control')%></td>
+					<td><%= f.collection_select(:shaping_two, @shapings, :id, :name, {:include_blank => 'Sélectionner un façonnage'}, class: 'form-control')%></td>
+					<td><%= f.collection_select(:shaping_three, @shapings, :id, :name, {:include_blank => 'Sélectionner un façonnage'}, class: 'form-control')%></td>
+ß				</tr>
 				<tr>
 					<td>Façonnage divers</td>
-					<td><%= f.text_field :diverse_shape, class: "form-control"%></td>
+					<td colspan=3><%= f.text_field :diverse_shape, class: "form-control"%></td>
 				</tr>
 				<tr>
 					<td>Paquetage</td>
-					<td><%= f.select(:package, options_for_select(t("packages").invert, @project.package), {:include_blank => 'Sélectionner un paquetage'}, class: 'form-control')%></td>
+					<td colspan=3><%= f.select(:package, options_for_select(t("packages").invert, @project.package), {:include_blank => 'Sélectionner un paquetage'}, class: 'form-control')%></td>
 				</tr>
 				<tr>
 					<td>Remarques (Interne à Rubrik-C)</td>
-					<td><%= f.text_area :notice, class: 'form-control'%></td>
+					<td colspan=3><%= f.text_area :notice, class: 'form-control'%></td>
 				</tr>
 				<tr>
 					<td>Sous-traitance</td>
-					<td><%= f.text_area :outsourcing, class: 'form-control'%></td>
+					<td colspan=3><%= f.text_area :outsourcing, class: 'form-control'%></td>
 				</tr>
 			</table>
 		</div>

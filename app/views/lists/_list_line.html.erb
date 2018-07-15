@@ -1,0 +1,8 @@
+<tr>
+	<td colspan="4"><%= link_to list.name, edit_list_path(list) %></td>
+</tr>
+	<% list.listItems.each do |list_item|%>
+		<tr>
+			<td><%= list_item.name %></td>
+		</tr>
+	<% end %>
