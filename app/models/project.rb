@@ -10,17 +10,17 @@ class Project < ActiveRecord::Base
   belongs_to :carrier, class_name: Carrier, foreign_key: "carrier_id"
   before_save :set_estimated_time
 
-  scope :passed, -> (archived) {where archived: true}
-  scope :number, -> (number) { where number: number}
-  scope :user, -> (user) {where worker_id: user}
-  scope :search_name, -> (name) {where("name LIKE ?", "#{name}%")}
+  scope :passed, -> (archived) {where(archived: true).reorder("created_at DESC") }
+  scope :number, -> (number) { where(number: number).reorder("created_at DESC") }
+  scope :user, -> (user) {where(worker_id: user).reorder("created_at DESC") }
+  scope :search_name, -> (name) {where("name LIKE ?", "#{name}%").reorder("created_at DESC") }
   scope :client, -> (client) {distinct.joins('LEFT JOIN participants ON participants.project_id = projects.id')
-    .joins('LEFT JOIN contacts ON contacts.id = participants.contact_id').where('contacts.client_id = ? ', client)}
-  scope :create_date, -> (create_begin, create_end) {where("created_at BETWEEN DATE(?) AND DATE(?)", create_begin, create_end)}
-  scope :project_type, -> (type) {where project_type: type}
-  scope :progress, -> (progress) {where progression: progress}
-  scope :status, -> (status) {where state: status}
-  scope :prio, -> (prio) {where priority: prio}
+    .joins('LEFT JOIN contacts ON contacts.id = participants.contact_id').where('contacts.client_id = ? ', client).reorder("created_at DESC") }
+  scope :create_date, -> (create_begin, create_end) {where("created_at BETWEEN DATE(?) AND DATE(?)", create_begin, create_end).reorder("created_at DESC") }
+  scope :project_type, -> (type) {where(project_type: type).reorder("created_at DESC") }
+  scope :progress, -> (progress) {where(progression: progress).reorder("created_at DESC") }
+  scope :status, -> (status) {where(state: status).reorder("created_at DESC") }
+  scope :prio, -> (prio) {where(priority: prio).reorder("created_at DESC") }
 
 
   accepts_nested_attributes_for :tasks, :allow_destroy => true

@@ -78,6 +78,8 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+    @filmings = ListItem.where(list_id: 2)
+    @shapings = ListItem.where(list_id: 1)
     @paperstocks = Paperstock.all
     @various_stocks = VariousStock.all
     @client = Client.where('disable IS NULL')
@@ -223,6 +225,8 @@ class ProjectsController < ApplicationController
 
     @project.name += ' - copie'
     @project.number += ' - copie'
+    @filmings = ListItem.where(list_id: 2)
+    @shapings = ListItem.where(list_id: 1)
     @client = Client.where('disable IS NULL').order(:name => :asc)
     @existing_project.papers.each do |paper|
       @project.papers = [
