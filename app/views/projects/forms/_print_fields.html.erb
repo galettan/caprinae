@@ -46,20 +46,11 @@
 					<td colspan=3><%= f.text_field :special_shape, class: "form-control"%></td>
 				</tr>
 				<tr>
-					<td>Pelliculage ou plastification (Ancienne version, ne plus utiliser)</td>
-					<td colspan=3><%= f.select(:filming, options_for_select(t("filmings").invert, @project.filming), {:include_blank => 'Sélectionner un pelliculage ou plastification'}, disabled: 'disabled', class: 'form-control')%></td>
-				</tr>
-				<tr>
-					<td>Pelliculage ou plastification (Nouvelle version)</td>
+					<td>Pelliculage ou plastification</td>
 					<td colspan=3><%= f.collection_select(:filming_id, @filmings, :id, :name, {:include_blank => 'Sélectionner un pelliculage ou plastification'}, class: 'form-control')%></td>
-
 				</tr>
 				<tr>
-					<td>Façonnage (Ancienne version, ne plus utiliser)</td>
-					<td colspan=3><%= f.select(:shaping, options_for_select(t("shapings").invert, @project.shaping), {:include_blank => 'Sélectionner un façonnage'}, disabled: 'disabled', class: 'form-control')%></td>
-				</tr>
-				<tr>
-					<td>Façonnage (Nouvelle version)</td>
+					<td>Façonnage</td>
 					<td><%= f.collection_select(:shaping_one, @shapings, :id, :name, {:include_blank => 'Sélectionner un façonnage'}, class: 'form-control')%></td>
 					<td><%= f.collection_select(:shaping_two, @shapings, :id, :name, {:include_blank => 'Sélectionner un façonnage'}, class: 'form-control')%></td>
 					<td><%= f.collection_select(:shaping_three, @shapings, :id, :name, {:include_blank => 'Sélectionner un façonnage'}, class: 'form-control')%></td>

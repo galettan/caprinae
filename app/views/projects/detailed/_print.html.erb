@@ -42,11 +42,11 @@
 						<td colspan=3><%= t @project.finished_shape %></td>
 					</tr>
 					<tr>
-						<td>Pelliculage ou plastification (Nouvelle version)</td>
+						<td>Pelliculage ou plastification</td>
 						<td colspan=3><%= @project.filming_id.nil? ? '' : ListItem.find(@project.filming_id).name %></td>
 					</tr>
 					<tr>
-						<td>Façonnage (Nouvelle version)</td>
+						<td>Façonnage</td>
 			            <td><%=  @project.shaping_one.nil? ? '' : ListItem.find(@project.shaping_one).name %></td>
 			            <td><%=  @project.shaping_two.nil? ? '' : ListItem.find(@project.shaping_two).name %></td>
 			            <td><%=  @project.shaping_three.nil? ? '' : ListItem.find(@project.shaping_three).name %></td>
