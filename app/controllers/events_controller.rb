@@ -21,7 +21,7 @@ class EventsController < ApplicationController
        AND first_feedback <= '#{end_day}'" + worker_filter)
       projects.each do |project|
         @events << {
-            title: project.number + ' - ' + project.name,
+            title: project.name + ' - ' + (project.participants.first.nil? ? 'Pas de client'  : project.participants.first.contact.client.name),
             url: project_url(project),
             date: project.first_feedback,
             color: 'DodgerBlue'
@@ -34,7 +34,7 @@ class EventsController < ApplicationController
        AND delivery_date <= '#{end_day}'" + worker_filter)
       projects.each do |project|
         @events << {
-            title: project.number + ' - ' + project.name,
+            title: project.name + ' - ' + (project.participants.first.nil? ? 'Pas de client'  : project.participants.first.contact.client.name),
             url: project_url(project),
             date: project.delivery_date,
             color: 'orange'
@@ -46,7 +46,7 @@ class EventsController < ApplicationController
        AND good_to_print <= '#{end_day}'" + worker_filter)
       projects.each do |project|
         @events << {
-            title: project.number + ' - ' + project.name,
+            title: project.name + ' - ' + (project.participants.first.nil? ? 'Pas de client'  : project.participants.first.contact.client.name),
             url: project_url(project),
             date: project.good_to_print,
             color: 'green'
@@ -59,7 +59,7 @@ class EventsController < ApplicationController
        AND departure_date <= '#{end_day}'" + worker_filter)
       projects.each do |project|
         @events << {
-            title: project.number + ' - ' + project.name,
+            title: project.name + ' - ' + (project.participants.first.nil? ? 'Pas de client'  : project.participants.first.contact.client.name),
             url: project_url(project),
             date: project.departure_date,
             color: 'YellowGreen'

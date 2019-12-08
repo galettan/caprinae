@@ -248,6 +248,25 @@ class ProjectsController < ApplicationController
     @project.description = 'Copie du projet #' + @existing_project.number + "\n" + @existing_project.description
     @project.number = 0
     @project.create_email = 0
+    @project.test_print = nil
+    @project.colors = ''
+    @project.orientation = ''
+    @project.various_input = nil
+    @project.good_sheets_qty = nil
+    @project.finished_doc_qty = nil
+    @project.let_raw = nil
+    @project.open_shape = ''
+    @project.finished_shape = ''
+    @project.special_shape = nil
+    @project.filming_id = nil
+    @project.shaping_one = nil
+    @project.shaping_two = nil
+    @project.shaping_three = nil
+    @project.diverse_shape = nil
+    @project.package = ''
+    @project.notice = nil
+    @project.outsourcing = nil
+
     respond_to do |format|
       format.html { render :new}
     end
