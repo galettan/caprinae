@@ -49,6 +49,8 @@ GEM
       sass (>= 3.3.4)
     bootstrap-will_paginate (1.0.0)
       will_paginate
+    bootstrap3-datetimepicker-rails (4.17.47)
+      momentjs-rails (>= 2.8.1)
     builder (3.2.3)
     byebug (9.0.6)
     cancancan (2.0.0)
@@ -148,7 +150,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (12.0.0)
+    rake (13.0.1)
     rb-fsevent (0.10.2)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
@@ -211,6 +213,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.10)
   bootstrap-sass (~> 3.3, >= 3.3.5.1)
   bootstrap-will_paginate (>= 0.0.10)
+  bootstrap3-datetimepicker-rails (~> 4.17.47)
   byebug
   cancancan
   cocoon
