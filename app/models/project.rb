@@ -36,7 +36,7 @@ class Project < ActiveRecord::Base
   enum state: [:running, :waitingclient, :validatedclient, :finished, :waitingbriefclient]
   enum progression: [:todocrea, :runningcrea, :finishedcrea, :todoprint, :runningprint, :finishedprint, :outsource]
 
-  enum colors: [:quadrir, :quadrirv, :quadrirnbv, :nbr, :nbrv]
+  enum colors: [:quadrir, :quadrirv, :quadrirnbv, :nbr, :nbrv, :couvquadriintnb, :quadrieqpantr, :quadrieqpantrv, :pantone]
   enum orientation: [:portraitor, :landscapeor]
   enum open_shape: [:a3oshape, :a4oshape, :a5oshape, :hundredseventybyfiftyfour, :hundredseventybyheightyfive, :twohundredbytwoten,
     :twofortybyhundred, :twoninetysevenbyhundred, :twoninetysevenbyoneofive, :threehundredbyoneandhalf, :fourtwentybytwoten, :fourtwentybyhundred,
