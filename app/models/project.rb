@@ -29,7 +29,7 @@ class Project < ActiveRecord::Base
   accepts_nested_attributes_for :papers, :allow_destroy => true
   
   validates :name, presence: true
-  validates :number, presence: true
+  validates :number, presence: true, numericality: {only_integer: true}, length: { is: 6}
     
   enum project_type: [:print, :crea, :other, :creaprint, :creaother, :printother, :creaprintother, :web, :webother, :webprint, :webprintother]
   enum priority: [:normal, :urgent]

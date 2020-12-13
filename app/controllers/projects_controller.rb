@@ -1,3 +1,4 @@
+# coding: utf-8
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user
@@ -126,6 +127,12 @@ class ProjectsController < ApplicationController
         format.html { redirect_to @project }
         format.json { render :show, status: :created, location: @project }
       else
+        @project = Project.new
+        @filmings = ListItem.where(list_id: 2)
+        @shapings = ListItem.where(list_id: 1)
+        @paperstocks = Paperstock.all
+        @various_stocks = VariousStock.all
+        @client = Client.where('disable IS NULL')
         flash[:danger] = 'Projet non créé'
         format.html { render :new }
         format.json { render json: @project.errors, status: :unprocessable_entity }
@@ -141,6 +148,9 @@ class ProjectsController < ApplicationController
     @project_data = project_params
     @tasks = project_params['tasks_attributes']
     @feedbacks = project_params['feedbacks_attributes']
+    if @project_data['project_type'] == "creaother" && @project_data['progression'] == "finishedcrea"
+      @project_data['progression'] = :outsource
+    end
     if !@tasks.nil?
       @tasks.each do |t, value|
         if !value['id'].nil?
@@ -166,7 +176,7 @@ class ProjectsController < ApplicationController
             flash[:danger] = 'Mise à jour du retour impossible'
           end
         else
-          value['worker_id'] = current_user.id
+          value['worker_id'] = curent_user.id
         end
         @project_data['feedbacks_attributes'] = @feedbacks
       end
@@ -266,6 +276,7 @@ class ProjectsController < ApplicationController
     @project.package = ''
     @project.notice = nil
     @project.outsourcing = nil
+    @project.mandatory_time = nil
 
     respond_to do |format|
       format.html { render :new}
@@ -360,6 +371,7 @@ class ProjectsController < ApplicationController
         :shaping_two,
         :shaping_three,
         :filming_id,
+        :mandatory_time,
         tasks_attributes: [:id, :description, :hours, :minutes, :_destroy, :worker_id, :project_id],
         feedbacks_attributes: [:id, :description, :_destroy, :worker_id, :project_id],
         participants_attributes: [:id, :project_id, :contact_id, :_destroy],
