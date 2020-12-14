@@ -151,6 +151,11 @@ class ProjectsController < ApplicationController
     if @project_data['project_type'] == "creaother" && @project_data['progression'] == "finishedcrea"
       @project_data['progression'] = :outsource
     end
+    @filmings = ListItem.where(list_id: 2)
+    @shapings = ListItem.where(list_id: 1)
+    @paperstocks = Paperstock.all
+    @various_stocks = VariousStock.all
+    @client = Client.where('disable IS NULL')
     if !@tasks.nil?
       @tasks.each do |t, value|
         if !value['id'].nil?
@@ -176,7 +181,7 @@ class ProjectsController < ApplicationController
             flash[:danger] = 'Mise à jour du retour impossible'
           end
         else
-          value['worker_id'] = curent_user.id
+          value['worker_id'] = current_user.id
         end
         @project_data['feedbacks_attributes'] = @feedbacks
       end
